@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="pl">
 <head>
 <meta charset="UTF-8">
@@ -18,170 +17,169 @@
   body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.03) 2px,rgba(0,0,0,0.03) 4px);pointer-events:none;z-index:9999;}
   body::after{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,212,255,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,0.025) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0;}
 
-/* HEADER */
-.header{position:sticky;top:0;z-index:100;background:linear-gradient(180deg,#020608,rgba(2,6,8,.97));border-bottom:1px solid var(–border2);padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:64px;backdrop-filter:blur(10px);}
-.logo{font-family:‘Orbitron’,monospace;font-size:20px;font-weight:900;color:var(–cyan);letter-spacing:4px;text-shadow:0 0 20px rgba(0,212,255,.4);}
-.logo span{color:var(–green);}
-.hbadge{background:rgba(255,45,85,.15);border:1px solid var(–red);color:var(–red);font-family:‘Share Tech Mono’,monospace;font-size:10px;padding:3px 10px;letter-spacing:2px;animation:pr 2s infinite;}
-@keyframes pr{0%,100%{opacity:1}50%{opacity:.6}}
-.hright{display:flex;align-items:center;gap:20px;font-family:‘Share Tech Mono’,monospace;font-size:11px;color:var(–text2);}
-.ldot{width:8px;height:8px;border-radius:50%;background:var(–red);box-shadow:0 0 8px var(–red);animation:bk 1.5s infinite;display:inline-block;margin-right:6px;}
-@keyframes bk{0%,100%{opacity:1}50%{opacity:.15}}
+  /* HEADER */
+  .header{position:sticky;top:0;z-index:100;background:linear-gradient(180deg,#020608,rgba(2,6,8,.97));border-bottom:1px solid var(--border2);padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:64px;backdrop-filter:blur(10px);}
+  .logo{font-family:'Orbitron',monospace;font-size:20px;font-weight:900;color:var(--cyan);letter-spacing:4px;text-shadow:0 0 20px rgba(0,212,255,.4);}
+  .logo span{color:var(--green);}
+  .hbadge{background:rgba(255,45,85,.15);border:1px solid var(--red);color:var(--red);font-family:'Share Tech Mono',monospace;font-size:10px;padding:3px 10px;letter-spacing:2px;animation:pr 2s infinite;}
+  @keyframes pr{0%,100%{opacity:1}50%{opacity:.6}}
+  .hright{display:flex;align-items:center;gap:20px;font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--text2);}
+  .ldot{width:8px;height:8px;border-radius:50%;background:var(--red);box-shadow:0 0 8px var(--red);animation:bk 1.5s infinite;display:inline-block;margin-right:6px;}
+  @keyframes bk{0%,100%{opacity:1}50%{opacity:.15}}
 
-/* MAIN */
-.main{position:relative;z-index:1;max-width:1600px;margin:0 auto;padding:24px;}
+  /* MAIN */
+  .main{position:relative;z-index:1;max-width:1600px;margin:0 auto;padding:24px;}
 
-/* ALERT */
-.alert{background:linear-gradient(135deg,rgba(255,45,85,.1),rgba(255,184,0,.05));border:1px solid rgba(255,45,85,.4);border-left:5px solid var(–red);padding:16px 22px;margin-bottom:22px;display:flex;align-items:center;gap:16px;animation:si .5s ease;}
-@keyframes si{from{transform:translateX(-20px);opacity:0}to{transform:translateX(0);opacity:1}}
-.alert.amber{border-left-color:var(–amber);border-color:rgba(255,184,0,.4);background:linear-gradient(135deg,rgba(255,184,0,.07),transparent);}
-.alert strong{font-family:‘Orbitron’,monospace;font-size:10px;letter-spacing:2px;color:var(–red);}
-.alert.amber strong{color:var(–amber);}
-.alert p{font-size:13px;color:var(–text);margin-top:4px;line-height:1.5;}
+  /* ALERT */
+  .alert{background:linear-gradient(135deg,rgba(255,45,85,.1),rgba(255,184,0,.05));border:1px solid rgba(255,45,85,.4);border-left:5px solid var(--red);padding:16px 22px;margin-bottom:22px;display:flex;align-items:center;gap:16px;animation:si .5s ease;}
+  @keyframes si{from{transform:translateX(-20px);opacity:0}to{transform:translateX(0);opacity:1}}
+  .alert.amber{border-left-color:var(--amber);border-color:rgba(255,184,0,.4);background:linear-gradient(135deg,rgba(255,184,0,.07),transparent);}
+  .alert strong{font-family:'Orbitron',monospace;font-size:10px;letter-spacing:2px;color:var(--red);}
+  .alert.amber strong{color:var(--amber);}
+  .alert p{font-size:13px;color:var(--text);margin-top:4px;line-height:1.5;}
 
-/* NEGOTIATION STATUS */
-.neg-status{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px;}
-.neg-card{background:var(–bg-card);border:1px solid var(–border);padding:14px;text-align:center;}
-.neg-label{font-family:‘Share Tech Mono’,monospace;font-size:9px;letter-spacing:2px;color:var(–dim);text-transform:uppercase;margin-bottom:8px;}
-.neg-val{font-family:‘Orbitron’,monospace;font-size:18px;font-weight:700;line-height:1;}
-.neg-sub{font-size:11px;color:var(–text2);margin-top:5px;}
+  /* NEGOTIATION STATUS */
+  .neg-status{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px;}
+  .neg-card{background:var(--bg-card);border:1px solid var(--border);padding:14px;text-align:center;}
+  .neg-label{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--dim);text-transform:uppercase;margin-bottom:8px;}
+  .neg-val{font-family:'Orbitron',monospace;font-size:18px;font-weight:700;line-height:1;}
+  .neg-sub{font-size:11px;color:var(--text2);margin-top:5px;}
 
-/* TABS */
-.tabs{display:flex;gap:4px;margin-bottom:22px;border-bottom:1px solid var(–border);}
-.tab{padding:10px 18px;font-family:‘Orbitron’,monospace;font-size:10px;letter-spacing:2px;color:var(–dim);cursor:pointer;border:1px solid transparent;border-bottom:none;margin-bottom:-1px;background:transparent;transition:all .2s;}
-.tab:hover{color:var(–text2);}
-.tab.active{color:var(–cyan);border-color:var(–border2);background:var(–bg-card);border-bottom-color:var(–bg-card);}
-.tab-content{display:none;}
-.tab-content.active{display:block;}
+  /* TABS */
+  .tabs{display:flex;gap:4px;margin-bottom:22px;border-bottom:1px solid var(--border);}
+  .tab{padding:10px 18px;font-family:'Orbitron',monospace;font-size:10px;letter-spacing:2px;color:var(--dim);cursor:pointer;border:1px solid transparent;border-bottom:none;margin-bottom:-1px;background:transparent;transition:all .2s;}
+  .tab:hover{color:var(--text2);}
+  .tab.active{color:var(--cyan);border-color:var(--border2);background:var(--bg-card);border-bottom-color:var(--bg-card);}
+  .tab-content{display:none;}
+  .tab-content.active{display:block;}
 
-/* SECTION TITLE */
-.stitle{font-family:‘Orbitron’,monospace;font-size:11px;letter-spacing:4px;color:var(–cyan);text-transform:uppercase;margin-bottom:16px;display:flex;align-items:center;gap:12px;}
-.stitle::after{content:’’;flex:1;height:1px;background:linear-gradient(90deg,var(–border2),transparent);}
+  /* SECTION TITLE */
+  .stitle{font-family:'Orbitron',monospace;font-size:11px;letter-spacing:4px;color:var(--cyan);text-transform:uppercase;margin-bottom:16px;display:flex;align-items:center;gap:12px;}
+  .stitle::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border2),transparent);}
 
-/* TOP5 */
-.t5{display:flex;flex-direction:column;gap:8px;margin-bottom:28px;}
-.t5r{display:grid;grid-template-columns:32px 1fr 130px 110px 90px 120px;gap:10px;align-items:center;background:var(–bg-card);border:1px solid var(–border);border-left:3px solid var(–border2);padding:12px 16px;transition:all .2s;animation:fu .5s ease both;}
-@keyframes fu{from{transform:translateY(10px);opacity:0}to{transform:translateY(0);opacity:1}}
-.t5r:hover{background:var(–bg-card2);transform:translateX(4px);}
-.t5h{background:transparent!important;border:none!important;padding:6px 16px!important;cursor:default!important;}
-.t5h:hover{transform:none!important;}
-.rn{font-family:‘Orbitron’,monospace;font-size:18px;font-weight:900;color:var(–dim);}
-.cl{font-family:‘Share Tech Mono’,monospace;font-size:10px;color:var(–dim);letter-spacing:1px;}
-.en{font-size:13px;font-weight:600;color:var(–text);line-height:1.4;}
-.er{font-family:‘Share Tech Mono’,monospace;font-size:10px;color:var(–text2);margin-top:2px;}
+  /* TOP5 */
+  .t5{display:flex;flex-direction:column;gap:8px;margin-bottom:28px;}
+  .t5r{display:grid;grid-template-columns:32px 1fr 130px 110px 90px 120px;gap:10px;align-items:center;background:var(--bg-card);border:1px solid var(--border);border-left:3px solid var(--border2);padding:12px 16px;transition:all .2s;animation:fu .5s ease both;}
+  @keyframes fu{from{transform:translateY(10px);opacity:0}to{transform:translateY(0);opacity:1}}
+  .t5r:hover{background:var(--bg-card2);transform:translateX(4px);}
+  .t5h{background:transparent!important;border:none!important;padding:6px 16px!important;cursor:default!important;}
+  .t5h:hover{transform:none!important;}
+  .rn{font-family:'Orbitron',monospace;font-size:18px;font-weight:900;color:var(--dim);}
+  .cl{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--dim);letter-spacing:1px;}
+  .en{font-size:13px;font-weight:600;color:var(--text);line-height:1.4;}
+  .er{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--text2);margin-top:2px;}
 
-.badge{display:inline-block;padding:3px 9px;font-family:‘Share Tech Mono’,monospace;font-size:10px;letter-spacing:1px;border-radius:2px;font-weight:700;white-space:nowrap;}
-.bc{background:rgba(255,45,85,.15);color:var(–red);border:1px solid rgba(255,45,85,.35);}
-.bh{background:rgba(255,184,0,.12);color:var(–amber);border:1px solid rgba(255,184,0,.3);}
-.bm{background:rgba(26,127,255,.12);color:var(–blue);border:1px solid rgba(26,127,255,.3);}
-.bo{background:rgba(0,255,136,.08);color:var(–green);border:1px solid rgba(0,255,136,.25);}
+  .badge{display:inline-block;padding:3px 9px;font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:1px;border-radius:2px;font-weight:700;white-space:nowrap;}
+  .bc{background:rgba(255,45,85,.15);color:var(--red);border:1px solid rgba(255,45,85,.35);}
+  .bh{background:rgba(255,184,0,.12);color:var(--amber);border:1px solid rgba(255,184,0,.3);}
+  .bm{background:rgba(26,127,255,.12);color:var(--blue);border:1px solid rgba(26,127,255,.3);}
+  .bo{background:rgba(0,255,136,.08);color:var(--green);border:1px solid rgba(0,255,136,.25);}
 
-/* EVENT CARDS */
-.egrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(480px,1fr));gap:18px;margin-bottom:28px;}
-.ecard{background:var(–bg-card);border:1px solid var(–border);overflow:hidden;transition:all .3s;animation:fu .6s ease both;}
-.ecard:hover{border-color:var(–border2);transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,.5);}
-.ech{padding:14px 20px;display:flex;align-items:flex-start;justify-content:space-between;gap:10px;border-bottom:1px solid var(–border);background:linear-gradient(135deg,var(–bg-card2),var(–bg-card));}
-.ect{font-size:14px;font-weight:700;color:var(–text);line-height:1.4;}
-.ecm{font-family:‘Share Tech Mono’,monospace;font-size:10px;color:var(–text2);margin-top:6px;display:flex;gap:12px;flex-wrap:wrap;}
-.ecb{padding:16px 20px;}
-.ed{font-size:12.5px;color:var(–text2);line-height:1.7;margin-bottom:14px;}
+  /* EVENT CARDS */
+  .egrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(480px,1fr));gap:18px;margin-bottom:28px;}
+  .ecard{background:var(--bg-card);border:1px solid var(--border);overflow:hidden;transition:all .3s;animation:fu .6s ease both;}
+  .ecard:hover{border-color:var(--border2);transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,.5);}
+  .ech{padding:14px 20px;display:flex;align-items:flex-start;justify-content:space-between;gap:10px;border-bottom:1px solid var(--border);background:linear-gradient(135deg,var(--bg-card2),var(--bg-card));}
+  .ect{font-size:14px;font-weight:700;color:var(--text);line-height:1.4;}
+  .ecm{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--text2);margin-top:6px;display:flex;gap:12px;flex-wrap:wrap;}
+  .ecb{padding:16px 20px;}
+  .ed{font-size:12.5px;color:var(--text2);line-height:1.7;margin-bottom:14px;}
 
-/* Impact */
-.ig{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
-.ii{display:flex;flex-direction:column;gap:4px;}
-.il{font-family:‘Share Tech Mono’,monospace;font-size:9px;color:var(–dim);letter-spacing:1px;text-transform:uppercase;}
-.ibw{display:flex;align-items:center;gap:8px;}
-.ibb{flex:1;height:4px;background:rgba(255,255,255,.05);border-radius:2px;overflow:hidden;}
-.ibf{height:100%;border-radius:2px;transition:width 1s ease;}
-.is{font-family:‘Orbitron’,monospace;font-size:10px;font-weight:700;min-width:18px;text-align:right;}
+  /* Impact */
+  .ig{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+  .ii{display:flex;flex-direction:column;gap:4px;}
+  .il{font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--dim);letter-spacing:1px;text-transform:uppercase;}
+  .ibw{display:flex;align-items:center;gap:8px;}
+  .ibb{flex:1;height:4px;background:rgba(255,255,255,.05);border-radius:2px;overflow:hidden;}
+  .ibf{height:100%;border-radius:2px;transition:width 1s ease;}
+  .is{font-family:'Orbitron',monospace;font-size:10px;font-weight:700;min-width:18px;text-align:right;}
 
-/* Scenarios */
-.sc{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px;border-top:1px solid var(–border);padding-top:12px;}
-.sb{padding:10px;border-radius:2px;background:rgba(0,212,255,.04);border:1px solid rgba(0,212,255,.1);}
-.sw{padding:10px;border-radius:2px;background:rgba(255,45,85,.04);border:1px solid rgba(255,45,85,.12);}
-.sg{padding:10px;border-radius:2px;background:rgba(0,255,136,.04);border:1px solid rgba(0,255,136,.1);}
-.sl{font-family:‘Share Tech Mono’,monospace;font-size:9px;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;}
-.sb .sl{color:var(–cyan);} .sw .sl{color:var(–red);} .sg .sl{color:var(–green);}
-.st{font-size:11px;color:var(–text2);line-height:1.5;}
+  /* Scenarios */
+  .sc{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px;border-top:1px solid var(--border);padding-top:12px;}
+  .sb{padding:10px;border-radius:2px;background:rgba(0,212,255,.04);border:1px solid rgba(0,212,255,.1);}
+  .sw{padding:10px;border-radius:2px;background:rgba(255,45,85,.04);border:1px solid rgba(255,45,85,.12);}
+  .sg{padding:10px;border-radius:2px;background:rgba(0,255,136,.04);border:1px solid rgba(0,255,136,.1);}
+  .sl{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;}
+  .sb .sl{color:var(--cyan);} .sw .sl{color:var(--red);} .sg .sl{color:var(--green);}
+  .st{font-size:11px;color:var(--text2);line-height:1.5;}
 
-/* Timeline */
-.tl{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:28px;}
-.tlc{background:var(–bg-card);border:1px solid var(–border);padding:16px;}
-.tlh{font-family:‘Orbitron’,monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(–border);display:flex;align-items:center;gap:8px;}
-.ts{color:var(–red);} .tm{color:var(–amber);} .tlong{color:var(–cyan);}
-.tli{display:flex;gap:10px;margin-bottom:10px;font-size:12px;color:var(–text2);line-height:1.5;}
-.tb{font-family:‘Share Tech Mono’,monospace;font-size:14px;flex-shrink:0;}
+  /* Timeline */
+  .tl{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:28px;}
+  .tlc{background:var(--bg-card);border:1px solid var(--border);padding:16px;}
+  .tlh{font-family:'Orbitron',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;}
+  .ts{color:var(--red);} .tm{color:var(--amber);} .tlong{color:var(--cyan);}
+  .tli{display:flex;gap:10px;margin-bottom:10px;font-size:12px;color:var(--text2);line-height:1.5;}
+  .tb{font-family:'Share Tech Mono',monospace;font-size:14px;flex-shrink:0;}
 
-/* Warnings */
-.wgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;margin-bottom:28px;}
-.wg{border:1px solid var(–border);padding:14px;background:var(–bg-deep);}
-.wgt{font-family:‘Share Tech Mono’,monospace;font-size:10px;color:var(–cyan);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(–border);}
-.wi{display:flex;align-items:flex-start;gap:8px;margin-bottom:8px;font-size:12px;color:var(–text2);line-height:1.4;}
-.wd{width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0;}
-.dr{background:var(–red);box-shadow:0 0 5px rgba(255,45,85,.5);}
-.da{background:var(–amber);}
-.dc{background:var(–cyan);}
-.dg{background:var(–green);}
+  /* Warnings */
+  .wgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;margin-bottom:28px;}
+  .wg{border:1px solid var(--border);padding:14px;background:var(--bg-deep);}
+  .wgt{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--cyan);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border);}
+  .wi{display:flex;align-items:flex-start;gap:8px;margin-bottom:8px;font-size:12px;color:var(--text2);line-height:1.4;}
+  .wd{width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0;}
+  .dr{background:var(--red);box-shadow:0 0 5px rgba(255,45,85,.5);}
+  .da{background:var(--amber);}
+  .dc{background:var(--cyan);}
+  .dg{background:var(--green);}
 
-/* Recs */
-.rgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:28px;}
-.rc{background:var(–bg-card);border:1px solid var(–border);overflow:hidden;}
-.rh{padding:11px 14px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(–border);background:linear-gradient(135deg,var(–bg-card2),var(–bg-card));}
-.ri{font-size:16px;}
-.rt{font-family:‘Orbitron’,monospace;font-size:10px;letter-spacing:2px;color:var(–cyan);}
-.rb{padding:12px 14px;}
-.rit{display:flex;gap:8px;margin-bottom:8px;font-size:12px;color:var(–text2);line-height:1.5;}
-.ra{color:var(–cyan);flex-shrink:0;font-size:10px;margin-top:2px;font-family:‘Share Tech Mono’,monospace;}
+  /* Recs */
+  .rgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:28px;}
+  .rc{background:var(--bg-card);border:1px solid var(--border);overflow:hidden;}
+  .rh{padding:11px 14px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--border);background:linear-gradient(135deg,var(--bg-card2),var(--bg-card));}
+  .ri{font-size:16px;}
+  .rt{font-family:'Orbitron',monospace;font-size:10px;letter-spacing:2px;color:var(--cyan);}
+  .rb{padding:12px 14px;}
+  .rit{display:flex;gap:8px;margin-bottom:8px;font-size:12px;color:var(--text2);line-height:1.5;}
+  .ra{color:var(--cyan);flex-shrink:0;font-size:10px;margin-top:2px;font-family:'Share Tech Mono',monospace;}
 
-/* Exec */
-.exec{background:linear-gradient(135deg,rgba(0,212,255,.05),rgba(0,255,136,.02));border:1px solid var(–border2);border-left:4px solid var(–cyan);padding:22px;margin-bottom:28px;position:relative;}
-.exec::before{content:‘EXECUTIVE SUMMARY’;position:absolute;top:14px;right:18px;font-family:‘Orbitron’,monospace;font-size:9px;letter-spacing:3px;color:var(–dim);}
-.ei{display:flex;gap:16px;padding:10px 0;border-bottom:1px solid var(–border);align-items:flex-start;}
-.ei:last-child{border-bottom:none;}
-.el{font-family:‘Share Tech Mono’,monospace;font-size:10px;letter-spacing:1px;color:var(–cyan);min-width:150px;text-transform:uppercase;padding-top:2px;flex-shrink:0;}
-.et{font-size:13px;color:var(–text);line-height:1.7;}
-.et strong{color:var(–amber);}
-.et .rd{color:var(–red);}
+  /* Exec */
+  .exec{background:linear-gradient(135deg,rgba(0,212,255,.05),rgba(0,255,136,.02));border:1px solid var(--border2);border-left:4px solid var(--cyan);padding:22px;margin-bottom:28px;position:relative;}
+  .exec::before{content:'EXECUTIVE SUMMARY';position:absolute;top:14px;right:18px;font-family:'Orbitron',monospace;font-size:9px;letter-spacing:3px;color:var(--dim);}
+  .ei{display:flex;gap:16px;padding:10px 0;border-bottom:1px solid var(--border);align-items:flex-start;}
+  .ei:last-child{border-bottom:none;}
+  .el{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:1px;color:var(--cyan);min-width:150px;text-transform:uppercase;padding-top:2px;flex-shrink:0;}
+  .et{font-size:13px;color:var(--text);line-height:1.7;}
+  .et strong{color:var(--amber);}
+  .et .rd{color:var(--red);}
 
-/* Fuel */
-.fp{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:28px;}
-.fc{background:var(–bg-card);border:1px solid var(–border);padding:14px;text-align:center;}
-.fl{font-family:‘Share Tech Mono’,monospace;font-size:9px;letter-spacing:2px;color:var(–dim);text-transform:uppercase;margin-bottom:8px;}
-.fv{font-family:‘Orbitron’,monospace;font-size:24px;font-weight:700;color:var(–amber);line-height:1;}
-.fv.rd{color:var(–red);}
-.fu2{font-family:‘Share Tech Mono’,monospace;font-size:10px;color:var(–text2);margin-top:4px;}
-.fs{font-size:11px;margin-top:6px;}
-.fs.ok{color:var(–green);} .fs.warn{color:var(–amber);} .fs.bad{color:var(–red);}
+  /* Fuel */
+  .fp{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:28px;}
+  .fc{background:var(--bg-card);border:1px solid var(--border);padding:14px;text-align:center;}
+  .fl{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--dim);text-transform:uppercase;margin-bottom:8px;}
+  .fv{font-family:'Orbitron',monospace;font-size:24px;font-weight:700;color:var(--amber);line-height:1;}
+  .fv.rd{color:var(--red);}
+  .fu2{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--text2);margin-top:4px;}
+  .fs{font-size:11px;margin-top:6px;}
+  .fs.ok{color:var(--green);} .fs.warn{color:var(--amber);} .fs.bad{color:var(--red);}
 
-/* Divider / desinformation warning */
-.disinfo{background:rgba(255,184,0,.06);border:1px solid rgba(255,184,0,.3);border-left:4px solid var(–amber);padding:10px 16px;margin:10px 0 14px;font-size:12px;color:var(–amber);display:flex;align-items:flex-start;gap:8px;}
-.disinfo span{flex-shrink:0;}
+  /* Divider / desinformation warning */
+  .disinfo{background:rgba(255,184,0,.06);border:1px solid rgba(255,184,0,.3);border-left:4px solid var(--amber);padding:10px 16px;margin:10px 0 14px;font-size:12px;color:var(--amber);display:flex;align-items:flex-start;gap:8px;}
+  .disinfo span{flex-shrink:0;}
 
-/* Footer */
-.footer{border-top:1px solid var(–border);padding:14px 0;display:flex;justify-content:space-between;align-items:center;font-family:‘Share Tech Mono’,monospace;font-size:10px;color:var(–dim);letter-spacing:1px;}
+  /* Footer */
+  .footer{border-top:1px solid var(--border);padding:14px 0;display:flex;justify-content:space-between;align-items:center;font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--dim);letter-spacing:1px;}
 
-@media(max-width:900px){
-.egrid{grid-template-columns:1fr;}
-.wgrid{grid-template-columns:1fr;}
-.rgrid{grid-template-columns:1fr 1fr;}
-.tl{grid-template-columns:1fr;}
-.fp{grid-template-columns:repeat(2,1fr);}
-.t5r{grid-template-columns:28px 1fr 80px;}
-.t5r > *:nth-child(n+4){display:none;}
-.t5h > *:nth-child(n+4){display:none;}
-.neg-status{grid-template-columns:repeat(2,1fr);}
-.sc{grid-template-columns:1fr;}
-}
-@media(max-width:600px){
-.main{padding:12px;}
-.rgrid{grid-template-columns:1fr;}
-.logo{font-size:15px;}
-}
-::-webkit-scrollbar{width:4px;}
-::-webkit-scrollbar-track{background:var(–bg-deep);}
-::-webkit-scrollbar-thumb{background:var(–border2);border-radius:2px;}
+  @media(max-width:900px){
+    .egrid{grid-template-columns:1fr;}
+    .wgrid{grid-template-columns:1fr;}
+    .rgrid{grid-template-columns:1fr 1fr;}
+    .tl{grid-template-columns:1fr;}
+    .fp{grid-template-columns:repeat(2,1fr);}
+    .t5r{grid-template-columns:28px 1fr 80px;}
+    .t5r > *:nth-child(n+4){display:none;}
+    .t5h > *:nth-child(n+4){display:none;}
+    .neg-status{grid-template-columns:repeat(2,1fr);}
+    .sc{grid-template-columns:1fr;}
+  }
+  @media(max-width:600px){
+    .main{padding:12px;}
+    .rgrid{grid-template-columns:1fr;}
+    .logo{font-size:15px;}
+  }
+  ::-webkit-scrollbar{width:4px;}
+  ::-webkit-scrollbar-track{background:var(--bg-deep);}
+  ::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px;}
 </style>
-
 </head>
 <body>
 
@@ -200,7 +198,6 @@
 <main class="main">
 
 <!-- ALERT GŁÓWNY -->
-
 <div class="alert">
   <div style="font-size:26px">🔴</div>
   <div>
@@ -210,7 +207,6 @@
 </div>
 
 <!-- STATUS NEGOCJACJI -->
-
 <div class="stitle">STATUS NEGOCJACJI USA–IRAN | AKTUALIZACJA 6.04.2026</div>
 <div class="neg-status">
   <div class="neg-card">
@@ -236,7 +232,6 @@
 </div>
 
 <!-- TABS -->
-
 <div class="tabs">
   <button class="tab active" onclick="showTab('t5')">📊 TOP 5</button>
   <button class="tab" onclick="showTab('ev')">📋 ZDARZENIA</button>
@@ -247,7 +242,6 @@
 </div>
 
 <!-- ===== TAB TOP5 ===== -->
-
 <div id="tab-t5" class="tab-content active">
   <div class="stitle">TOP 5 — 6–8 KWIETNIA 2026</div>
   <div class="t5">
@@ -327,155 +321,151 @@
 </div>
 
 <!-- ===== TAB ZDARZENIA ===== -->
-
 <div id="tab-ev" class="tab-content">
   <div class="stitle">SZCZEGÓŁOWA ANALIZA — 5 KLUCZOWYCH ZDARZEŃ</div>
   <div class="egrid">
 
-```
-<!-- EV1 -->
-<div class="ecard" style="animation-delay:.1s">
-  <div class="ech">
-    <div>
-      <div class="ect">⏱️ Ultimatum USA wobec Iranu — „Dzień Elektrowni" lub rozejm 45-dniowy</div>
-      <div class="ecm"><span>📍 IRAN / USA</span><span>Wiarygodność: <span style="color:var(--green)">●●●●●</span></span><span style="color:var(--red)">ESKALACJA: 80%</span></div>
+    <!-- EV1 -->
+    <div class="ecard" style="animation-delay:.1s">
+      <div class="ech">
+        <div>
+          <div class="ect">⏱️ Ultimatum USA wobec Iranu — „Dzień Elektrowni" lub rozejm 45-dniowy</div>
+          <div class="ecm"><span>📍 IRAN / USA</span><span>Wiarygodność: <span style="color:var(--green)">●●●●●</span></span><span style="color:var(--red)">ESKALACJA: 80%</span></div>
+        </div>
+        <span class="badge bc">KRYTYCZNE</span>
+      </div>
+      <div class="ecb">
+        <p class="ed">Trump wyznaczył 6 IV godz. 20:00 ET jako ostateczny termin — po raz czwarty. Tym razem jednak wszystkie sygnały wskazują, że jest to rzeczywiście moment rozstrzygający: USA i Izrael mają gotowe plany zmasowanych ataków na irańską infrastrukturę cywilną (elektrownie, mosty). Jednocześnie przez Pakistan, Egipt i Turcję negocjowany jest 45-dniowy rozejm — Witkoff i Araghchi wymieniają SMS-y. Trump powiedział Axiosowi: „Jest na to duża szansa, ale jeśli nie dojdzie do porozumienia, wysadzę tam wszystko w powietrze." Iran zestrzelił już myśliwiec F-15 i odrzucił ultimatum formalnie, ale zakulisowo uczestniczy w negocjacjach.</p>
+        <div class="disinfo"><span>⚠️</span>DEZINFORMACJA: Iran oficjalnie zaprzecza negocjacjom. Rozbieżność między oficjalnymi komunikatami a działaniami kuluarowymi jest kluczowym sygnałem — faktyczny stan negocjacji wymaga weryfikacji z wielu źródeł.</div>
+        <div class="ig">
+          <div class="ii"><div class="il">Bezpieczeństwo</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:40%;background:var(--blue)"></div></div><div class="is" style="color:var(--blue)">2</div></div></div>
+          <div class="ii"><div class="il">Gospodarka</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:100%;background:var(--red);box-shadow:0 0 8px rgba(255,45,85,.5)"></div></div><div class="is" style="color:var(--red)">5</div></div></div>
+          <div class="ii"><div class="il">Energia</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:100%;background:var(--red);box-shadow:0 0 8px rgba(255,45,85,.5)"></div></div><div class="is" style="color:var(--red)">5</div></div></div>
+          <div class="ii"><div class="il">Samorządy</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:60%;background:#ff8c00"></div></div><div class="is" style="color:#ff8c00">3</div></div></div>
+          <div class="ii"><div class="il">Farmacja</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:60%;background:#ff8c00"></div></div><div class="is" style="color:#ff8c00">3</div></div></div>
+          <div class="ii"><div class="il">Społeczeństwo</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:60%;background:#ff8c00"></div></div><div class="is" style="color:#ff8c00">3</div></div></div>
+        </div>
+        <div class="sc">
+          <div class="sb"><div class="sl">⚙ BAZOWY 50%</div><div class="st">Rozejm 45-dniowy podpisany przed upływem terminu. Ropa spada o 10–15 USD/bbl. Ormuz zaczyna się stopniowo otwierać.</div></div>
+          <div class="sw"><div class="sl">☠ PESYMISTYCZNY 30%</div><div class="st">Ataki na elektrownie. Ropa 120–130+ USD/bbl. CPN przestaje stabilizować. Iran zamyka Bab al-Mandab. Globalna recesja.</div></div>
+          <div class="sg"><div class="sl">✓ OPTYMISTYCZNY 20%</div><div class="st">Porozumienie islamabadzkie podpisane dziś. Pełne zawieszenie broni. Ropa 80 USD. Ormuz otwarty w 72h.</div></div>
+        </div>
+      </div>
     </div>
-    <span class="badge bc">KRYTYCZNE</span>
-  </div>
-  <div class="ecb">
-    <p class="ed">Trump wyznaczył 6 IV godz. 20:00 ET jako ostateczny termin — po raz czwarty. Tym razem jednak wszystkie sygnały wskazują, że jest to rzeczywiście moment rozstrzygający: USA i Izrael mają gotowe plany zmasowanych ataków na irańską infrastrukturę cywilną (elektrownie, mosty). Jednocześnie przez Pakistan, Egipt i Turcję negocjowany jest 45-dniowy rozejm — Witkoff i Araghchi wymieniają SMS-y. Trump powiedział Axiosowi: „Jest na to duża szansa, ale jeśli nie dojdzie do porozumienia, wysadzę tam wszystko w powietrze." Iran zestrzelił już myśliwiec F-15 i odrzucił ultimatum formalnie, ale zakulisowo uczestniczy w negocjacjach.</p>
-    <div class="disinfo"><span>⚠️</span>DEZINFORMACJA: Iran oficjalnie zaprzecza negocjacjom. Rozbieżność między oficjalnymi komunikatami a działaniami kuluarowymi jest kluczowym sygnałem — faktyczny stan negocjacji wymaga weryfikacji z wielu źródeł.</div>
-    <div class="ig">
-      <div class="ii"><div class="il">Bezpieczeństwo</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:40%;background:var(--blue)"></div></div><div class="is" style="color:var(--blue)">2</div></div></div>
-      <div class="ii"><div class="il">Gospodarka</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:100%;background:var(--red);box-shadow:0 0 8px rgba(255,45,85,.5)"></div></div><div class="is" style="color:var(--red)">5</div></div></div>
-      <div class="ii"><div class="il">Energia</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:100%;background:var(--red);box-shadow:0 0 8px rgba(255,45,85,.5)"></div></div><div class="is" style="color:var(--red)">5</div></div></div>
-      <div class="ii"><div class="il">Samorządy</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:60%;background:#ff8c00"></div></div><div class="is" style="color:#ff8c00">3</div></div></div>
-      <div class="ii"><div class="il">Farmacja</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:60%;background:#ff8c00"></div></div><div class="is" style="color:#ff8c00">3</div></div></div>
-      <div class="ii"><div class="il">Społeczeństwo</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:60%;background:#ff8c00"></div></div><div class="is" style="color:#ff8c00">3</div></div></div>
-    </div>
-    <div class="sc">
-      <div class="sb"><div class="sl">⚙ BAZOWY 50%</div><div class="st">Rozejm 45-dniowy podpisany przed upływem terminu. Ropa spada o 10–15 USD/bbl. Ormuz zaczyna się stopniowo otwierać.</div></div>
-      <div class="sw"><div class="sl">☠ PESYMISTYCZNY 30%</div><div class="st">Ataki na elektrownie. Ropa 120–130+ USD/bbl. CPN przestaje stabilizować. Iran zamyka Bab al-Mandab. Globalna recesja.</div></div>
-      <div class="sg"><div class="sl">✓ OPTYMISTYCZNY 20%</div><div class="st">Porozumienie islamabadzkie podpisane dziś. Pełne zawieszenie broni. Ropa 80 USD. Ormuz otwarty w 72h.</div></div>
-    </div>
-  </div>
-</div>
 
-<!-- EV2 -->
-<div class="ecard" style="animation-delay:.2s">
-  <div class="ech">
-    <div>
-      <div class="ect">💣 Sabotaż gazociągu Balkan Stream — Serbia/Węgry, tydzień przed wyborami</div>
-      <div class="ecm"><span>📍 SERBIA / WĘGRY</span><span>Wiarygodność: <span style="color:var(--cyan)">●●●●○</span></span><span style="color:var(--amber)">ESKALACJA: 60%</span></div>
+    <!-- EV2 -->
+    <div class="ecard" style="animation-delay:.2s">
+      <div class="ech">
+        <div>
+          <div class="ect">💣 Sabotaż gazociągu Balkan Stream — Serbia/Węgry, tydzień przed wyborami</div>
+          <div class="ecm"><span>📍 SERBIA / WĘGRY</span><span>Wiarygodność: <span style="color:var(--cyan)">●●●●○</span></span><span style="color:var(--amber)">ESKALACJA: 60%</span></div>
+        </div>
+        <span class="badge bc">PILNE</span>
+      </div>
+      <div class="ecb">
+        <p class="ed">5 kwietnia wojsko serbskie znalazło potężne ładunki wybuchowe (4 kg, z zapalnikami) przy gazociągu TurkStream/Balkan Stream k. Kanjiży, przy granicy z Węgrami — rurociąg pokrywa 60% zapotrzebowania Węgier na gaz. Orban zwołał nadzwyczajną Radę Obrony i wysłał wojsko do ochrony gazociągu. Serbski kontrwywiad: oznaczenia na ładunkach wskazują produkcję w USA — ale nie oznacza to sprawcy. Brak „ukraińskiego śladu". Lider opozycji Magyar oskarża o operację pod fałszywą flagą zainspirowaną przez Rosję/Serbię — tydzień przed wyborami 12 IV.</p>
+        <div class="disinfo"><span>⚠️</span>WYSOKA NIEPEWNOŚĆ: Incydent może być sabotażem, prowokacją lub operacją pod fałszywą flagą. Sprawca nieznany. Materiały wyprodukowane w USA ≠ USA jako sprawca. Kontekst przedwyborczy i spadek poparcia Fideszu (35–37%) vs TISZA (56–58%) nakazuje szczególną ostrożność analityczną.</div>
+        <div class="ig">
+          <div class="ii"><div class="il">Bezpieczeństwo PL</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:60%;background:#ff8c00"></div></div><div class="is" style="color:#ff8c00">3</div></div></div>
+          <div class="ii"><div class="il">Infrastruktura EU</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:80%;background:var(--amber);box-shadow:0 0 6px rgba(255,184,0,.4)"></div></div><div class="is" style="color:var(--amber)">4</div></div></div>
+          <div class="ii"><div class="il">Energia (EU)</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:60%;background:#ff8c00"></div></div><div class="is" style="color:#ff8c00">3</div></div></div>
+          <div class="ii"><div class="il">Gospodarka</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:40%;background:var(--blue)"></div></div><div class="is" style="color:var(--blue)">2</div></div></div>
+          <div class="ii"><div class="il">Farmacja</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:4%;background:var(--dim)"></div></div><div class="is" style="color:var(--dim)">0</div></div></div>
+          <div class="ii"><div class="il">Społeczeństwo</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:40%;background:var(--blue)"></div></div><div class="is" style="color:var(--blue)">2</div></div></div>
+        </div>
+        <div class="sc">
+          <div class="sb"><div class="sl">⚙ BAZOWY</div><div class="st">Prawdziwy sabotaż, sprawca nieustalony. Gazociąg działa. Wzmożona ochrona militarna w regionie.</div></div>
+          <div class="sw"><div class="sl">☠ PESYMISTYCZNY</div><div class="st">Eskalacja sabotaży infrastruktury energetycznej w Europie. Kolejne incydenty w PL, Bałtyk, Baltic Pipe.</div></div>
+          <div class="sg"><div class="sl">✓ OPTYMISTYCZNY</div><div class="st">Operacja pod fałszywą flagą zdemaskowana przez śledztwo. Orban traci wybory 12 IV. Nowy rząd WĘ kończy z rosyjskim gazem.</div></div>
+        </div>
+      </div>
     </div>
-    <span class="badge bc">PILNE</span>
-  </div>
-  <div class="ecb">
-    <p class="ed">5 kwietnia wojsko serbskie znalazło potężne ładunki wybuchowe (4 kg, z zapalnikami) przy gazociągu TurkStream/Balkan Stream k. Kanjiży, przy granicy z Węgrami — rurociąg pokrywa 60% zapotrzebowania Węgier na gaz. Orban zwołał nadzwyczajną Radę Obrony i wysłał wojsko do ochrony gazociągu. Serbski kontrwywiad: oznaczenia na ładunkach wskazują produkcję w USA — ale nie oznacza to sprawcy. Brak „ukraińskiego śladu". Lider opozycji Magyar oskarża o operację pod fałszywą flagą zainspirowaną przez Rosję/Serbię — tydzień przed wyborami 12 IV.</p>
-    <div class="disinfo"><span>⚠️</span>WYSOKA NIEPEWNOŚĆ: Incydent może być sabotażem, prowokacją lub operacją pod fałszywą flagą. Sprawca nieznany. Materiały wyprodukowane w USA ≠ USA jako sprawca. Kontekst przedwyborczy i spadek poparcia Fideszu (35–37%) vs TISZA (56–58%) nakazuje szczególną ostrożność analityczną.</div>
-    <div class="ig">
-      <div class="ii"><div class="il">Bezpieczeństwo PL</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:60%;background:#ff8c00"></div></div><div class="is" style="color:#ff8c00">3</div></div></div>
-      <div class="ii"><div class="il">Infrastruktura EU</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:80%;background:var(--amber);box-shadow:0 0 6px rgba(255,184,0,.4)"></div></div><div class="is" style="color:var(--amber)">4</div></div></div>
-      <div class="ii"><div class="il">Energia (EU)</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:60%;background:#ff8c00"></div></div><div class="is" style="color:#ff8c00">3</div></div></div>
-      <div class="ii"><div class="il">Gospodarka</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:40%;background:var(--blue)"></div></div><div class="is" style="color:var(--blue)">2</div></div></div>
-      <div class="ii"><div class="il">Farmacja</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:4%;background:var(--dim)"></div></div><div class="is" style="color:var(--dim)">0</div></div></div>
-      <div class="ii"><div class="il">Społeczeństwo</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:40%;background:var(--blue)"></div></div><div class="is" style="color:var(--blue)">2</div></div></div>
-    </div>
-    <div class="sc">
-      <div class="sb"><div class="sl">⚙ BAZOWY</div><div class="st">Prawdziwy sabotaż, sprawca nieustalony. Gazociąg działa. Wzmożona ochrona militarna w regionie.</div></div>
-      <div class="sw"><div class="sl">☠ PESYMISTYCZNY</div><div class="st">Eskalacja sabotaży infrastruktury energetycznej w Europie. Kolejne incydenty w PL, Bałtyk, Baltic Pipe.</div></div>
-      <div class="sg"><div class="sl">✓ OPTYMISTYCZNY</div><div class="st">Operacja pod fałszywą flagą zdemaskowana przez śledztwo. Orban traci wybory 12 IV. Nowy rząd WĘ kończy z rosyjskim gazem.</div></div>
-    </div>
-  </div>
-</div>
 
-<!-- EV3 -->
-<div class="ecard" style="animation-delay:.3s">
-  <div class="ech">
-    <div>
-      <div class="ect">🗳️ Węgry — wybory 12 IV, TISZA 56% vs Fidesz 37%</div>
-      <div class="ecm"><span>📍 WĘGRY / UE</span><span>Wiarygodność: <span style="color:var(--green)">●●●●●</span></span><span style="color:var(--amber)">WYNIK: 70% zmiana władzy</span></div>
+    <!-- EV3 -->
+    <div class="ecard" style="animation-delay:.3s">
+      <div class="ech">
+        <div>
+          <div class="ect">🗳️ Węgry — wybory 12 IV, TISZA 56% vs Fidesz 37%</div>
+          <div class="ecm"><span>📍 WĘGRY / UE</span><span>Wiarygodność: <span style="color:var(--green)">●●●●●</span></span><span style="color:var(--amber)">WYNIK: 70% zmiana władzy</span></div>
+        </div>
+        <span class="badge bh">STRATEGICZNE</span>
+      </div>
+      <div class="ecb">
+        <p class="ed">Wybory parlamentarne na Węgrzech 12 kwietnia 2026. Większość niezależnych sondaży daje TISZY Petera Magyara 56–58% poparcia wśród zdecydowanych wyborców vs Fidesz Orbana 35–37%. Incydent przy gazociągu Balkan Stream wpisuje się w kampanię Orbana — opozycja oskarża go o prowokację z rosyjsko-serbskim wsparciem. Zmiana władzy na Węgrzech oznaczałaby: reorientację polityki energetycznej (koniec z rosyjskim gazem przez TurkStream), zmianę relacji Budapeszt–Bruksela, wsparcie dla Ukrainy, nowe podejście do sankcji wobec Rosji. Dla Polski — pozytywny sygnał geopolityczny.</p>
+        <div class="ig">
+          <div class="ii"><div class="il">Bezpieczeństwo</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:60%;background:#ff8c00"></div></div><div class="is" style="color:#ff8c00">3+</div></div></div>
+          <div class="ii"><div class="il">Gospodarka</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:40%;background:var(--blue)"></div></div><div class="is" style="color:var(--blue)">2</div></div></div>
+          <div class="ii"><div class="il">Energia (UE)</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:60%;background:#ff8c00"></div></div><div class="is" style="color:#ff8c00">3</div></div></div>
+          <div class="ii"><div class="il">Samorządy</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:20%;background:var(--text2)"></div></div><div class="is" style="color:var(--text2)">1</div></div></div>
+          <div class="ii"><div class="il">Farmacja</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:4%;background:var(--dim)"></div></div><div class="is" style="color:var(--dim)">0</div></div></div>
+          <div class="ii"><div class="il">Geopolityka UE</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:80%;background:var(--amber);box-shadow:0 0 6px rgba(255,184,0,.4)"></div></div><div class="is" style="color:var(--amber)">4</div></div></div>
+        </div>
+        <div class="sc">
+          <div class="sb"><div class="sl">⚙ BAZOWY</div><div class="st">TISZA wygrywa 12 IV. Nowy rząd WĘ reorientuje politykę: TurkStream wygaszany, wsparcie dla Ukrainy, normalizacja z UE.</div></div>
+          <div class="sw"><div class="sl">☠ PESYMISTYCZNY</div><div class="st">Fidesz wygrywa dzięki prowokacji z Balkan Stream. Orban pozostaje. Blokada UE, gaz rosyjski płynie dalej.</div></div>
+          <div class="sg"><div class="sl">✓ OPTYMISTYCZNY</div><div class="st">TISZA wygrywa zdecydowanie + sabotaż zdemaskowany. EU jednoczy się ws. Rosji. Baltic Pipe ważniejszy dla całego regionu.</div></div>
+        </div>
+      </div>
     </div>
-    <span class="badge bh">STRATEGICZNE</span>
-  </div>
-  <div class="ecb">
-    <p class="ed">Wybory parlamentarne na Węgrzech 12 kwietnia 2026. Większość niezależnych sondaży daje TISZY Petera Magyara 56–58% poparcia wśród zdecydowanych wyborców vs Fidesz Orbana 35–37%. Incydent przy gazociągu Balkan Stream wpisuje się w kampanię Orbana — opozycja oskarża go o prowokację z rosyjsko-serbskim wsparciem. Zmiana władzy na Węgrzech oznaczałaby: reorientację polityki energetycznej (koniec z rosyjskim gazem przez TurkStream), zmianę relacji Budapeszt–Bruksela, wsparcie dla Ukrainy, nowe podejście do sankcji wobec Rosji. Dla Polski — pozytywny sygnał geopolityczny.</p>
-    <div class="ig">
-      <div class="ii"><div class="il">Bezpieczeństwo</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:60%;background:#ff8c00"></div></div><div class="is" style="color:#ff8c00">3+</div></div></div>
-      <div class="ii"><div class="il">Gospodarka</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:40%;background:var(--blue)"></div></div><div class="is" style="color:var(--blue)">2</div></div></div>
-      <div class="ii"><div class="il">Energia (UE)</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:60%;background:#ff8c00"></div></div><div class="is" style="color:#ff8c00">3</div></div></div>
-      <div class="ii"><div class="il">Samorządy</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:20%;background:var(--text2)"></div></div><div class="is" style="color:var(--text2)">1</div></div></div>
-      <div class="ii"><div class="il">Farmacja</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:4%;background:var(--dim)"></div></div><div class="is" style="color:var(--dim)">0</div></div></div>
-      <div class="ii"><div class="il">Geopolityka UE</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:80%;background:var(--amber);box-shadow:0 0 6px rgba(255,184,0,.4)"></div></div><div class="is" style="color:var(--amber)">4</div></div></div>
-    </div>
-    <div class="sc">
-      <div class="sb"><div class="sl">⚙ BAZOWY</div><div class="st">TISZA wygrywa 12 IV. Nowy rząd WĘ reorientuje politykę: TurkStream wygaszany, wsparcie dla Ukrainy, normalizacja z UE.</div></div>
-      <div class="sw"><div class="sl">☠ PESYMISTYCZNY</div><div class="st">Fidesz wygrywa dzięki prowokacji z Balkan Stream. Orban pozostaje. Blokada UE, gaz rosyjski płynie dalej.</div></div>
-      <div class="sg"><div class="sl">✓ OPTYMISTYCZNY</div><div class="st">TISZA wygrywa zdecydowanie + sabotaż zdemaskowany. EU jednoczy się ws. Rosji. Baltic Pipe ważniejszy dla całego regionu.</div></div>
-    </div>
-  </div>
-</div>
 
-<!-- EV4 -->
-<div class="ecard" style="animation-delay:.4s">
-  <div class="ech">
-    <div>
-      <div class="ect">🇷🇺 Rosja atakuje Odessę, korzysta z absorbcji USA przez Iran</div>
-      <div class="ecm"><span>📍 UKRAINA / ROSJA</span><span>Wiarygodność: <span style="color:var(--green)">●●●●●</span></span><span style="color:var(--amber)">ESKALACJA: 50%</span></div>
+    <!-- EV4 -->
+    <div class="ecard" style="animation-delay:.4s">
+      <div class="ech">
+        <div>
+          <div class="ect">🇷🇺 Rosja atakuje Odessę, korzysta z absorbcji USA przez Iran</div>
+          <div class="ecm"><span>📍 UKRAINA / ROSJA</span><span>Wiarygodność: <span style="color:var(--green)">●●●●●</span></span><span style="color:var(--amber)">ESKALACJA: 50%</span></div>
+        </div>
+        <span class="badge bh">WYSOKA</span>
+      </div>
+      <div class="ecb">
+        <p class="ed">W nocy z 5 na 6 kwietnia Rosja przeprowadziła zmasowany atak powietrzny na Odessę — uszkodzony wielopiętrowy budynek mieszkalny, możliwe ofiary pod gruzami. Walki toczą się w dotychczasowej intensywności po zerwaniu rozejmu wielkanocnego. Rosja aktywnie wykorzystuje okno możliwości stworzone przez absorbcję USA w konflikcie z Iranem. Ukraińskie drony jednocześnie uderzyły w rosyjski naftociąg na Bałtyku. Zełenski prowadzi dyplomację na Bliskim Wschodzie — podpisał umowy ws. dostaw diesla z Arabią Saudyjską i Katarem.</p>
+        <div class="ig">
+          <div class="ii"><div class="il">Bezpieczeństwo PL</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:100%;background:var(--red);box-shadow:0 0 8px rgba(255,45,85,.5)"></div></div><div class="is" style="color:var(--red)">5</div></div></div>
+          <div class="ii"><div class="il">Gospodarka</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:60%;background:#ff8c00"></div></div><div class="is" style="color:#ff8c00">3</div></div></div>
+          <div class="ii"><div class="il">Energia</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:40%;background:var(--blue)"></div></div><div class="is" style="color:var(--blue)">2</div></div></div>
+          <div class="ii"><div class="il">Samorządy</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:40%;background:var(--blue)"></div></div><div class="is" style="color:var(--blue)">2</div></div></div>
+          <div class="ii"><div class="il">Farmacja</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:20%;background:var(--text2)"></div></div><div class="is" style="color:var(--text2)">1</div></div></div>
+          <div class="ii"><div class="il">Społeczeństwo</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:80%;background:var(--amber);box-shadow:0 0 6px rgba(255,184,0,.4)"></div></div><div class="is" style="color:var(--amber)">4</div></div></div>
+        </div>
+        <div class="sc">
+          <div class="sb"><div class="sl">⚙ BAZOWY</div><div class="st">Walki na dotychczasowych liniach. Brak przełomu. Rozejm 30-dniowy wisi w powietrzu bez odpowiedzi Moskwy.</div></div>
+          <div class="sw"><div class="sl">☠ PESYMISTYCZNY</div><div class="st">Rosja uderza masowo w energetykę Ukrainy przy braku uwagi Zachodu. Ukraina atakuje rosyjskie rafinerie. Ropa +10 USD.</div></div>
+          <div class="sg"><div class="sl">✓ OPTYMISTYCZNY</div><div class="st">USA naciskają na Moskwę razem z rozjemem iranskim. 30-dniowe zawieszenie broni Rosja–Ukraina zawarte w tym samym tygodniu.</div></div>
+        </div>
+      </div>
     </div>
-    <span class="badge bh">WYSOKA</span>
-  </div>
-  <div class="ecb">
-    <p class="ed">W nocy z 5 na 6 kwietnia Rosja przeprowadziła zmasowany atak powietrzny na Odessę — uszkodzony wielopiętrowy budynek mieszkalny, możliwe ofiary pod gruzami. Walki toczą się w dotychczasowej intensywności po zerwaniu rozejmu wielkanocnego. Rosja aktywnie wykorzystuje okno możliwości stworzone przez absorbcję USA w konflikcie z Iranem. Ukraińskie drony jednocześnie uderzyły w rosyjski naftociąg na Bałtyku. Zełenski prowadzi dyplomację na Bliskim Wschodzie — podpisał umowy ws. dostaw diesla z Arabią Saudyjską i Katarem.</p>
-    <div class="ig">
-      <div class="ii"><div class="il">Bezpieczeństwo PL</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:100%;background:var(--red);box-shadow:0 0 8px rgba(255,45,85,.5)"></div></div><div class="is" style="color:var(--red)">5</div></div></div>
-      <div class="ii"><div class="il">Gospodarka</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:60%;background:#ff8c00"></div></div><div class="is" style="color:#ff8c00">3</div></div></div>
-      <div class="ii"><div class="il">Energia</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:40%;background:var(--blue)"></div></div><div class="is" style="color:var(--blue)">2</div></div></div>
-      <div class="ii"><div class="il">Samorządy</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:40%;background:var(--blue)"></div></div><div class="is" style="color:var(--blue)">2</div></div></div>
-      <div class="ii"><div class="il">Farmacja</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:20%;background:var(--text2)"></div></div><div class="is" style="color:var(--text2)">1</div></div></div>
-      <div class="ii"><div class="il">Społeczeństwo</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:80%;background:var(--amber);box-shadow:0 0 6px rgba(255,184,0,.4)"></div></div><div class="is" style="color:var(--amber)">4</div></div></div>
-    </div>
-    <div class="sc">
-      <div class="sb"><div class="sl">⚙ BAZOWY</div><div class="st">Walki na dotychczasowych liniach. Brak przełomu. Rozejm 30-dniowy wisi w powietrzu bez odpowiedzi Moskwy.</div></div>
-      <div class="sw"><div class="sl">☠ PESYMISTYCZNY</div><div class="st">Rosja uderza masowo w energetykę Ukrainy przy braku uwagi Zachodu. Ukraina atakuje rosyjskie rafinerie. Ropa +10 USD.</div></div>
-      <div class="sg"><div class="sl">✓ OPTYMISTYCZNY</div><div class="st">USA naciskają na Moskwę razem z rozjemem iranskim. 30-dniowe zawieszenie broni Rosja–Ukraina zawarte w tym samym tygodniu.</div></div>
-    </div>
-  </div>
-</div>
 
-<!-- EV5 -->
-<div class="ecard" style="animation-delay:.5s">
-  <div class="ech">
-    <div>
-      <div class="ect">⛽ Polska: ropa hurtowa 109 USD/bbl, pakiet CPN broni przed szokiem</div>
-      <div class="ecm"><span>📍 POLSKA</span><span>Wiarygodność: <span style="color:var(--green)">●●●●●</span></span><span style="color:var(--green)">PAKIET AKTYWNY</span></div>
+    <!-- EV5 -->
+    <div class="ecard" style="animation-delay:.5s">
+      <div class="ech">
+        <div>
+          <div class="ect">⛽ Polska: ropa hurtowa 109 USD/bbl, pakiet CPN broni przed szokiem</div>
+          <div class="ecm"><span>📍 POLSKA</span><span>Wiarygodność: <span style="color:var(--green)">●●●●●</span></span><span style="color:var(--green)">PAKIET AKTYWNY</span></div>
+        </div>
+        <span class="badge bm">MONITORUJ</span>
+      </div>
+      <div class="ecb">
+        <p class="ed">Hurtowa cena diesla ON w Orlenie: 6,99 PLN/l netto (8,60 PLN/l z VAT 23%) — pokazuje prawdziwą skalę kryzysu bez interwencji. Detaliczne ceny maksymalne chronią kierowców: benzyna 95 — 6,21 zł, diesel — 7,87 zł (od 8 IV nowe obwieszczenie). Ropa Brent na poziomie 109 USD/bbl (dane z 2 IV). Orlen nie sprowadza ropy przez Ormuz — dywersyfikacja z Morza Północnego, Afryki, Ameryk działa. Minister energii wyklucza ograniczenia dla Polaków; rozważa limitowanie dla obcokrajowców przy stacjach przygranicznych (turystyka paliwowa). Koszt pakietu: 1,6 mld PLN/mies.</p>
+        <div class="ig">
+          <div class="ii"><div class="il">Bezpieczeństwo</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:20%;background:var(--text2)"></div></div><div class="is" style="color:var(--text2)">1+</div></div></div>
+          <div class="ii"><div class="il">Gospodarka/Budżet</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:80%;background:var(--amber);box-shadow:0 0 6px rgba(255,184,0,.4)"></div></div><div class="is" style="color:var(--amber)">4</div></div></div>
+          <div class="ii"><div class="il">Energia</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:60%;background:#ff8c00"></div></div><div class="is" style="color:#ff8c00">3</div></div></div>
+          <div class="ii"><div class="il">Samorządy</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:60%;background:#ff8c00"></div></div><div class="is" style="color:#ff8c00">3</div></div></div>
+          <div class="ii"><div class="il">Farmacja</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:20%;background:var(--text2)"></div></div><div class="is" style="color:var(--text2)">1</div></div></div>
+          <div class="ii"><div class="il">Społeczeństwo</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:60%;background:#ff8c00"></div></div><div class="is" style="color:#ff8c00">3+</div></div></div>
+        </div>
+        <div class="sc">
+          <div class="sb"><div class="sl">⚙ BAZOWY</div><div class="st">Pakiet CPN przedłużony po 15 IV. Ropa 95–105 USD. Diesel wraca poniżej 7,70 po Wielkanocy.</div></div>
+          <div class="sw"><div class="sl">☠ PESYMISTYCZNY</div><div class="st">Ataki na Iran → ropa 130 USD → diesel hurtowo 9+ zł. CPN nie wystarczy. Braki paliwa przy stacjach.</div></div>
+          <div class="sg"><div class="sl">✓ OPTYMISTYCZNY</div><div class="st">Rozejm Iran → ropa 85 USD. Pakiet CPN zbędny od maja. Powrót normalnych podatków.</div></div>
+        </div>
+      </div>
     </div>
-    <span class="badge bm">MONITORUJ</span>
-  </div>
-  <div class="ecb">
-    <p class="ed">Hurtowa cena diesla ON w Orlenie: 6,99 PLN/l netto (8,60 PLN/l z VAT 23%) — pokazuje prawdziwą skalę kryzysu bez interwencji. Detaliczne ceny maksymalne chronią kierowców: benzyna 95 — 6,21 zł, diesel — 7,87 zł (od 8 IV nowe obwieszczenie). Ropa Brent na poziomie 109 USD/bbl (dane z 2 IV). Orlen nie sprowadza ropy przez Ormuz — dywersyfikacja z Morza Północnego, Afryki, Ameryk działa. Minister energii wyklucza ograniczenia dla Polaków; rozważa limitowanie dla obcokrajowców przy stacjach przygranicznych (turystyka paliwowa). Koszt pakietu: 1,6 mld PLN/mies.</p>
-    <div class="ig">
-      <div class="ii"><div class="il">Bezpieczeństwo</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:20%;background:var(--text2)"></div></div><div class="is" style="color:var(--text2)">1+</div></div></div>
-      <div class="ii"><div class="il">Gospodarka/Budżet</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:80%;background:var(--amber);box-shadow:0 0 6px rgba(255,184,0,.4)"></div></div><div class="is" style="color:var(--amber)">4</div></div></div>
-      <div class="ii"><div class="il">Energia</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:60%;background:#ff8c00"></div></div><div class="is" style="color:#ff8c00">3</div></div></div>
-      <div class="ii"><div class="il">Samorządy</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:60%;background:#ff8c00"></div></div><div class="is" style="color:#ff8c00">3</div></div></div>
-      <div class="ii"><div class="il">Farmacja</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:20%;background:var(--text2)"></div></div><div class="is" style="color:var(--text2)">1</div></div></div>
-      <div class="ii"><div class="il">Społeczeństwo</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:60%;background:#ff8c00"></div></div><div class="is" style="color:#ff8c00">3+</div></div></div>
-    </div>
-    <div class="sc">
-      <div class="sb"><div class="sl">⚙ BAZOWY</div><div class="st">Pakiet CPN przedłużony po 15 IV. Ropa 95–105 USD. Diesel wraca poniżej 7,70 po Wielkanocy.</div></div>
-      <div class="sw"><div class="sl">☠ PESYMISTYCZNY</div><div class="st">Ataki na Iran → ropa 130 USD → diesel hurtowo 9+ zł. CPN nie wystarczy. Braki paliwa przy stacjach.</div></div>
-      <div class="sg"><div class="sl">✓ OPTYMISTYCZNY</div><div class="st">Rozejm Iran → ropa 85 USD. Pakiet CPN zbędny od maja. Powrót normalnych podatków.</div></div>
-    </div>
-  </div>
-</div>
-```
 
   </div>
 </div>
 
 <!-- ===== TAB ENERGIA ===== -->
-
 <div id="tab-en" class="tab-content">
   <div class="stitle">CENY PALIW POLSKA — 6 KWIETNIA 2026</div>
   <div class="fp">
@@ -558,7 +548,6 @@
 </div>
 
 <!-- ===== TAB SYGNAŁY ===== -->
-
 <div id="tab-wa" class="tab-content">
   <div class="stitle">WCZESNE SYGNAŁY OSTRZEGAWCZE — 6–8 KWIETNIA 2026</div>
   <div class="wgrid">
@@ -610,7 +599,6 @@
 </div>
 
 <!-- ===== TAB REKOMENDACJE ===== -->
-
 <div id="tab-re" class="tab-content">
   <div class="stitle">REKOMENDACJE DLA POLSKI — 6–8 KWIETNIA 2026</div>
   <div class="rgrid">
@@ -671,7 +659,6 @@
 </div>
 
 <!-- ===== TAB PODSUMOWANIE ===== -->
-
 <div id="tab-su" class="tab-content">
   <div class="stitle">EXECUTIVE SUMMARY — 6 KWIETNIA 2026</div>
   <div class="exec">
@@ -744,6 +731,5 @@ function updateClock(){
 setInterval(updateClock,1000);
 updateClock();
 </script>
-
 </body>
 </html>
