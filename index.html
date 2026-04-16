@@ -1,788 +1,1001 @@
 <!DOCTYPE html>
-
 <html lang="pl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OSINT POLSKA | 9 KWIETNIA 2026 | ROZEJM POD ZNAKIEM ZAPYTANIA</title>
-<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@300;400;500;600;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+<title>OSINT Polska · 16 kwietnia 2026 · Raport #44</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;1,9..144,400&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --bg:#020608;--card:#0a1520;--card2:#0d1e2d;
-    --green:#00ff88;--cyan:#00d4ff;--red:#ff2d55;--amber:#ffb800;--blue:#1a7fff;
-    --t:#c8e6f0;--t2:#6a9ab0;--dim:#2a4a5a;
-    --b:#0d2535;--b2:#0d3550;
-  }
-  *{margin:0;padding:0;box-sizing:border-box;}
-  body{background:var(--bg);color:var(--t);font-family:'Rajdhani',sans-serif;min-height:100vh;overflow-x:hidden;}
-  body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.03) 2px,rgba(0,0,0,.03) 4px);pointer-events:none;z-index:9999;}
-  body::after{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,212,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,.025) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0;}
-
-.header{position:sticky;top:0;z-index:100;background:linear-gradient(180deg,#020608,rgba(2,6,8,.97));border-bottom:1px solid var(–b2);padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:64px;backdrop-filter:blur(10px);}
-.logo{font-family:‘Orbitron’,monospace;font-size:20px;font-weight:900;color:var(–cyan);letter-spacing:4px;text-shadow:0 0 20px rgba(0,212,255,.4);}
-.logo span{color:var(–green);}
-.hb{background:rgba(255,184,0,.15);border:1px solid var(–amber);color:var(–amber);font-family:‘Share Tech Mono’,monospace;font-size:10px;padding:3px 10px;letter-spacing:2px;animation:pa 2s infinite;}
-@keyframes pa{0%,100%{opacity:1}50%{opacity:.6}}
-.hr{display:flex;align-items:center;gap:20px;font-family:‘Share Tech Mono’,monospace;font-size:11px;color:var(–t2);}
-.ld{width:8px;height:8px;border-radius:50%;background:var(–amber);box-shadow:0 0 8px var(–amber);animation:bk 1.5s infinite;display:inline-block;margin-right:6px;}
-@keyframes bk{0%,100%{opacity:1}50%{opacity:.15}}
-
-.main{position:relative;z-index:1;max-width:1600px;margin:0 auto;padding:24px;}
-
-/* STATUS BAR */
-.status-bar{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:24px;}
-.sc{background:var(–card);border:1px solid var(–b);padding:14px;text-align:center;}
-.sl{font-family:‘Share Tech Mono’,monospace;font-size:9px;letter-spacing:2px;color:var(–dim);text-transform:uppercase;margin-bottom:8px;}
-.sv{font-family:‘Orbitron’,monospace;font-size:20px;font-weight:700;line-height:1;}
-.ss{font-size:11px;margin-top:5px;color:var(–t2);}
-
-/* ALERT */
-.alert{border-left:5px solid var(–red);background:linear-gradient(135deg,rgba(255,45,85,.1),rgba(255,184,0,.03));border:1px solid rgba(255,45,85,.4);border-left-width:5px;padding:16px 22px;margin-bottom:20px;display:flex;align-items:flex-start;gap:16px;animation:si .5s ease;}
-@keyframes si{from{transform:translateX(-20px);opacity:0}to{transform:translateX(0);opacity:1}}
-.alert.amber{border-left-color:var(–amber);border-color:rgba(255,184,0,.4);background:linear-gradient(135deg,rgba(255,184,0,.07),transparent);}
-.alert.green{border-left-color:var(–green);border-color:rgba(0,255,136,.3);background:linear-gradient(135deg,rgba(0,255,136,.06),transparent);}
-.alert strong{font-family:‘Orbitron’,monospace;font-size:10px;letter-spacing:2px;}
-.alert.alert-red strong{color:var(–red);}
-.alert.amber strong{color:var(–amber);}
-.alert.green strong{color:var(–green);}
-.alert p{font-size:13px;color:var(–t);margin-top:4px;line-height:1.5;}
-
-/* TABS */
-.tabs{display:flex;gap:4px;margin-bottom:22px;border-bottom:1px solid var(–b);}
-.tab{padding:10px 18px;font-family:‘Orbitron’,monospace;font-size:10px;letter-spacing:2px;color:var(–dim);cursor:pointer;border:1px solid transparent;border-bottom:none;margin-bottom:-1px;background:transparent;transition:all .2s;}
-.tab:hover{color:var(–t2);}
-.tab.active{color:var(–cyan);border-color:var(–b2);background:var(–card);border-bottom-color:var(–card);}
-.tab-content{display:none;}
-.tab-content.active{display:block;}
-
-.stitle{font-family:‘Orbitron’,monospace;font-size:11px;letter-spacing:4px;color:var(–cyan);text-transform:uppercase;margin-bottom:16px;display:flex;align-items:center;gap:12px;}
-.stitle::after{content:’’;flex:1;height:1px;background:linear-gradient(90deg,var(–b2),transparent);}
-
-/* TOP5 */
-.t5{display:flex;flex-direction:column;gap:8px;margin-bottom:28px;}
-.t5r{display:grid;grid-template-columns:32px 1fr 130px 110px 90px 120px;gap:10px;align-items:center;background:var(–card);border:1px solid var(–b);border-left:3px solid var(–b2);padding:12px 16px;transition:all .2s;animation:fu .5s ease both;}
-@keyframes fu{from{transform:translateY(10px);opacity:0}to{transform:translateY(0);opacity:1}}
-.t5r:hover{background:var(–card2);transform:translateX(4px);}
-.t5h{background:transparent!important;border:none!important;padding:6px 16px!important;cursor:default!important;}
-.t5h:hover{transform:none!important;}
-.rn{font-family:‘Orbitron’,monospace;font-size:18px;font-weight:900;color:var(–dim);}
-.cl{font-family:‘Share Tech Mono’,monospace;font-size:10px;color:var(–dim);letter-spacing:1px;}
-.en{font-size:13px;font-weight:600;color:var(–t);line-height:1.4;}
-.er{font-family:‘Share Tech Mono’,monospace;font-size:10px;color:var(–t2);margin-top:2px;}
-
-.badge{display:inline-block;padding:3px 9px;font-family:‘Share Tech Mono’,monospace;font-size:10px;letter-spacing:1px;border-radius:2px;font-weight:700;white-space:nowrap;}
-.bc{background:rgba(255,45,85,.15);color:var(–red);border:1px solid rgba(255,45,85,.35);}
-.bh{background:rgba(255,184,0,.12);color:var(–amber);border:1px solid rgba(255,184,0,.3);}
-.bm{background:rgba(26,127,255,.12);color:var(–blue);border:1px solid rgba(26,127,255,.3);}
-.bo{background:rgba(0,255,136,.08);color:var(–green);border:1px solid rgba(0,255,136,.25);}
-
-/* CARDS */
-.egrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(480px,1fr));gap:18px;margin-bottom:28px;}
-.ecard{background:var(–card);border:1px solid var(–b);overflow:hidden;transition:all .3s;animation:fu .6s ease both;}
-.ecard:hover{border-color:var(–b2);transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,.5);}
-.ech{padding:14px 20px;display:flex;align-items:flex-start;justify-content:space-between;gap:10px;border-bottom:1px solid var(–b);background:linear-gradient(135deg,var(–card2),var(–card));}
-.ect{font-size:14px;font-weight:700;color:var(–t);line-height:1.4;}
-.ecm{font-family:‘Share Tech Mono’,monospace;font-size:10px;color:var(–t2);margin-top:6px;display:flex;gap:12px;flex-wrap:wrap;}
-.ecb{padding:16px 20px;}
-.ed{font-size:12.5px;color:var(–t2);line-height:1.7;margin-bottom:14px;}
-
-.ig{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
-.ii{display:flex;flex-direction:column;gap:4px;}
-.il{font-family:‘Share Tech Mono’,monospace;font-size:9px;color:var(–dim);letter-spacing:1px;text-transform:uppercase;}
-.ibw{display:flex;align-items:center;gap:8px;}
-.ibb{flex:1;height:4px;background:rgba(255,255,255,.05);border-radius:2px;overflow:hidden;}
-.ibf{height:100%;border-radius:2px;transition:width 1s ease;}
-.is{font-family:‘Orbitron’,monospace;font-size:10px;font-weight:700;min-width:18px;text-align:right;}
-
-.sc2{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px;border-top:1px solid var(–b);padding-top:12px;}
-.sb{padding:10px;border-radius:2px;background:rgba(0,212,255,.04);border:1px solid rgba(0,212,255,.1);}
-.sw{padding:10px;border-radius:2px;background:rgba(255,45,85,.04);border:1px solid rgba(255,45,85,.12);}
-.sg{padding:10px;border-radius:2px;background:rgba(0,255,136,.04);border:1px solid rgba(0,255,136,.1);}
-.sclabel{font-family:‘Share Tech Mono’,monospace;font-size:9px;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;}
-.sb .sclabel{color:var(–cyan);} .sw .sclabel{color:var(–red);} .sg .sclabel{color:var(–green);}
-.sct{font-size:11px;color:var(–t2);line-height:1.5;}
-
-/* FUEL */
-.fp{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:24px;}
-.fc{background:var(–card);border:1px solid var(–b);padding:14px;text-align:center;}
-.fl{font-family:‘Share Tech Mono’,monospace;font-size:9px;letter-spacing:2px;color:var(–dim);text-transform:uppercase;margin-bottom:8px;}
-.fv{font-family:‘Orbitron’,monospace;font-size:22px;font-weight:700;color:var(–amber);line-height:1;}
-.fv.g{color:var(–green);} .fv.r{color:var(–red);}
-.fu{font-family:‘Share Tech Mono’,monospace;font-size:10px;color:var(–t2);margin-top:4px;}
-.fs{font-size:11px;margin-top:6px;}
-.fs.ok{color:var(–green);} .fs.warn{color:var(–amber);} .fs.bad{color:var(–red);}
-
-/* TIMELINE */
-.tl{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:28px;}
-.tlc{background:var(–card);border:1px solid var(–b);padding:16px;}
-.tlh{font-family:‘Orbitron’,monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(–b);}
-.ts{color:var(–red);} .tm{color:var(–amber);} .tl2{color:var(–cyan);}
-.tli{display:flex;gap:10px;margin-bottom:10px;font-size:12px;color:var(–t2);line-height:1.5;}
-.tb{font-family:‘Share Tech Mono’,monospace;font-size:14px;flex-shrink:0;}
-
-/* WARNINGS */
-.wgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;margin-bottom:28px;}
-.wg{border:1px solid var(–b);padding:14px;background:#020608;}
-.wgt{font-family:‘Share Tech Mono’,monospace;font-size:10px;color:var(–cyan);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(–b);}
-.wi{display:flex;align-items:flex-start;gap:8px;margin-bottom:8px;font-size:12px;color:var(–t2);line-height:1.4;}
-.wd{width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0;}
-.dr{background:var(–red);box-shadow:0 0 5px rgba(255,45,85,.5);}
-.da{background:var(–amber);}
-.dc{background:var(–cyan);}
-.dg{background:var(–green);}
-
-/* RECS */
-.rgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:28px;}
-.rc{background:var(–card);border:1px solid var(–b);overflow:hidden;}
-.rh{padding:11px 14px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(–b);background:linear-gradient(135deg,var(–card2),var(–card));}
-.ri{font-size:16px;}
-.rt{font-family:‘Orbitron’,monospace;font-size:10px;letter-spacing:2px;color:var(–cyan);}
-.rb{padding:12px 14px;}
-.rit{display:flex;gap:8px;margin-bottom:8px;font-size:12px;color:var(–t2);line-height:1.5;}
-.ra{color:var(–cyan);flex-shrink:0;font-size:10px;margin-top:2px;font-family:‘Share Tech Mono’,monospace;}
-
-/* EXEC */
-.exec{background:linear-gradient(135deg,rgba(0,212,255,.05),rgba(0,255,136,.02));border:1px solid var(–b2);border-left:4px solid var(–cyan);padding:22px;margin-bottom:28px;position:relative;}
-.exec::before{content:‘EXECUTIVE SUMMARY’;position:absolute;top:14px;right:18px;font-family:‘Orbitron’,monospace;font-size:9px;letter-spacing:3px;color:var(–dim);}
-.ei{display:flex;gap:16px;padding:10px 0;border-bottom:1px solid var(–b);align-items:flex-start;}
-.ei:last-child{border-bottom:none;}
-.el{font-family:‘Share Tech Mono’,monospace;font-size:10px;letter-spacing:1px;color:var(–cyan);min-width:150px;text-transform:uppercase;padding-top:2px;flex-shrink:0;}
-.et{font-size:13px;color:var(–t);line-height:1.7;}
-.et strong{color:var(–amber);}
-.et .rd{color:var(–red);}
-.et .gr{color:var(–green);}
-
-/* GPW TICKER */
-.ticker{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-bottom:24px;}
-.tick{background:var(–card);border:1px solid var(–b);padding:10px;text-align:center;}
-.tick-name{font-family:‘Share Tech Mono’,monospace;font-size:9px;color:var(–dim);letter-spacing:1px;margin-bottom:4px;}
-.tick-val{font-family:‘Orbitron’,monospace;font-size:14px;font-weight:700;}
-.tick-val.up{color:var(–green);}
-.tick-val.down{color:var(–red);}
-
-.footer{border-top:1px solid var(–b);padding:14px 0;display:flex;justify-content:space-between;align-items:center;font-family:‘Share Tech Mono’,monospace;font-size:10px;color:var(–dim);letter-spacing:1px;}
-
-@media(max-width:900px){
-.egrid,.wgrid{grid-template-columns:1fr;}
-.rgrid,.tl{grid-template-columns:1fr 1fr;}
-.fp,.status-bar,.ticker{grid-template-columns:repeat(2,1fr);}
-.t5r{grid-template-columns:28px 1fr 80px;}
-.t5r>*:nth-child(n+4){display:none;}
-.t5h>*:nth-child(n+4){display:none;}
-.sc2{grid-template-columns:1fr;}
+:root {
+  --sand: #f5f0e8;
+  --paper: #faf8f4;
+  --white: #ffffff;
+  --ink: #1a1612;
+  --ink2: #3d3630;
+  --ink3: #6b5f56;
+  --ink4: #a89990;
+  --line: #e8e0d4;
+  --line2: #d4c8bc;
+  --red: #c0392b;
+  --red-soft: #fdf0ee;
+  --red-mid: #f5c6c2;
+  --amber: #d4720a;
+  --amber-soft: #fef6ed;
+  --amber-mid: #fdddb8;
+  --green: #1a7a4a;
+  --green-soft: #eef6f2;
+  --green-mid: #b8deca;
+  --blue: #1d5fa6;
+  --blue-soft: #eef3fb;
+  --shadow: 0 1px 3px rgba(26,22,18,.06), 0 4px 16px rgba(26,22,18,.04);
+  --shadow-md: 0 2px 8px rgba(26,22,18,.08), 0 8px 32px rgba(26,22,18,.06);
 }
-@media(max-width:600px){.main{padding:12px;}.rgrid,.tl{grid-template-columns:1fr;}.logo{font-size:15px;}}
-::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:var(–bg);}::-webkit-scrollbar-thumb{background:var(–b2);border-radius:2px;}
-</style>
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Sora', sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  min-height: 100vh;
+}
 
+/* ── HEADER ── */
+.hdr {
+  background: var(--white);
+  border-bottom: 1px solid var(--line);
+  position: sticky; top:0; z-index:100;
+  padding: 0 32px;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 60px;
+  box-shadow: 0 1px 0 var(--line), 0 4px 16px rgba(26,22,18,.04);
+}
+.logo {
+  font-family: 'Fraunces', serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.5px;
+}
+.logo span { color: var(--red); }
+.hdr-badge {
+  background: var(--red-soft);
+  border: 1px solid var(--red-mid);
+  color: var(--red);
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  padding: 4px 12px;
+  border-radius: 100px;
+}
+.hdr-right {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--ink4);
+  display: flex; align-items: center; gap: 20px;
+}
+.live-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--green); display: inline-block; margin-right: 6px;
+  box-shadow: 0 0 0 0 rgba(26,122,74,.4);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse { 0%,100%{box-shadow:0 0 0 0 rgba(26,122,74,.4)} 50%{box-shadow:0 0 0 5px rgba(26,122,74,.0)} }
+
+/* ── LAYOUT ── */
+.page { max-width: 1440px; margin: 0 auto; padding: 28px 32px; }
+
+/* ── SCORECARD ROW ── */
+.scorecards {
+  display: grid;
+  grid-template-columns: repeat(6,1fr);
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.sc {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 16px;
+  text-align: center;
+  box-shadow: var(--shadow);
+  transition: transform .2s, box-shadow .2s;
+}
+.sc:hover { transform: translateY(-1px); box-shadow: var(--shadow-md); }
+.sc-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px; letter-spacing: 1.5px;
+  color: var(--ink4); text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.sc-value {
+  font-family: 'Fraunces', serif;
+  font-size: 24px; font-weight: 700;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.sc-sub { font-size: 10px; color: var(--ink4); }
+.c-red { color: var(--red); }
+.c-amber { color: var(--amber); }
+.c-green { color: var(--green); }
+.c-blue { color: var(--blue); }
+.c-ink { color: var(--ink); }
+
+/* ── ALERT BANNERS ── */
+.banners { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
+.banner {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 16px 20px;
+  display: flex; gap: 16px; align-items: flex-start;
+  box-shadow: var(--shadow);
+  border-left: 4px solid var(--line2);
+  animation: fadeUp .4s ease both;
+}
+@keyframes fadeUp { from{transform:translateY(8px);opacity:0} to{transform:none;opacity:1} }
+.banner.urgent { border-left-color: var(--red); background: var(--red-soft); }
+.banner.warn { border-left-color: var(--amber); background: var(--amber-soft); }
+.banner.good { border-left-color: var(--green); background: var(--green-soft); }
+.banner-icon { font-size: 22px; flex-shrink: 0; margin-top: 1px; }
+.banner-title {
+  font-size: 12px; font-weight: 600; letter-spacing: .3px;
+  margin-bottom: 4px;
+}
+.banner.urgent .banner-title { color: var(--red); }
+.banner.warn .banner-title { color: var(--amber); }
+.banner.good .banner-title { color: var(--green); }
+.banner-text { font-size: 13px; color: var(--ink2); line-height: 1.6; }
+
+/* ── TABS ── */
+.tab-nav {
+  display: flex; gap: 4px;
+  border-bottom: 2px solid var(--line);
+  margin-bottom: 24px;
+  padding-bottom: 0;
+}
+.tab-btn {
+  padding: 10px 18px;
+  font-family: 'Sora', sans-serif;
+  font-size: 13px; font-weight: 500;
+  color: var(--ink4);
+  cursor: pointer; border: none; background: transparent;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  border-radius: 8px 8px 0 0;
+  transition: all .15s;
+}
+.tab-btn:hover { color: var(--ink2); background: var(--sand); }
+.tab-btn.on {
+  color: var(--ink);
+  border-bottom-color: var(--ink);
+  background: var(--white);
+}
+.tab-pane { display: none; }
+.tab-pane.on { display: block; }
+
+/* ── SECTION TITLE ── */
+.section-title {
+  font-family: 'Fraunces', serif;
+  font-size: 18px; font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 16px;
+  display: flex; align-items: center; gap: 10px;
+}
+.section-title::after {
+  content: '';
+  flex: 1; height: 1px;
+  background: var(--line);
+}
+
+/* ── TOP5 TABLE ── */
+.top5 { display: flex; flex-direction: column; gap: 8px; margin-bottom: 32px; }
+.t5-header {
+  display: grid;
+  grid-template-columns: 36px 1fr 100px 120px 90px 100px;
+  gap: 12px; padding: 8px 16px;
+  font-family: 'DM Mono', monospace;
+  font-size: 9px; letter-spacing: 1.5px; color: var(--ink4); text-transform: uppercase;
+}
+.t5-row {
+  display: grid;
+  grid-template-columns: 36px 1fr 100px 120px 90px 100px;
+  gap: 12px; align-items: center;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 14px 16px;
+  box-shadow: var(--shadow);
+  transition: all .18s;
+  animation: fadeUp .4s ease both;
+}
+.t5-row:hover { border-color: var(--line2); transform: translateX(3px); box-shadow: var(--shadow-md); }
+.t5-num {
+  font-family: 'Fraunces', serif;
+  font-size: 22px; font-weight: 700;
+  color: var(--line2);
+}
+.t5-title { font-size: 13px; font-weight: 600; color: var(--ink); line-height: 1.4; }
+.t5-sub { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--ink4); margin-top: 3px; }
+.pill {
+  display: inline-flex; align-items: center;
+  padding: 3px 10px;
+  border-radius: 100px;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; font-weight: 500;
+  white-space: nowrap;
+}
+.pill-red { background: var(--red-soft); color: var(--red); border: 1px solid var(--red-mid); }
+.pill-amber { background: var(--amber-soft); color: var(--amber); border: 1px solid var(--amber-mid); }
+.pill-green { background: var(--green-soft); color: var(--green); border: 1px solid var(--green-mid); }
+.pill-blue { background: var(--blue-soft); color: var(--blue); border: 1px solid #c5d8f0; }
+.pill-gray { background: var(--sand); color: var(--ink3); border: 1px solid var(--line); }
+
+/* ── CARDS GRID ── */
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(440px,1fr)); gap: 16px; margin-bottom: 32px; }
+.card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: all .22s;
+  animation: fadeUp .5s ease both;
+}
+.card:hover { border-color: var(--line2); box-shadow: var(--shadow-md); transform: translateY(-2px); }
+.card-head {
+  padding: 16px 20px 14px;
+  border-bottom: 1px solid var(--line);
+  background: var(--sand);
+  display: flex; justify-content: space-between; align-items: flex-start; gap: 10px;
+}
+.card-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.4; }
+.card-meta { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--ink4); margin-top: 5px; display: flex; gap: 12px; flex-wrap: wrap; }
+.card-body { padding: 16px 20px; }
+.card-desc { font-size: 12.5px; color: var(--ink2); line-height: 1.75; margin-bottom: 14px; }
+
+/* ── IMPACT BARS ── */
+.impacts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.imp { display: flex; flex-direction: column; gap: 4px; }
+.imp-label { font-family: 'DM Mono', monospace; font-size: 9px; color: var(--ink4); letter-spacing: 1px; text-transform: uppercase; }
+.imp-row { display: flex; align-items: center; gap: 8px; }
+.imp-bar { flex: 1; height: 4px; background: var(--line); border-radius: 4px; overflow: hidden; }
+.imp-fill { height: 100%; border-radius: 4px; transition: width 1s ease; }
+.imp-score { font-family: 'DM Mono', monospace; font-size: 10px; font-weight: 500; min-width: 20px; text-align: right; }
+
+/* ── SCENARIOS ── */
+.scens { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--line); }
+.sc-base { padding: 10px 12px; border-radius: 10px; background: var(--blue-soft); border: 1px solid #c5d8f0; }
+.sc-bad  { padding: 10px 12px; border-radius: 10px; background: var(--red-soft); border: 1px solid var(--red-mid); }
+.sc-good { padding: 10px 12px; border-radius: 10px; background: var(--green-soft); border: 1px solid var(--green-mid); }
+.sc-label { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 4px; font-weight: 500; }
+.sc-base .sc-label { color: var(--blue); }
+.sc-bad .sc-label { color: var(--red); }
+.sc-good .sc-label { color: var(--green); }
+.sc-text { font-size: 11px; color: var(--ink2); line-height: 1.55; }
+
+/* ── FUEL ── */
+.fuel-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 12px; margin-bottom: 24px; }
+.fuel-card {
+  background: var(--white); border: 1px solid var(--line);
+  border-radius: 12px; padding: 16px; text-align: center;
+  box-shadow: var(--shadow);
+}
+.fuel-label { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 1.5px; color: var(--ink4); text-transform: uppercase; margin-bottom: 10px; }
+.fuel-value { font-family: 'Fraunces', serif; font-size: 28px; font-weight: 700; line-height: 1; margin-bottom: 4px; }
+.fuel-unit { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--ink4); }
+.fuel-status { font-size: 11px; margin-top: 6px; font-weight: 500; }
+.status-ok { color: var(--green); }
+.status-warn { color: var(--amber); }
+.status-bad { color: var(--red); }
+
+/* ── SIGNALS ── */
+.signals { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px,1fr)); gap: 14px; margin-bottom: 28px; }
+.signal-card { background: var(--white); border: 1px solid var(--line); border-radius: 12px; padding: 16px; box-shadow: var(--shadow); }
+.signal-title { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 1.5px; color: var(--ink3); text-transform: uppercase; margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid var(--line); }
+.sig-item { display: flex; gap: 10px; margin-bottom: 9px; font-size: 12px; color: var(--ink2); line-height: 1.5; }
+.sig-dot { width: 7px; height: 7px; border-radius: 50%; margin-top: 5px; flex-shrink: 0; }
+.d-red { background: var(--red); }
+.d-amber { background: var(--amber); }
+.d-blue { background: var(--blue); }
+.d-green { background: var(--green); }
+
+/* ── RECS ── */
+.recs { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-bottom: 32px; }
+.rec-card { background: var(--white); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); }
+.rec-head { padding: 12px 16px; border-bottom: 1px solid var(--line); background: var(--sand); display: flex; align-items: center; gap: 10px; }
+.rec-icon { font-size: 16px; }
+.rec-title { font-size: 12px; font-weight: 600; color: var(--ink); }
+.rec-body { padding: 14px 16px; }
+.rec-item { display: flex; gap: 10px; margin-bottom: 9px; font-size: 12px; color: var(--ink2); line-height: 1.55; }
+.rec-arrow { color: var(--ink4); flex-shrink: 0; margin-top: 2px; font-family: 'DM Mono', monospace; font-size: 11px; }
+
+/* ── EXEC ── */
+.exec-box {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: var(--shadow-md);
+  margin-bottom: 32px;
+  position: relative;
+}
+.exec-box::before {
+  content: 'EXECUTIVE SUMMARY · RAPORT #44';
+  position: absolute; top: 18px; right: 20px;
+  font-family: 'DM Mono', monospace;
+  font-size: 9px; letter-spacing: 2px; color: var(--ink4); text-transform: uppercase;
+}
+.exec-row { display: flex; gap: 20px; padding: 12px 0; border-bottom: 1px solid var(--line); align-items: flex-start; }
+.exec-row:last-child { border-bottom: none; }
+.exec-key { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 1px; color: var(--ink3); text-transform: uppercase; min-width: 140px; flex-shrink: 0; padding-top: 2px; }
+.exec-val { font-size: 13px; color: var(--ink2); line-height: 1.7; }
+.exec-val strong { color: var(--ink); }
+.exec-val .hi-red { color: var(--red); font-weight: 600; }
+.exec-val .hi-green { color: var(--green); font-weight: 600; }
+.exec-val .hi-amber { color: var(--amber); font-weight: 600; }
+
+/* ── TENSION GAUGE ── */
+.tension-bar {
+  background: var(--sand);
+  border-radius: 8px;
+  height: 8px;
+  margin: 8px 0 4px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+}
+.tension-fill {
+  height: 100%;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #27ae60 0%, #f39c12 50%, #c0392b 80%);
+  width: 70%;
+  position: relative;
+}
+.tension-fill::after {
+  content: '';
+  position: absolute; right: 0; top: 50%;
+  transform: translateY(-50%);
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: white;
+  border: 2px solid var(--red);
+  box-shadow: 0 0 0 3px rgba(192,57,43,.2);
+}
+
+/* ── TABLE ── */
+.data-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 28px; }
+.data-table th {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--ink4); text-align: left;
+  padding: 10px 14px;
+  background: var(--sand);
+  border-bottom: 2px solid var(--line);
+}
+.data-table td { padding: 10px 14px; border-bottom: 1px solid var(--line); color: var(--ink2); vertical-align: middle; }
+.data-table tr:hover td { background: var(--sand); }
+.data-table tr:last-child td { border-bottom: none; }
+.v-ok { color: var(--green); font-weight: 600; font-family: 'DM Mono', monospace; }
+.v-warn { color: var(--amber); font-weight: 600; font-family: 'DM Mono', monospace; }
+.v-bad { color: var(--red); font-weight: 600; font-family: 'DM Mono', monospace; }
+.v-mono { font-family: 'DM Mono', monospace; color: var(--ink); }
+
+/* ── FOOTER ── */
+.footer {
+  border-top: 1px solid var(--line);
+  padding: 16px 0;
+  display: flex; justify-content: space-between; align-items: center;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; color: var(--ink4); letter-spacing: 1px;
+}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px) {
+  .cards,.signals,.recs,.scorecards { grid-template-columns: repeat(2,1fr); }
+  .fuel-grid { grid-template-columns: repeat(2,1fr); }
+  .t5-row,.t5-header { grid-template-columns: 30px 1fr 80px; }
+  .t5-row>*:nth-child(n+4),.t5-header>*:nth-child(n+4) { display: none; }
+  .scens { grid-template-columns: 1fr; }
+}
+@media(max-width:600px) {
+  .page { padding: 16px; }
+  .cards,.signals,.recs,.scorecards { grid-template-columns: 1fr; }
+  .hdr { padding: 0 16px; }
+  .hdr-right { display: none; }
+}
+</style>
 </head>
 <body>
 
-<header class="header">
-  <div style="display:flex;align-items:center;gap:16px">
-    <div class="logo">OSINT<span>PL</span></div>
-    <div class="hb">⚠ ROZEJM USA–IRAN ZAGROŻONY | ORMUZ ZNÓW BLOKOWANY</div>
+<!-- HEADER -->
+<header class="hdr">
+  <div style="display:flex;align-items:center;gap:14px">
+    <div class="logo">OSINT<span>.</span>PL</div>
+    <div class="hdr-badge">RAPORT #44 · 16.IV.2026</div>
   </div>
-  <div class="hr">
-    <span><span class="ld"></span>RAPORT DZIENNY</span>
+  <div class="hdr-right">
+    <span><span class="live-dot"></span>Na żywo</span>
     <span id="clock">--:--:--</span>
-    <span>9.04.2026</span>
+    <span>Czwartek · 16 kwietnia</span>
   </div>
 </header>
 
-<main class="main">
+<div class="page">
 
-<!-- ALERT GŁÓWNY -->
-
-<div class="alert alert-red">
-  <div style="font-size:26px">🔴</div>
-  <div>
-    <strong>KRUCHY ROZEJM — ORMUZ PONOWNIE ZABLOKOWANY PO 90 MINUTACH OD ZAWARCIA POROZUMIENIA</strong>
-    <p>USA i Iran zawarły 2-tygodniowe zawieszenie broni (7/8 IV, 90 min przed upływem ultimatum). Ale Izrael zaatakował Liban — 100 celów Hezbollahu. Iran uznał to za naruszenie i ponownie zablokował Cieśninę Ormuz. Hezbollah wznowił ostrzał północnego Izraela. Iran grozi wycofaniem się z rozejmu jeśli ataki na Liban nie ustaną. Negocjacje w Islamabadzie zaplanowane na 10 IV — czy się odbędą?</p>
-  </div>
-</div>
-
-<div class="alert green">
-  <div style="font-size:22px">🟢</div>
-  <div>
-    <strong>POZYTYWNY SYGNAŁ: GPW REKORD WSZECH CZASÓW | ROPA SPADA DO 94–97 USD</strong>
-    <p>Pomimo chaosu wokół rozejmu — rynki zareagowały euforią: WIG +3,85%, WIG20 rekord 3534 pkt, KGHM +9,85%, mBank +9,4%. Ropa Brent spada z 117 USD do ok. 94–97 USD. Benzyna 95 od 9 IV: max 6,27 zł, diesel 7,83 zł (lekki spadek). Pierwsze fizyczne otwarcie Ormuzu jest jednak niepewne.</p>
-  </div>
-</div>
-
-<!-- STATUS BAR -->
-
-<div class="stitle">STATUS ROZEJMU — 9 KWIETNIA 2026</div>
-<div class="status-bar">
-  <div class="sc">
-    <div class="sl">Status rozejmu</div>
-    <div class="sv" style="color:var(--amber);font-size:14px">KRUCHY</div>
-    <div class="ss">Izrael nie zatrzymał ataków na Liban</div>
-  </div>
-  <div class="sc">
-    <div class="sl">Ropa Brent</div>
-    <div class="sv" style="color:var(--green)">~97</div>
-    <div class="ss">USD/bbl ↓ z 117 USD (rozejm)</div>
-  </div>
-  <div class="sc">
-    <div class="sl">WIG20 rekord</div>
-    <div class="sv" style="color:var(--green)">3534</div>
-    <div class="ss">pkt | nowy rekord wszech czasów</div>
-  </div>
-  <div class="sc">
-    <div class="sl">Benzyna 95 (9 IV)</div>
-    <div class="sv" style="color:var(--amber)">6,27</div>
-    <div class="ss">PLN/l maks. CPN (↑0,06 vs wcześniej)</div>
-  </div>
-  <div class="sc">
-    <div class="sl">Negocjacje Islamabad</div>
-    <div class="sv" style="color:var(--amber);font-size:14px">10 IV?</div>
-    <div class="ss">Vance prowadzi delegację USA</div>
-  </div>
-</div>
-
-<!-- TABS -->
-
-<div class="tabs">
-  <button class="tab active" onclick="showTab('t5')">📊 TOP 5</button>
-  <button class="tab" onclick="showTab('ev')">📋 ZDARZENIA</button>
-  <button class="tab" onclick="showTab('en')">⚡ RYNKI</button>
-  <button class="tab" onclick="showTab('wa')">⚠️ SYGNAŁY</button>
-  <button class="tab" onclick="showTab('re')">🎯 REKOMENDACJE</button>
-  <button class="tab" onclick="showTab('su')">📌 PODSUMOWANIE</button>
-</div>
-
-<!-- ===== TAB TOP5 ===== -->
-
-<div id="tab-t5" class="tab-content active">
-  <div class="stitle">TOP 5 — 9 KWIETNIA 2026</div>
-  <div class="t5">
-    <div class="t5r t5h">
-      <div class="cl">#</div><div class="cl">WYDARZENIE</div><div class="cl">REGION</div>
-      <div class="cl">TREND</div><div class="cl">WPŁYW PL</div><div class="cl">PILNOŚĆ</div>
+  <!-- SCORECARDS -->
+  <div class="scorecards">
+    <div class="sc">
+      <div class="sc-label">Napięcie globalne</div>
+      <div class="sc-value c-amber">70<span style="font-size:14px">/100</span></div>
+      <div class="tension-bar"><div class="tension-fill" style="width:70%"></div></div>
+      <div class="sc-sub">→ stabilizacja</div>
     </div>
-    <div class="t5r" style="border-left-color:var(--amber);animation-delay:.05s">
-      <div class="rn">01</div>
+    <div class="sc">
+      <div class="sc-label">2. runda Iran</div>
+      <div class="sc-value c-amber">~17 IV</div>
+      <div class="sc-sub">data nieustalona · AP</div>
+    </div>
+    <div class="sc">
+      <div class="sc-label">Rozejm wygasa</div>
+      <div class="sc-value c-red">21 IV</div>
+      <div class="sc-sub">5 dni · nie przedłużony</div>
+    </div>
+    <div class="sc">
+      <div class="sc-label">Benzyna 95 maks.</div>
+      <div class="sc-value c-green">6,12</div>
+      <div class="sc-sub">PLN/l · rekord CPN ↓</div>
+    </div>
+    <div class="sc">
+      <div class="sc-label">Inflacja CPI PL</div>
+      <div class="sc-value c-ink">3,0%</div>
+      <div class="sc-sub">marzec r/r · paliwa +8,5%</div>
+    </div>
+    <div class="sc">
+      <div class="sc-label">TISZA</div>
+      <div class="sc-value c-green">138<span style="font-size:14px">/199</span></div>
+      <div class="sc-sub">Warszawa w planie</div>
+    </div>
+  </div>
+
+  <!-- BANNERS -->
+  <div class="banners">
+    <div class="banner urgent" style="animation-delay:.05s">
+      <div class="banner-icon">⏱️</div>
       <div>
-        <div class="en">🕊️ Rozejm USA–Iran zawarty, ale kruchy — Ormuz znów zablokowany</div>
-        <div class="er">IRAN / LIBAN | Izrael atakuje Liban 100 celów → Iran blokuje Ormuz ponownie</div>
+        <div class="banner-title">AP (16 IV): 2. runda negocjacji USA–Iran możliwa już w czwartek lub piątek — Islamabad lub Genewa</div>
+        <div class="banner-text">Agencja AP powołuje się na „dwóch pakistańskich urzędników" — 2. runda może odbyć się już dziś lub jutro (16–17 IV). WSJ potwierdza: obie strony wyraziły zgodę na spotkanie, daty i miejsca nie ustalono. Iran: „kontakt z Waszyngtonem przez Pakistan trwa." Regionalni mediatorzy naciskają na przedłużenie rozejmu. Axios (środa): negocjatorzy zbliżają się do „porozumienia ramowego" przed 21 IV. Trump w Fox: „Myślę, że to już prawie koniec."</div>
       </div>
-      <div><span class="badge bh">BLISKI WSCHÓD</span></div>
-      <div><span class="badge bh">🟡 NIEPEWNOŚĆ</span></div>
-      <div><span class="badge bh">🟠 4/5</span></div>
-      <div><span class="badge bc">KRYTYCZNA</span></div>
     </div>
-    <div class="t5r" style="border-left-color:var(--green);animation-delay:.1s">
-      <div class="rn">02</div>
+    <div class="banner warn" style="animation-delay:.1s">
+      <div class="banner-icon">📊</div>
       <div>
-        <div class="en">📈 GPW rekord: WIG20 3534 pkt, ropa Brent -13% do ~94 USD</div>
-        <div class="er">POLSKA / RYNKI | KGHM +9,85%, mBank +9,4%, Orlen -2,84%</div>
+        <div class="banner-title">Inflacja CPI Polska marzec: 3,0% r/r — wyżej niż cel NBP. Paliwa podbijają o 8,5%</div>
+        <div class="banner-text">GUS: marzec CPI 3,0% r/r (vs 2,1% w lutym) — najwyżej od 8 miesięcy. Napędzane przez paliwa (+8,5% r/r, diesel +16,4%). Analitycy Santander BP: CPN obniży CPI o 0,8 pp w kwietniu → szacowane ~2,5% w IV. Kotecki (RPP): stopy bez zmian przez resztę roku. Santander: „Zakładamy, że obniżka podatków na paliwa pozostanie w mocy do końca roku."</div>
       </div>
-      <div><span class="badge bo">POLSKA/GLOBAL</span></div>
-      <div><span class="badge bo">✅ POZYTYWNY</span></div>
-      <div><span class="badge bo">🟢 +4/5</span></div>
-      <div><span class="badge bm">MONITORUJ</span></div>
     </div>
-    <div class="t5r" style="border-left-color:var(--amber);animation-delay:.15s">
-      <div class="rn">03</div>
+    <div class="banner good" style="animation-delay:.15s">
+      <div class="banner-icon">🇭🇺</div>
       <div>
-        <div class="en">🗳️ Węgry — wybory 12 IV, TISZA nadal prowadzi 56% vs 37%</div>
-        <div class="er">WĘGRY | Incydent Balkan Stream nie zmienił sondaży; głosowanie za 3 dni</div>
+        <div class="banner-title">Forsal (16 IV): „Powstanie nowa oś Warszawa–Budapeszt?" Magyar z pierwszą wizytą uda się do Polski</div>
+        <div class="banner-text">Premier elekt Peter Magyar potwierdza Warszawę jako pierwszą zagraniczną wizytę. Tusk rozmawiał z Magyarem bezpośrednio po wyborach. Macinka (CZ): „Ocieplenie WE–PL." Fico (SK): gotowy do „intensywnej współpracy." KE przygotowuje odmrożenie ok. 10–12 mld EUR funduszy UE dla Węgier. E-petrol: „W połowie kwietnia na stacjach paliw nie ma śladu po ubiegłotygodniowych podwyżkach."</div>
       </div>
-      <div><span class="badge bh">WĘGRY / UE</span></div>
-      <div><span class="badge bh">70% PEWNA</span></div>
-      <div><span class="badge bh">🟠 4/5</span></div>
-      <div><span class="badge bh">PILNA</span></div>
-    </div>
-    <div class="t5r" style="border-left-color:var(--amber);animation-delay:.2s">
-      <div class="rn">04</div>
-      <div>
-        <div class="en">🛡️ Trump–Rutte szczyt NATO — rzeczniczka: „NATO odwróciło się plecami"</div>
-        <div class="er">USA / NATO | Leavitt przed szczytem; Vance w Budapeszcie ws. rozejmu</div>
-      </div>
-      <div><span class="badge bh">USA / NATO</span></div>
-      <div><span class="badge bh">40% UMIAR.</span></div>
-      <div><span class="badge bc">🔴 5/5</span></div>
-      <div><span class="badge bc">KRYTYCZNA</span></div>
-    </div>
-    <div class="t5r" style="border-left-color:var(--blue);animation-delay:.25s">
-      <div class="rn">05</div>
-      <div>
-        <div class="en">⛽ Polska: ceny paliw lekko rosną mimo spadku ropy — algorytm CPN reaguje z opóźnieniem</div>
-        <div class="er">POLSKA | Benzyna 95 maks. 6,27 zł (↑0,06), diesel 7,83 zł; decyzja o CPN po 15 IV</div>
-      </div>
-      <div><span class="badge bm">POLSKA</span></div>
-      <div><span class="badge bm">PARADOKS</span></div>
-      <div><span class="badge bm">🔵 3/5</span></div>
-      <div><span class="badge bm">MONITORUJ</span></div>
     </div>
   </div>
 
-  <!-- TIMELINE -->
+  <!-- TABS -->
+  <div class="tab-nav">
+    <button class="tab-btn on" onclick="showTab('top5')">📊 Top 5</button>
+    <button class="tab-btn" onclick="showTab('events')">📋 Zdarzenia</button>
+    <button class="tab-btn" onclick="showTab('energy')">⚡ Energia</button>
+    <button class="tab-btn" onclick="showTab('signals')">🔍 Sygnały</button>
+    <button class="tab-btn" onclick="showTab('gauges')">📈 Wskaźniki</button>
+    <button class="tab-btn" onclick="showTab('recs')">🎯 Rekomendacje</button>
+    <button class="tab-btn" onclick="showTab('summary')">📌 Podsumowanie</button>
+  </div>
 
-  <div class="stitle">HORYZONT CZASOWY — 9–21 KWIETNIA</div>
-  <div class="tl">
-    <div class="tlc">
-      <div class="tlh ts">⚡ 9–12 KWIETNIA</div>
-      <div class="tli"><span class="tb ts">▶</span><strong style="color:var(--amber)">10 IV</strong> — negocjacje USA–Iran w Islamabadzie; Vance prowadzi delegację. Czy się odbędą?</div>
-      <div class="tli"><span class="tb ts">▶</span>Iran musi zdecydować: wycofać się z rozejmu (Liban) czy podtrzymać i negocjować?</div>
-      <div class="tli"><span class="tb ts">▶</span><strong style="color:var(--amber)">12 IV</strong> — wybory na Węgrzech. TISZA vs Fidesz. Zmiana władzy = reorientacja UE</div>
-      <div class="tli"><span class="tb ts">▶</span>Szczyt Trump–Rutte — wynik zdeterminuje przyszłość Art. 5 dla Polski</div>
-      <div class="tli"><span class="tb ts">▶</span>Saudyjski rurociąg East-West zaatakowany przez irańskiego drona — ocena szkód</div>
-    </div>
-    <div class="tlc">
-      <div class="tlh tm">🟡 13–21 KWIETNIA</div>
-      <div class="tli"><span class="tb tm">▶</span>Wygaśnięcie rozejmu USA–Iran (21 IV) — kolejne ultimatum lub porozumienie?</div>
-      <div class="tli"><span class="tb tm">▶</span>Polska: decyzja ws. CPN po 15 IV — akcyza, VAT, przedłużenie pakietu?</div>
-      <div class="tli"><span class="tb tm">▶</span>Inflacja CPI za marzec PL — publikacja ok. 15 IV; sygnał dla RPP</div>
-      <div class="tli"><span class="tb tm">▶</span>80% Polaków chce utrzymania maks. cen paliw do końca 2026 (sondaż SE/Pollster)</div>
-      <div class="tli"><span class="tb tm">▶</span>Fizyczne przywrócenie przepływu przez Ormuz — rozłożone w czasie nawet po rozejmie</div>
-    </div>
-    <div class="tlc">
-      <div class="tlh tl2">🔵 PO 21 KWIETNIA</div>
-      <div class="tli"><span class="tb tl2">▶</span>Wizyta Trumpa w Chinach 14–15 maja — mediacja ws. Iranu i handlu</div>
-      <div class="tli"><span class="tb tl2">▶</span>Cła USA na leki patentowe — sierpień/październik 2026 (120–180 dni od 2.04)</div>
-      <div class="tli"><span class="tb tl2">▶</span>Ewentualna zmiana władzy na Węgrzech = nowa dynamika UE ws. Rosji i Ukrainy</div>
-      <div class="tli"><span class="tb tl2">▶</span>Transfer technologii KRLD→Białoruś (drony, rakiety) — monitoring 6–12 mies.</div>
-      <div class="tli"><span class="tb tl2">▶</span>4 LIPCA — 250-lecie USA; Trump potrzebuje trwałego „zwycięstwa"</div>
+  <!-- TAB: TOP5 -->
+  <div id="pane-top5" class="tab-pane on">
+    <div class="section-title">Top 5 wydarzeń · 16 kwietnia 2026</div>
+    <div class="top5">
+      <div class="t5-header">
+        <div>#</div><div>Wydarzenie</div>
+        <div>Obszar</div><div>Wiarygodność</div>
+        <div>Wpływ PL</div><div>Pilność</div>
+      </div>
+
+      <div class="t5-row" style="animation-delay:.05s;border-left:3px solid var(--amber)">
+        <div class="t5-num">01</div>
+        <div>
+          <div class="t5-title">2. runda Iran–USA możliwa DZIŚ/JUTRO — zbliżają się do porozumienia ramowego</div>
+          <div class="t5-sub">USA/IRAN/PAK · 16 IV · NOWE: AP (2 urzędników) + Axios: „zbliżają się do ramowego"</div>
+        </div>
+        <div><span class="pill pill-amber">Iran / USA</span></div>
+        <div><span class="pill pill-green">A · Reuters/AP/WSJ</span></div>
+        <div><span class="pill pill-red">ENE:5 GOT:5</span></div>
+        <div><span class="pill pill-amber">Dziś–21 IV</span></div>
+      </div>
+
+      <div class="t5-row" style="animation-delay:.1s;border-left:3px solid var(--amber)">
+        <div class="t5-num">02</div>
+        <div>
+          <div class="t5-title">Inflacja CPI PL marzec: 3,0% — poniżej konsensusu, ale wchodzimy w nowy trend wzrostowy</div>
+          <div class="t5-sub">POLSKA · 15.04 finalne · NOWE: paliwa +8,5% r/r, diesel +16,4% — CPN tłumi efekt</div>
+        </div>
+        <div><span class="pill pill-amber">Polska</span></div>
+        <div><span class="pill pill-green">A · GUS</span></div>
+        <div><span class="pill pill-amber">GOT:4 SPO:3</span></div>
+        <div><span class="pill pill-blue">7–30 dni</span></div>
+      </div>
+
+      <div class="t5-row" style="animation-delay:.15s;border-left:3px solid var(--red)">
+        <div class="t5-num">03</div>
+        <div>
+          <div class="t5-title">Trump: „nie planuję przedłużać rozejmu" — ale dodaje „jestem bliski końca." Sprzeczne sygnały</div>
+          <div class="t5-sub">USA/IRAN · 15.04 ABC News · KONTYNUACJA: Trump co kilka godzin wysyła inny komunikat</div>
+        </div>
+        <div><span class="pill pill-red">USA / Iran</span></div>
+        <div><span class="pill pill-green">A · Reuters/ABC</span></div>
+        <div><span class="pill pill-red">ENE:5 GOT:5</span></div>
+        <div><span class="pill pill-red">21 IV krytyczny</span></div>
+      </div>
+
+      <div class="t5-row" style="animation-delay:.2s;border-left:3px solid var(--green)">
+        <div class="t5-num">04</div>
+        <div>
+          <div class="t5-title">TISZA–Warszawa: oś PL–WE nabiera kształtu. „Powstanie nowa oś Warszawa–Budapeszt?"</div>
+          <div class="t5-sub">WĘGRY/UE/PL · 16.04 · KONTYNUACJA: Magyar 1. wizyta = Warszawa. KE przygotowuje odmrożenie €10–12 mld</div>
+        </div>
+        <div><span class="pill pill-green">Węgry / UE</span></div>
+        <div><span class="pill pill-green">A · PAP/Forsal/Reuters</span></div>
+        <div><span class="pill pill-green">BEZ:4 GOT:3</span></div>
+        <div><span class="pill pill-blue">7–30 dni</span></div>
+      </div>
+
+      <div class="t5-row" style="animation-delay:.25s;border-left:3px solid #999">
+        <div class="t5-num">05</div>
+        <div>
+          <div class="t5-title">Rosja: Iran sprzedaje ropę rekordowo mimo blokady. Chiński statek przepłynął Ormuz mimo blokady USA</div>
+          <div class="t5-sub">GLOBALNY · 15–16.04 · NOWE: chiński tankowiec przeszedł przez Ormuz — precedens dla blokady USA</div>
+        </div>
+        <div><span class="pill pill-gray">Globalny</span></div>
+        <div><span class="pill pill-amber">B · Money.pl/Paliwa</span></div>
+        <div><span class="pill pill-amber">ENE:3 GOT:3</span></div>
+        <div><span class="pill pill-blue">7 dni</span></div>
+      </div>
+
     </div>
   </div>
+
+  <!-- TAB: ZDARZENIA -->
+  <div id="pane-events" class="tab-pane">
+    <div class="section-title">Szczegółowa analiza — 5 kluczowych zdarzeń</div>
+    <div class="cards">
+
+      <div class="card" style="animation-delay:.08s">
+        <div class="card-head">
+          <div>
+            <div class="card-title">⏱️ 2. runda Iran–USA — koniec wojny „blisko"? Dane dziś 16 IV</div>
+            <div class="card-meta"><span>USA / IRAN / PAKISTAN</span><span style="color:var(--amber)">NOWE · 16 IV</span><span>Wiar: A</span></div>
+          </div>
+          <span class="pill pill-amber">KRYTYCZNE</span>
+        </div>
+        <div class="card-body">
+          <p class="card-desc">AP (16 IV): 2. runda możliwa już dziś/jutro (Islamabad lub Genewa) — 2 pakistańscy urzędnicy. WSJ: obie strony zgadzają się na spotkanie, brak konkretów. Axios (środa): negocjatorzy zbliżają się do „porozumienia ramowego." Pakistański premier Sharif odwiedza AS, Katar, Turcję 15–18 IV — negocjacje raczej po tej wizycie. Trump w ABC: „nie planuję przedłużać rozejmu." Trump w Fox kilka godzin wcześniej: „Myślę, że to już prawie koniec." [OCENA: niespójność sygnałów celowa — presja na Iran.] USA wysyłają kolejne tysiące żołnierzy na Bliski Wschód wg Washington Post. Vance: Iran nie otworzył Ormuzu w pełni — „to fundamentalnie zmieni nasze negocjacje." Leavitt: „mam dobre przeczucia."</p>
+          <div class="impacts">
+            <div class="imp"><div class="imp-label">Gospodarka PL</div><div class="imp-row"><div class="imp-bar"><div class="imp-fill" style="width:100%;background:var(--red)"></div></div><div class="imp-score c-red">5</div></div></div>
+            <div class="imp"><div class="imp-label">Energia/paliwa</div><div class="imp-row"><div class="imp-bar"><div class="imp-fill" style="width:100%;background:var(--red)"></div></div><div class="imp-score c-red">5</div></div></div>
+            <div class="imp"><div class="imp-label">Bezpieczeństwo</div><div class="imp-row"><div class="imp-bar"><div class="imp-fill" style="width:40%;background:var(--blue)"></div></div><div class="imp-score c-blue">2</div></div></div>
+            <div class="imp"><div class="imp-label">Samorządy JST</div><div class="imp-row"><div class="imp-bar"><div class="imp-fill" style="width:60%;background:var(--amber)"></div></div><div class="imp-score c-amber">3</div></div></div>
+            <div class="imp"><div class="imp-label">Farmacja API</div><div class="imp-row"><div class="imp-bar"><div class="imp-fill" style="width:60%;background:var(--amber)"></div></div><div class="imp-score c-amber">3</div></div></div>
+            <div class="imp"><div class="imp-label">GPW (kurs)</div><div class="imp-row"><div class="imp-bar"><div class="imp-fill" style="width:60%;background:var(--amber)"></div></div><div class="imp-score c-amber">±</div></div></div>
+          </div>
+          <div class="scens">
+            <div class="sc-base"><div class="sc-label">Bazowy 55%</div><div class="sc-text">2. runda 17–18 IV. Porozumienie ramowe przed 21 IV. Rozejm przedłużony. Ropa stabilna 95–105 USD.</div></div>
+            <div class="sc-bad"><div class="sc-label">Pesymist. 30%</div><div class="sc-text">Brak 2. rundy. Rozejm odpada 21 IV. Eskalacja. Ropa 120–135 USD. CPN niewystarczający.</div></div>
+            <div class="sc-good"><div class="sc-label">Optymist. 15%</div><div class="sc-text">Porozumienie pełne. Ormuz otwarty. Ropa 80–85 USD. CPN zbędny od maja.</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="animation-delay:.16s">
+        <div class="card-head">
+          <div>
+            <div class="card-title">📊 Inflacja CPI PL marzec 3,0% — nowy trend. Co dalej z RPP?</div>
+            <div class="card-meta"><span>POLSKA</span><span style="color:var(--amber)">15 IV finalne GUS</span><span>Wiar: A</span></div>
+          </div>
+          <span class="pill pill-amber">WAŻNE</span>
+        </div>
+        <div class="card-body">
+          <p class="card-desc">GUS finalne (15 IV): CPI marzec 3,0% r/r (+1,1% m/m) — najwyżej od 8 miesięcy. Przez CPI napędzają paliwa: +8,5% r/r, diesel +16,4% r/r. Żywność: +2,0% r/r. Usługi: +5,5% r/r (presja kosztów pracy). Santander BP: CPN obniża CPI o 0,8 pp — bez tarczy byłoby ~3,8%. Prognoza avril: CPI spada do ~2,5% dzięki CPN. Główna ekonomistka Banku Pocztowego Monika Kurtek: „Aby inflacja trwale wróciła do niższych poziomów, potrzebne jest zakończenie wojny." Kotecki (RPP): stopy 3,75% bez zmian przez resztę 2026. Obecna sytuacja „nie stanowi wyraźnego sygnału do podwyżek." [KONTYNUACJA: każde 10% wzrostu ropy = +0,2–0,3 pp inflacji.]</p>
+          <div class="impacts">
+            <div class="imp"><div class="imp-label">Ceny towarów</div><div class="imp-row"><div class="imp-bar"><div class="imp-fill" style="width:60%;background:var(--amber)"></div></div><div class="imp-score c-amber">3</div></div></div>
+            <div class="imp"><div class="imp-label">RPP / stopy</div><div class="imp-row"><div class="imp-bar"><div class="imp-fill" style="width:60%;background:var(--amber)"></div></div><div class="imp-score c-amber">3</div></div></div>
+            <div class="imp"><div class="imp-label">Samorządy JST</div><div class="imp-row"><div class="imp-bar"><div class="imp-fill" style="width:60%;background:var(--amber)"></div></div><div class="imp-score c-amber">3</div></div></div>
+            <div class="imp"><div class="imp-label">Budżet PL</div><div class="imp-row"><div class="imp-bar"><div class="imp-fill" style="width:80%;background:var(--amber)"></div></div><div class="imp-score c-amber">4</div></div></div>
+            <div class="imp"><div class="imp-label">Paliwa (trend)</div><div class="imp-row"><div class="imp-bar"><div class="imp-fill" style="width:80%;background:var(--green)"></div></div><div class="imp-score c-green">CPN↓</div></div></div>
+            <div class="imp"><div class="imp-label">Społeczeństwo</div><div class="imp-row"><div class="imp-bar"><div class="imp-fill" style="width:60%;background:var(--amber)"></div></div><div class="imp-score c-amber">3</div></div></div>
+          </div>
+          <div class="scens">
+            <div class="sc-base"><div class="sc-label">Bazowy</div><div class="sc-text">CPI kwiecień ~2,5% dzięki CPN. Stopy 3,75% bez zmian. Inflacja w celu do końca roku jeśli ropa nie rośnie.</div></div>
+            <div class="sc-bad"><div class="sc-label">Pesymist.</div><div class="sc-text">Rozejm odpada → ropa 120+ → inflacja 5–6% w maju. RPP sygnalizuje podwyżkę. Stopy do 4,5%.</div></div>
+            <div class="sc-good"><div class="sc-label">Optymist.</div><div class="sc-text">Pokój → ropa 80 USD → CPI spada do 2,0% w Q3. RPP obniża stopy w Q4 2026.</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="animation-delay:.24s">
+        <div class="card-head">
+          <div>
+            <div class="card-title">🇭🇺 TISZA–Polska: oś PL–WE. Magyar do Warszawy. Co to zmienia?</div>
+            <div class="card-meta"><span>WĘGRY / UE / POLSKA</span><span style="color:var(--green)">KONTYNUACJA ↗</span><span>Wiar: A</span></div>
+          </div>
+          <span class="pill pill-green">STRATEGICZNE</span>
+        </div>
+        <div class="card-body">
+          <p class="card-desc">Magyar potwierdza Warszawę jako 1. wizytę zagraniczną premiera elekta. Tusk rozmawiał z nim bezpośrednio po wyborach. KE przygotowuje procedurę odmrożenia funduszy UE dla Węgier (10–12 mld EUR). Macinka (CZ): zmiana w V4, ocieplenie WE–PL. Fico (SK): gotowy do „intensywnej współpracy." Forsal: „Oś Warszawa–Budapeszt?" [DEZINFORMACJA: Kirill Dmitrijew twierdzi, że wyniki WE oznaczają „upadek UE" — narracja kremlowska, odrzucić.] Kluczowe dla Polski: koniec blokowania sankcji UE vs Rosja, zmiana układu głosów ws. TurkStream, nowy format V4. E-petrol (16 IV): „W połowie kwietnia na stacjach paliw nie ma śladu po ubiegłotygodniowych podwyżkach." [OCENA: CPN + ropa ~100 USD to efekt. Utrzymanie trendu zależy od 2. rundy.]</p>
+          <div class="impacts">
+            <div class="imp"><div class="imp-label">Polska geopolityka</div><div class="imp-row"><div class="imp-bar"><div class="imp-fill" style="width:100%;background:var(--green)"></div></div><div class="imp-score c-green">5+</div></div></div>
+            <div class="imp"><div class="imp-label">Geopolityka UE</div><div class="imp-row"><div class="imp-bar"><div class="imp-fill" style="width:80%;background:var(--green)"></div></div><div class="imp-score c-green">4+</div></div></div>
+            <div class="imp"><div class="imp-label">Sankcje vs Rosja</div><div class="imp-row"><div class="imp-bar"><div class="imp-fill" style="width:80%;background:var(--green)"></div></div><div class="imp-score c-green">4+</div></div></div>
+            <div class="imp"><div class="imp-label">Energia UE gaz</div><div class="imp-row"><div class="imp-bar"><div class="imp-fill" style="width:60%;background:var(--green)"></div></div><div class="imp-score c-green">3+</div></div></div>
+            <div class="imp"><div class="imp-label">Fundusze UE WE</div><div class="imp-row"><div class="imp-bar"><div class="imp-fill" style="width:80%;background:var(--green)"></div></div><div class="imp-score c-green">4+</div></div></div>
+            <div class="imp"><div class="imp-label">Społeczeństwo PL</div><div class="imp-row"><div class="imp-bar"><div class="imp-fill" style="width:80%;background:var(--green)"></div></div><div class="imp-score c-green">4</div></div></div>
+          </div>
+          <div class="scens">
+            <div class="sc-base"><div class="sc-label">Bazowy 80%</div><div class="sc-text">Magyar formuje rząd 30–60 dni. Fundusze UE odblokowane w Q3. Wizyta w Warszawie w ciągu 2 tygodni.</div></div>
+            <div class="sc-bad"><div class="sc-label">Pesymist. 10%</div><div class="sc-text">Orban blokuje przez kontrolowane instytucje. 90-dniowe vacuum. Fundusze nadal zamrożone.</div></div>
+            <div class="sc-good"><div class="sc-label">Optymist. 10%</div><div class="sc-text">Ekspresowa reforma. WE w Europejskim Filarze Obrony. Sankcje zaostrzone w 30 dni.</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="animation-delay:.32s">
+        <div class="card-head">
+          <div>
+            <div class="card-title">🛡️ NATO: sojusznicy odmawiają Ormuzu. Szczyt Rutte — co przyniesie?</div>
+            <div class="card-meta"><span>NATO / USA</span><span style="color:var(--red)">KRYTYCZNE DLA PL</span><span>Wiar: B</span></div>
+          </div>
+          <span class="pill pill-red">Egzystencjalne</span>
+        </div>
+        <div class="card-body">
+          <p class="card-desc">NATO (14 IV): państwa Sojuszu odmówiły angażowania się w blokadę Ormuzu planowaną przez Trumpa. Wielka Brytania i Francja nie wysyłają okrętów do Ormuzu. [Wiarygodność: B — RP.pl, wymaga potwierdzenia z NATO HQ.] Leavitt przed szczytem: Trump „poważnie rozważa wyjście z NATO." RMF24: 15 okrętów US gotowych „niszczyć" — USA rozpoczęły blokadę irańskiej żeglugi w cieśninie. Polska argument: płacimy więcej za US troops niż jakikolwiek inny sojusznik. Formalne wyjście USA z NATO wymaga 2/3 Senatu — bariera mechaniczna. [OCENA: deprecjacja retoryczna NATO działa nawet bez formalnego wyjścia — to operacyjne ryzyko dla PL.]</p>
+          <div class="impacts">
+            <div class="imp"><div class="imp-label">Bezpieczeństwo PL</div><div class="imp-row"><div class="imp-bar"><div class="imp-fill" style="width:100%;background:var(--red)"></div></div><div class="imp-score c-red">5</div></div></div>
+            <div class="imp"><div class="imp-label">Społeczeństwo PL</div><div class="imp-row"><div class="imp-bar"><div class="imp-fill" style="width:100%;background:var(--red)"></div></div><div class="imp-score c-red">5</div></div></div>
+            <div class="imp"><div class="imp-label">Wydatki obronne</div><div class="imp-row"><div class="imp-bar"><div class="imp-fill" style="width:80%;background:var(--amber)"></div></div><div class="imp-score c-amber">4</div></div></div>
+            <div class="imp"><div class="imp-label">Gospodarka</div><div class="imp-row"><div class="imp-bar"><div class="imp-fill" style="width:40%;background:var(--blue)"></div></div><div class="imp-score c-blue">2</div></div></div>
+            <div class="imp"><div class="imp-label">Energia</div><div class="imp-row"><div class="imp-bar"><div class="imp-fill" style="width:20%;background:var(--line2)"></div></div><div class="imp-score" style="color:var(--ink4)">1</div></div></div>
+            <div class="imp"><div class="imp-label">Farmacja</div><div class="imp-row"><div class="imp-bar"><div class="imp-fill" style="width:0%"></div></div><div class="imp-score" style="color:var(--ink4)">0</div></div></div>
+          </div>
+          <div class="scens">
+            <div class="sc-base"><div class="sc-label">Bazowy</div><div class="sc-text">Rutte kompromis. Europa 3,5% PKB. Art. 5 potwierdzony. PL wychodzi wzmocniona.</div></div>
+            <div class="sc-bad"><div class="sc-label">Pesymist.</div><div class="sc-text">Trump formalizuje „rewizję" NATO. Art. 5 w zawieszeniu. PL przyspiesza europejski filar bezpieczeństwa.</div></div>
+            <div class="sc-good"><div class="sc-label">Optymist.</div><div class="sc-text">Trump chwali NATO po Iranie. PL dostaje dodatkowe US troops. Art. 5 wzmocniony deklaracją.</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="animation-delay:.40s">
+        <div class="card-head">
+          <div>
+            <div class="card-title">🌊 Ormuz: chiński tankowiec przeszedł mimo blokady USA. Precedens</div>
+            <div class="card-meta"><span>CIEŚNINA ORMUZ</span><span style="color:var(--amber)">NOWE · 15 IV</span><span>Wiar: B</span></div>
+          </div>
+          <span class="pill pill-amber">Monitor</span>
+        </div>
+        <div class="card-body">
+          <p class="card-desc">Money.pl/Paliwa (15 IV): chiński statek przepłynął przez Ormuz mimo oficjalnej blokady morskiej USA. Iran i Chiny — „państwa przyjazne" — prowadzą żeglugę selekcyjnie. Precedens: blokada USA nie jest szczelna. Iran sprzedaje ropę rekordowo — dochody ze sprzedaży ropy podwoiły się podczas konfliktu (Rosja jako główny odbiorca). E-petrol.pl (16 IV): „W połowie kwietnia na stacjach paliw nie ma śladu po ubiegłotygodniowych podwyżkach" — CPN + ropa ~100 USD to równowaga chwilowa. Arabia Saudyjska: rurociąg East-West w pełnej przepustowości. Polska: Orlen bez zależności od Ormuzu. Baltic Pipe + LNG Świnoujście sprawne.</p>
+          <div class="impacts">
+            <div class="imp"><div class="imp-label">Ropa globalna</div><div class="imp-row"><div class="imp-bar"><div class="imp-fill" style="width:80%;background:var(--amber)"></div></div><div class="imp-score c-amber">4</div></div></div>
+            <div class="imp"><div class="imp-label">Paliwa PL</div><div class="imp-row"><div class="imp-bar"><div class="imp-fill" style="width:60%;background:var(--amber)"></div></div><div class="imp-score c-amber">3</div></div></div>
+            <div class="imp"><div class="imp-label">LNG Europa</div><div class="imp-row"><div class="imp-bar"><div class="imp-fill" style="width:80%;background:var(--amber)"></div></div><div class="imp-score c-amber">4</div></div></div>
+            <div class="imp"><div class="imp-label">Farmacja API</div><div class="imp-row"><div class="imp-bar"><div class="imp-fill" style="width:60%;background:var(--amber)"></div></div><div class="imp-score c-amber">3</div></div></div>
+            <div class="imp"><div class="imp-label">Polska bezpośr.</div><div class="imp-row"><div class="imp-bar"><div class="imp-fill" style="width:20%;background:var(--line2)"></div></div><div class="imp-score" style="color:var(--ink4)">1</div></div></div>
+            <div class="imp"><div class="imp-label">Nawozy/rolnictwo</div><div class="imp-row"><div class="imp-bar"><div class="imp-fill" style="width:60%;background:var(--amber)"></div></div><div class="imp-score c-amber">3</div></div></div>
+          </div>
+          <div class="scens">
+            <div class="sc-base"><div class="sc-label">Bazowy</div><div class="sc-text">Ormuz częściowo otwarty dla „przyjaznych." Ropa ~100 USD. Blokada USA nieskuteczna ale ogranicza eksport Iranu.</div></div>
+            <div class="sc-bad"><div class="sc-label">Pesymist.</div><div class="sc-text">Iran zamyka Ormuz dla wszystkich po 21 IV. Ropa 130+ USD. Kryzys energetyczny Q2 2026.</div></div>
+            <div class="sc-good"><div class="sc-label">Optymist.</div><div class="sc-text">Porozumienie → pełne otwarcie. 200 tankowców wypływa. Ropa 80 USD. Kryzys energetyczny zakończony.</div></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- TAB: ENERGIA -->
+  <div id="pane-energy" class="tab-pane">
+    <div class="section-title">Energia i rynki · 16 kwietnia 2026</div>
+    <div class="fuel-grid">
+      <div class="fuel-card">
+        <div class="fuel-label">Benzyna 95 (CPN maks.)</div>
+        <div class="fuel-value c-green">6,12</div>
+        <div class="fuel-unit">PLN/l · ↓ rekord CPN</div>
+        <div class="fuel-status status-ok">✓ chroniona do 30 IV</div>
+      </div>
+      <div class="fuel-card">
+        <div class="fuel-label">Diesel ON (CPN maks.)</div>
+        <div class="fuel-value c-green">7,58</div>
+        <div class="fuel-unit">PLN/l · ↓ 0,10 tydzień</div>
+        <div class="fuel-status status-ok">✓ stabilna</div>
+      </div>
+      <div class="fuel-card">
+        <div class="fuel-label">Ropa Brent</div>
+        <div class="fuel-value c-amber">~100</div>
+        <div class="fuel-unit">USD/bbl · bez paniki</div>
+        <div class="fuel-status status-warn">⚠ kruchy rozejm</div>
+      </div>
+      <div class="fuel-card">
+        <div class="fuel-label">Inflacja CPI PL</div>
+        <div class="fuel-value c-amber">3,0%</div>
+        <div class="fuel-unit">marzec r/r · finalny GUS</div>
+        <div class="fuel-status status-warn">⚠ powyżej celu 2,5%</div>
+      </div>
+      <div class="fuel-card">
+        <div class="fuel-label">LPG (poza CPN)</div>
+        <div class="fuel-value c-red">REC</div>
+        <div class="fuel-unit">~3,84 PLN/l · rekord hist.</div>
+        <div class="fuel-status status-bad">✗ brak ochrony</div>
+      </div>
+    </div>
+    <div class="cards" style="grid-template-columns:repeat(auto-fill,minmax(320px,1fr))">
+      <div class="card">
+        <div class="card-head"><div class="card-title">📉 Prognoza cen paliw — 2 tygodnie</div></div>
+        <div class="card-body">
+          <div class="sig-item" style="display:flex;gap:10px;margin-bottom:9px;font-size:13px;color:var(--ink2)"><span class="sig-dot d-green" style="margin-top:5px;flex-shrink:0"></span><strong>2. runda + rozejm przedłużony:</strong> benzyna 95 → 5,90–6,10 zł. Diesel → 7,30–7,50 zł</div>
+          <div class="sig-item" style="display:flex;gap:10px;margin-bottom:9px;font-size:13px;color:var(--ink2)"><span class="sig-dot d-amber" style="margin-top:5px;flex-shrink:0"></span>Ropa stabilna 96–104 USD: benzyna 6,10–6,30 zł przy akcyzie do 30 IV</div>
+          <div class="sig-item" style="display:flex;gap:10px;margin-bottom:9px;font-size:13px;color:var(--ink2)"><span class="sig-dot d-red" style="margin-top:5px;flex-shrink:0"></span><strong>Eskalacja po 21 IV:</strong> diesel 8,00+ zł. Benzyna 6,60+ zł nawet z CPN</div>
+          <div class="sig-item" style="display:flex;gap:10px;margin-bottom:9px;font-size:13px;color:var(--ink2)"><span class="sig-dot d-amber" style="margin-top:5px;flex-shrink:0"></span>CPN wygasa 30 IV — nowa decyzja rządu potrzebna do 28 IV</div>
+          <div class="sig-item" style="display:flex;gap:10px;margin-bottom:9px;font-size:13px;color:var(--ink2)"><span class="sig-dot d-red" style="margin-top:5px;flex-shrink:0"></span>Qatar Energy: 3 lata powrotu zdolności produkcyjnych nawet po pokoju</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-head"><div class="card-title">📅 Kalendarz ekonomiczny 16–22 IV</div></div>
+        <div class="card-body">
+          <div class="sig-item" style="display:flex;gap:10px;margin-bottom:9px;font-size:13px;color:var(--ink2)"><span class="sig-dot d-red" style="margin-top:5px;flex-shrink:0"></span><strong>16–17 IV:</strong> Ewentualna 2. runda Iran–USA (AP: możliwe dziś)</div>
+          <div class="sig-item" style="display:flex;gap:10px;margin-bottom:9px;font-size:13px;color:var(--ink2)"><span class="sig-dot d-amber" style="margin-top:5px;flex-shrink:0"></span><strong>17 IV (cz):</strong> Chiny PKB Q1 + produkcja przemysłowa</div>
+          <div class="sig-item" style="display:flex;gap:10px;margin-bottom:9px;font-size:13px;color:var(--ink2)"><span class="sig-dot d-amber" style="margin-top:5px;flex-shrink:0"></span><strong>17 IV:</strong> USA produkcja przemysłowa + wyniki Goldman Sachs</div>
+          <div class="sig-item" style="display:flex;gap:10px;margin-bottom:9px;font-size:13px;color:var(--ink2)"><span class="sig-dot d-red" style="margin-top:5px;flex-shrink:0"></span><strong>21 IV (pn):</strong> Wygaśnięcie rozejmu Iran — ABSOLUTNY DEADLINE</div>
+          <div class="sig-item" style="display:flex;gap:10px;margin-bottom:9px;font-size:13px;color:var(--ink2)"><span class="sig-dot d-blue" style="margin-top:5px;flex-shrink:0"></span><strong>~26–28 IV:</strong> Decyzja rządu PL ws. CPN na maj</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-head"><div class="card-title">🏦 RPP i inflacja — co dalej?</div></div>
+        <div class="card-body">
+          <div class="sig-item" style="display:flex;gap:10px;margin-bottom:9px;font-size:13px;color:var(--ink2)"><span class="sig-dot d-blue" style="margin-top:5px;flex-shrink:0"></span>Stopa referencyjna: 3,75% — Kotecki: marcowa obniżka ostatnia w 2026</div>
+          <div class="sig-item" style="display:flex;gap:10px;margin-bottom:9px;font-size:13px;color:var(--ink2)"><span class="sig-dot d-green" style="margin-top:5px;flex-shrink:0"></span>CPN obniża CPI o ~0,8 pp — bez tarczy inflacja byłaby 3,8%</div>
+          <div class="sig-item" style="display:flex;gap:10px;margin-bottom:9px;font-size:13px;color:var(--ink2)"><span class="sig-dot d-amber" style="margin-top:5px;flex-shrink:0"></span>Prognoza kwiecień: CPI ~2,5% r/r dzięki pełnemu efektowi CPN</div>
+          <div class="sig-item" style="display:flex;gap:10px;margin-bottom:9px;font-size:13px;color:var(--ink2)"><span class="sig-dot d-red" style="margin-top:5px;flex-shrink:0"></span>Eskalacja po 21 IV: ropa 120+ USD → inflacja 5–6% → RPP rozważa podwyżkę</div>
+          <div class="sig-item" style="display:flex;gap:10px;margin-bottom:9px;font-size:13px;color:var(--ink2)"><span class="sig-dot d-blue" style="margin-top:5px;flex-shrink:0"></span>S&P: PKB PL 3,3% (ropa 80) vs 2,5% (ropa 130 USD)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB: SYGNAŁY -->
+  <div id="pane-signals" class="tab-pane">
+    <div class="section-title">Wczesne sygnały ostrzegawcze · 16–20 kwietnia</div>
+    <div class="signals">
+      <div class="signal-card">
+        <div class="signal-title">🔴 Iran / USA — 2. runda</div>
+        <div class="sig-item"><span class="sig-dot d-red"></span><strong>Kluczowy:</strong> Czy 2. runda zostanie wyznaczona dziś/jutro? Brak do 18 IV = eskalacja niemal pewna po 21 IV</div>
+        <div class="sig-item"><span class="sig-dot d-red"></span>Trump Truth Social — ton po 18 IV. Eskalacja vs. „bliscy końca." Barometr intencji</div>
+        <div class="sig-item"><span class="sig-dot d-amber"></span>Tankowce AIS przez Ormuz — czy więcej niż Chiny i Indie? MarineTraffic.com</div>
+        <div class="sig-item"><span class="sig-dot d-amber"></span>Vance: „Iran musi otworzyć Ormuz lub to zmieni nasze negocjacje" — co Iran zrobi?</div>
+        <div class="sig-item"><span class="sig-dot d-blue"></span>Pakistan MSZ — komunikaty po wizycie Sharifa w AS/Katarze/Turcji (kończy się 18 IV)</div>
+      </div>
+      <div class="signal-card">
+        <div class="signal-title">🟡 Polska — CPN i inflacja</div>
+        <div class="sig-item"><span class="sig-dot d-red"></span>CPN wygasa 30 IV — nowa decyzja do 28 IV. Nie powtarzać błędu opóźnienia z 15 IV</div>
+        <div class="sig-item"><span class="sig-dot d-amber"></span>Inflacja bazowa PL (16 IV) — dane GUS ws. składowych CPI marzec</div>
+        <div class="sig-item"><span class="sig-dot d-amber"></span>Algorytm CPN 17–18 IV — czy ceny paliw reagują na ruch ropy po 2. rundzie?</div>
+        <div class="sig-item"><span class="sig-dot d-blue"></span>Turystyka paliwowa DE/CZ — czy ME ogłasza limity dla obcokrajowców?</div>
+      </div>
+      <div class="signal-card">
+        <div class="signal-title">🟢 Węgry — transfer władzy</div>
+        <div class="sig-item"><span class="sig-dot d-green"></span>Magyar wizyta Warszawa — kiedy? Agenda spotkania z Tuskiem. Monitor: premier.gov.pl</div>
+        <div class="sig-item"><span class="sig-dot d-amber"></span>Czy Orban utrudnia formowanie rządu przez instytucje? Telex.hu, HVG</div>
+        <div class="sig-item"><span class="sig-dot d-green"></span>KE — pierwsza decyzja ws. odmrożenia funduszy UE (10–12 mld EUR). Horyzont: 30–60 dni</div>
+        <div class="sig-item"><span class="sig-dot d-blue"></span>Orlen: „Magyar może mieć problem" — wskazówka na komplikacje legislacyjne w WE</div>
+      </div>
+      <div class="signal-card">
+        <div class="signal-title">🔴 NATO — szczyt Rutte</div>
+        <div class="sig-item"><span class="sig-dot d-red"></span>Wynik szczytu Trump–Rutte — czy Art. 5 potwierdzony i w jakiej formule?</div>
+        <div class="sig-item"><span class="sig-dot d-red"></span>NATO odmówiło blokady Ormuzu — reakcja Trumpa. Nowe żądania wobec Europy?</div>
+        <div class="sig-item"><span class="sig-dot d-amber"></span>Polska aktywna ws. płatności za US troops — komunikaty MON/MSZ?</div>
+        <div class="sig-item"><span class="sig-dot d-blue"></span>Polskie myśliwce — kolejne incydenty z rosyjskimi samolotami bez transponderów?</div>
+      </div>
+      <div class="signal-card">
+        <div class="signal-title">🔵 Rynki finansowe</div>
+        <div class="sig-item"><span class="sig-dot d-red"></span>EUR/PLN > 4,32 = panika rynkowa ws. eskalacji. NBP, stooq.pl — codziennie</div>
+        <div class="sig-item"><span class="sig-dot d-amber"></span>Ropa Brent > 110 USD = CPN niewystarczający. investing.com — rano</div>
+        <div class="sig-item"><span class="sig-dot d-amber"></span>GPW WIG20 < 3400 pkt = sygnał ostrzegawczy. gpw.pl</div>
+        <div class="sig-item"><span class="sig-dot d-blue"></span>Sezon wynikowy USA (JP Morgan, Goldman, Citi) — Q1 pod wpływem kryzysu irańskiego</div>
+      </div>
+      <div class="signal-card">
+        <div class="signal-title">🔵 Farmacja i leki</div>
+        <div class="sig-item"><span class="sig-dot d-amber"></span>Ormuz zamknięty 7 tygodni — braki API/siarki narastają. Monitor: GIF, CEFIC</div>
+        <div class="sig-item"><span class="sig-dot d-red"></span>Cła USA na leki patentowe — sierpień/październik 2026. Kontrakty TERAZ</div>
+        <div class="sig-item"><span class="sig-dot d-blue"></span>Nowe zasady wydawania leków (7 IV) — monitoring 2. tygodnia. GIF.gov.pl</div>
+        <div class="sig-item"><span class="sig-dot d-green"></span>Saudi AS East-West pipeline: pełna przepustowość — częściowa normalizacja siarki</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB: WSKAŹNIKI -->
+  <div id="pane-gauges" class="tab-pane">
+    <div class="section-title">Wskaźniki do monitorowania · progi alarmowe</div>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Wskaźnik</th>
+          <th>Stan 16 IV</th>
+          <th>Stabilny</th>
+          <th>Alarm</th>
+          <th>Katastrofa</th>
+          <th>Gdzie sprawdzić</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Ropa Brent</td><td class="v-warn">~100 USD/bbl</td><td class="v-ok">&lt; 90 USD</td><td class="v-warn">&gt; 110 USD</td><td class="v-bad">&gt; 130 USD</td><td>investing.com · e-petrol.pl</td></tr>
+        <tr><td>EUR/PLN</td><td class="v-warn">~4,27</td><td class="v-ok">&lt; 4,22</td><td class="v-warn">&gt; 4,32</td><td class="v-bad">&gt; 4,45</td><td>NBP · stooq.pl</td></tr>
+        <tr><td>Benzyna 95 maks. CPN</td><td class="v-ok">6,12 PLN/l ↓</td><td class="v-ok">&lt; 6,20 PLN/l</td><td class="v-warn">&gt; 6,50 PLN/l</td><td class="v-bad">&gt; 7,00 PLN/l</td><td>monitorpolski.gov.pl</td></tr>
+        <tr><td>Diesel maks. CPN</td><td class="v-ok">7,58 PLN/l ↓</td><td class="v-ok">&lt; 7,70 PLN/l</td><td class="v-warn">&gt; 8,00 PLN/l</td><td class="v-bad">&gt; 9,00 PLN/l</td><td>monitorpolski.gov.pl</td></tr>
+        <tr><td>Gaz TTF</td><td class="v-warn">~52 EUR/MWh*</td><td class="v-ok">&lt; 45 EUR/MWh</td><td class="v-warn">&gt; 70 EUR/MWh</td><td class="v-bad">&gt; 90 EUR/MWh</td><td>investing.com · ICE</td></tr>
+        <tr><td>Inflacja CPI PL</td><td class="v-warn">3,0% r/r (marzec)</td><td class="v-ok">&lt; 4,5%</td><td class="v-warn">&gt; 5,5%</td><td class="v-bad">&gt; 7,0%</td><td>GUS.gov.pl</td></tr>
+        <tr><td>Stopy RPP PL</td><td class="v-ok">3,75%</td><td class="v-ok">bez zmian</td><td class="v-warn">sygnał podwyżki</td><td class="v-bad">podwyżka do 4,5%+</td><td>nbp.pl</td></tr>
+        <tr><td>Tankowce Ormuz/dobę</td><td class="v-bad">~0 zachodnie</td><td class="v-ok">&gt; 15/dobę</td><td class="v-warn">5–15/dobę (sel.)</td><td class="v-bad">0 + eskalacja</td><td>MarineTraffic.com</td></tr>
+        <tr><td>WIG20 GPW</td><td class="v-warn">~3450*</td><td class="v-ok">&gt; 3400 pkt</td><td class="v-warn">&lt; 3200 pkt</td><td class="v-bad">&lt; 2900 pkt</td><td>gpw.pl · stooq.pl</td></tr>
+        <tr><td>Rozejm Iran — pozostało</td><td class="v-bad">5 dni</td><td class="v-ok">przedłużony</td><td class="v-warn">2 dni bez 2. rundy</td><td class="v-bad">wygaśnięcie 21 IV</td><td>Reuters · AP · PAP</td></tr>
+      </tbody>
+    </table>
+    <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--ink4);margin-top:-20px;margin-bottom:24px">* szacunki — dane nierejestrowane w czasie rzeczywistym</div>
+  </div>
+
+  <!-- TAB: REKOMENDACJE -->
+  <div id="pane-recs" class="tab-pane">
+    <div class="section-title">Rekomendacje działań · 16–20 kwietnia 2026</div>
+    <div class="recs">
+      <div class="rec-card">
+        <div class="rec-head"><div class="rec-icon">🏛️</div><div class="rec-title">Rząd centralny</div></div>
+        <div class="rec-body">
+          <div class="rec-item"><span class="rec-arrow">→</span><strong style="color:var(--green)">ZROBIONE:</strong> Akcyza przedłużona do 30 IV, benzyna 6,12 zł — dobra decyzja</div>
+          <div class="rec-item"><span class="rec-arrow">→</span><strong style="color:var(--red)">DO 17 IV:</strong> MSZ — wysłać zaproszenie i zaproponować datę wizyty Magyara w Warszawie. Okno strategiczne: 30 dni</div>
+          <div class="rec-item"><span class="rec-arrow">→</span><strong style="color:var(--amber)">DO 19 IV:</strong> MON/MSZ — aktywna komunikacja ws. płatności za US troops przed szczytem NATO. Najsilniejszy argument PL</div>
+          <div class="rec-item"><span class="rec-arrow">→</span><strong style="color:var(--amber)">DO 26–28 IV:</strong> Decyzja ws. CPN na maj — komunikat PRZED wygaśnięciem 30 IV, nie czekać na ostatni dzień</div>
+          <div class="rec-item"><span class="rec-arrow">→</span>Monitor 2. rundy Iran–USA — w razie przełomu: komunikat ws. cen paliw i CPN</div>
+        </div>
+      </div>
+      <div class="rec-card">
+        <div class="rec-head"><div class="rec-icon">🏙️</div><div class="rec-title">Samorządy JST</div></div>
+        <div class="rec-body">
+          <div class="rec-item"><span class="rec-arrow">→</span><strong style="color:var(--red)">WSTRZYMAJ</strong> przetargi transportowe do 22 IV — 5 dni do deadline rozejmu zmienia kalkul</div>
+          <div class="rec-item"><span class="rec-arrow">→</span>Budżety: utrzymaj korektę +15–20% kosztów energii vs. scenariusz sprzed marca</div>
+          <div class="rec-item"><span class="rec-arrow">→</span>Bufor paliwowy: min. 3-tygodniowy zapas dla służb komunalnych — rozejm kruchy</div>
+          <div class="rec-item"><span class="rec-arrow">→</span>Przetargi ciepło systemowe 2026/27: nie zamykaj kontraktów przed 22 IV</div>
+          <div class="rec-item"><span class="rec-arrow">→</span>SPZOZ/apteki: leki innowacyjne — kontrakty przed cłami USA (sierpień 2026)</div>
+        </div>
+      </div>
+      <div class="rec-card">
+        <div class="rec-head"><div class="rec-icon">💼</div><div class="rec-title">Biznes i inwestorzy</div></div>
+        <div class="rec-body">
+          <div class="rec-item"><span class="rec-arrow">→</span>GPW: KGHM, banki — utrzymuj (WE). JSW, Bogdanka — redukuj. Orlen — obserwuj marżę vs. ropa</div>
+          <div class="rec-item"><span class="rec-arrow">→</span><strong style="color:var(--red)">Hedging diesla Q3 2026 — TERAZ.</strong> Eskalacja po 21 IV = diesel 8,50+ zł</div>
+          <div class="rec-item"><span class="rec-arrow">→</span>EUR/PLN: możliwy ruch do 4,30+ jeśli 2. runda zawiedzie. Sprawdź ekspozycję</div>
+          <div class="rec-item"><span class="rec-arrow">→</span><strong style="color:var(--red)">Farmaceutyki:</strong> kontrakty na leki patentowe TERAZ — cła USA za 4 miesiące</div>
+          <div class="rec-item"><span class="rec-arrow">→</span>Inwestycje energochłonne (np. basen): wstrzymaj decyzje do 22 IV</div>
+        </div>
+      </div>
+      <div class="rec-card">
+        <div class="rec-head"><div class="rec-icon">🏥</div><div class="rec-title">Zdrowie / NFZ</div></div>
+        <div class="rec-body">
+          <div class="rec-item"><span class="rec-arrow">→</span><strong style="color:var(--red)">Priorytet:</strong> Przetargi na leki innowacyjne — podpisać w ciągu 7 dni (cła USA sierpień)</div>
+          <div class="rec-item"><span class="rec-arrow">→</span>Monitor dostępności API/siarki: Ormuz 7 tygodni zamknięty — braki narastają</div>
+          <div class="rec-item"><span class="rec-arrow">→</span>GIF: monitoring wdrożenia nowych zasad wydawania leków (7 IV) — apteki szpitalne</div>
+          <div class="rec-item"><span class="rec-arrow">→</span>Substytucja generyczna — informuj o alternatywach, lepsza dostępność bez ceł</div>
+        </div>
+      </div>
+      <div class="rec-card">
+        <div class="rec-head"><div class="rec-icon">🏗️</div><div class="rec-title">Gmina Kostrzyn — basen</div></div>
+        <div class="rec-body">
+          <div class="rec-item"><span class="rec-arrow" style="color:var(--red)">✗</span><strong style="color:var(--red)">NIE ogłaszać przetargu</strong> — rozejm wygasa 21 IV, kosztorys energetyczny nieaktualny</div>
+          <div class="rec-item"><span class="rec-arrow" style="color:var(--green)">✓</span>Kontynuuj dokumentację projektową — okno dotacyjne (KE po WE) otwiera się</div>
+          <div class="rec-item"><span class="rec-arrow" style="color:var(--green)">✓</span>Złóż wnioski o dofinansowanie — odmrożenie funduszy UE dla WE tworzy efekt kaskadowy</div>
+          <div class="rec-item"><span class="rec-arrow" style="color:var(--green)">✓</span>Zlec warianty OZE (pompy ciepła + rekuperacja) — bez pakietu energetycznego projekt nie do obrony</div>
+          <div class="rec-item"><span class="rec-arrow" style="color:var(--amber)">→</span>Wróć do decyzji inwestycyjnej po 22 IV gdy wyjaśni się sytuacja z rozejmem</div>
+        </div>
+      </div>
+      <div class="rec-card">
+        <div class="rec-head"><div class="rec-icon">👥</div><div class="rec-title">Obywatele</div></div>
+        <div class="rec-body">
+          <div class="rec-item"><span class="rec-arrow" style="color:var(--green)">✓</span>Benzyna 6,12 zł — chroniona do 30 IV. Tankuj normalnie, bez paniki</div>
+          <div class="rec-item"><span class="rec-arrow" style="color:var(--amber)">→</span>Rozejm wygasa 21 IV — jeśli eskalacja: ceny skoczą. Warto mieć pełny bak</div>
+          <div class="rec-item"><span class="rec-arrow" style="color:var(--green)">✓</span>Węgry: historyczna zmiana proeuropejska — dobra wiadomość dla bezpieczeństwa PL w UE</div>
+          <div class="rec-item"><span class="rec-arrow" style="color:var(--red)">!</div><div style="font-size:12px;color:var(--ink2)">LPG: rekord wszech czasów. Jeśli jeździsz na LPG — ogranicz przejazdyny</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB: SUMMARY -->
+  <div id="pane-summary" class="tab-pane">
+    <div class="section-title">Executive Summary · Raport #44 · 16 kwietnia 2026</div>
+    <div class="exec-box">
+      <div class="exec-row">
+        <div class="exec-key">Napięcie</div>
+        <div class="exec-val"><strong>70/100 → stabilizacja</strong> (↓ z 72). Obniżające: AP potwierdza 2. rundę możliwą dziś/jutro + Axios sygnalizuje „porozumienie ramowe." Podtrzymujące: rozejm wygasa 21 IV, brak formalnej daty 2. rundy, sprzeczne sygnały Trumpa.</div>
+      </div>
+      <div class="exec-row">
+        <div class="exec-key">Najważniejsze dziś</div>
+        <div class="exec-val">AP (2 pakistańscy urzędnicy): <hi-amber class="hi-amber">2. runda Iran–USA możliwa już dziś lub jutro</hi-amber> — Islamabad lub Genewa. Axios (środa): negocjatorzy zbliżają się do „porozumienia ramowego." Jednocześnie Trump w ABC: „nie planuję przedłużać rozejmu." [OCENA: sprzeczność celowa — presja negocjacyjna.] <span class="hi-red">Rozejm wygasa 21 IV — 5 dni.</span></div>
+      </div>
+      <div class="exec-row">
+        <div class="exec-key">Paliwa i inflacja</div>
+        <div class="exec-val">Benzyna 95 <span class="hi-green">6,12 zł — rekord niski CPN</span>, diesel 7,58 zł. Akcyza do 30 IV. GUS finalne: CPI marzec 3,0% r/r — poniżej konsensusu (3,3%), głównie paliwa +8,5% r/r. CPN tłumi inflację o ~0,8 pp. Prognoza: kwiecień ~2,5% dzięki pełnemu efektowi. Santander: zakładają CPN przez resztę roku. E-petrol: „W połowie kwietnia nie ma śladu po ubiegłotygodniowych podwyżkach."</div>
+      </div>
+      <div class="exec-row">
+        <div class="exec-key">Węgry — okno</div>
+        <div class="exec-val"><span class="hi-green">Forsal: „Nowa oś Warszawa–Budapeszt?"</span> Magyar 1. wizyta = Warszawa. KE przygotowuje odmrożenie 10–12 mld EUR dla Węgier. Macinka (CZ): nowy V4. Fico (SK): intensywna współpraca. To największy geopolityczny zysk Polski od wybuchu konfliktu — <strong>okno trwa 30 dni, zanim Magyar pochłonie go polityka wewnętrzna.</strong></div>
+      </div>
+      <div class="exec-row">
+        <div class="exec-key">24h: działaj</div>
+        <div class="exec-val">MSZ: wyślij zaproszenie Magyara do Warszawy z konkretną datą. MON: komunikat ws. płatności za US troops przed szczytem NATO. Farmacja/zdrowie: kontrakty na leki patentowe TERAZ (cła USA sierpień). Inwestorzy: hedging diesla Q3. Samorządy: wstrzymaj przetargi transportowe do 22 IV.</div>
+      </div>
+    </div>
+
+    <div class="section-title">Źródła · 16 kwietnia 2026</div>
+    <div class="cards" style="grid-template-columns:1fr">
+      <div class="card">
+        <div class="card-body">
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:8px;margin-bottom:14px">
+            <div class="sig-item" style="display:flex;gap:8px;font-size:12px;color:var(--ink2)"><span class="sig-dot d-green" style="flex-shrink:0;margin-top:4px"></span>Reuters / AP / PAP — Wiar. A ●●●●●</div>
+            <div class="sig-item" style="display:flex;gap:8px;font-size:12px;color:var(--ink2)"><span class="sig-dot d-green" style="flex-shrink:0;margin-top:4px"></span>WSJ / Axios / Bloomberg — Wiar. A ●●●●●</div>
+            <div class="sig-item" style="display:flex;gap:8px;font-size:12px;color:var(--ink2)"><span class="sig-dot d-green" style="flex-shrink:0;margin-top:4px"></span>GUS (CPI finalne 15 IV) — Wiar. A ●●●●●</div>
+            <div class="sig-item" style="display:flex;gap:8px;font-size:12px;color:var(--ink2)"><span class="sig-dot d-green" style="flex-shrink:0;margin-top:4px"></span>RP.pl / WNP.pl / Bankier.pl — Wiar. A ●●●●●</div>
+            <div class="sig-item" style="display:flex;gap:8px;font-size:12px;color:var(--ink2)"><span class="sig-dot d-blue" style="flex-shrink:0;margin-top:4px"></span>Forsal.pl / RMF24 — Wiar. B ●●●●○</div>
+            <div class="sig-item" style="display:flex;gap:8px;font-size:12px;color:var(--ink2)"><span class="sig-dot d-blue" style="flex-shrink:0;margin-top:4px"></span>300gospodarka.pl / Money.pl — Wiar. B ●●●●○</div>
+            <div class="sig-item" style="display:flex;gap:8px;font-size:12px;color:var(--ink2)"><span class="sig-dot d-amber" style="flex-shrink:0;margin-top:4px"></span>Santander BP (analitycy) — Wiar. B ●●●○○</div>
+            <div class="sig-item" style="display:flex;gap:8px;font-size:12px;color:var(--ink2)"><span class="sig-dot d-amber" style="flex-shrink:0;margin-top:4px"></span>e-petrol.pl (16 IV rano) — Wiar. B ●●●○○</div>
+          </div>
+          <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--ink4);padding-top:12px;border-top:1px solid var(--line)">
+            RAPORT #44 · OSINT · OPEN SOURCE · 3 WYSZUKIWANIA · 16.04.2026 · NAST. AKTUALIZACJA: 17–18 IV (2. runda Iran + Reagan rozejmu)
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="background:var(--amber-soft);border:1px solid var(--amber-mid);border-left:4px solid var(--amber);border-radius:12px;padding:20px;margin-top:4px">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;color:var(--amber);text-transform:uppercase;margin-bottom:10px">Co musi się wydarzyć</div>
+      <div style="font-size:13px;color:var(--ink2);line-height:1.7;margin-bottom:8px"><strong style="color:var(--green)">Żeby się poprawiło:</strong> 2. runda przed 21 IV → porozumienie ramowe ws. Ormuzu i programu nuklearnego → rozejm przedłużony lub zastąpiony umową → ropa spada poniżej 85 USD → NATO potwierdza Art. 5 na szczycie Rutte.</div>
+      <div style="font-size:13px;color:var(--ink2);line-height:1.7"><strong style="color:var(--red)">Żeby się pogorszyło:</strong> Brak 2. rundy przed 18 IV → Iran nie otwiera Ormuzu w żaden sposób → Trump ogłasza „koniec rozejmu" 21 IV → pełna eskalacja militarna → ropa 130+ USD → CPN niewystarczający.</div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <span>OSINT.PL · Raport #44 · 16.IV.2026 · 09:00 UTC</span>
+    <span>Open Source · Wieloźródłowy · Analityczny</span>
+    <span>Nast. aktualizacja: 17–18 IV 2026</span>
+  </div>
+
 </div>
-
-<!-- ===== TAB ZDARZENIA ===== -->
-
-<div id="tab-ev" class="tab-content">
-  <div class="stitle">SZCZEGÓŁOWA ANALIZA — 5 KLUCZOWYCH ZDARZEŃ</div>
-  <div class="egrid">
-
-```
-<!-- EV1 -->
-<div class="ecard" style="animation-delay:.1s">
-  <div class="ech">
-    <div>
-      <div class="ect">🕊️ Rozejm USA–Iran zawarty — ale od razu zagrożony przez Izrael i Liban</div>
-      <div class="ecm"><span>📍 IRAN / LIBAN / USA</span><span>Wiarygodność: <span style="color:var(--green)">●●●●●</span></span><span style="color:var(--amber)">STATUS: KRUCHY</span></div>
-    </div>
-    <span class="badge bh">KLUCZOWE</span>
-  </div>
-  <div class="ecb">
-    <p class="ed">7/8 IV, 90 minut przed upływem ultimatum: Trump ogłosił 14-dniowe zawieszenie broni z Iranem, pośredniczone przez Pakistan. Warunek: natychmiastowe otwarcie Ormuzu. Reakcja rynków: ropa -13%, WIG +3,85%. Ale już kilka godzin później: Izrael zaatakował ~100 celów Hezbollahu w Libanie (operacja „Ryczący Lew"). Iran uznał to za naruszenie rozejmu i ponownie zablokował Ormuz. Hezbollah wznowił rakietowanie Izraela. Kluczowy spór: Waszyngton i Izrael twierdzą, że rozejm nie obejmuje Libanu; Iran i Pakistan twierdzą, że obejmuje wszystkich. Vance: „szczere nieporozumienie." Negocjacje w Islamabadzie zaplanowane na 10 IV — niepewne czy się odbędą.</p>
-    <div style="background:rgba(255,184,0,.06);border:1px solid rgba(255,184,0,.3);border-left:3px solid var(--amber);padding:10px 14px;margin-bottom:14px;font-size:12px;color:var(--amber)">
-      ⚠ DEZINFORMACJA: Obie strony ogłosiły „swoje zwycięstwo". Iran w wersji perskiej rozejmu zachował wzbogacanie uranu — w wersji angielskiej tego nie ma. Chaos informacyjny jest elementem strategii obu stron. Monitoruj Reutera i AP jako najwydajniejsze źródła.
-    </div>
-    <div class="ig">
-      <div class="ii"><div class="il">Bezpieczeństwo PL</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:40%;background:var(--blue)"></div></div><div class="is" style="color:var(--blue)">2</div></div></div>
-      <div class="ii"><div class="il">Gospodarka</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:80%;background:var(--amber);box-shadow:0 0 6px rgba(255,184,0,.4)"></div></div><div class="is" style="color:var(--amber)">4</div></div></div>
-      <div class="ii"><div class="il">Energia</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:80%;background:var(--amber);box-shadow:0 0 6px rgba(255,184,0,.4)"></div></div><div class="is" style="color:var(--amber)">4</div></div></div>
-      <div class="ii"><div class="il">Samorządy</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:60%;background:#ff8c00"></div></div><div class="is" style="color:#ff8c00">3</div></div></div>
-      <div class="ii"><div class="il">Farmacja</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:60%;background:#ff8c00"></div></div><div class="is" style="color:#ff8c00">3</div></div></div>
-      <div class="ii"><div class="il">Społeczeństwo</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:40%;background:var(--blue)"></div></div><div class="is" style="color:var(--blue)">2</div></div></div>
-    </div>
-    <div class="sc2">
-      <div class="sb"><div class="sclabel">⚙ BAZOWY 45%</div><div class="sct">Negocjacje w Islamabadzie 10 IV się odbywają. Rozejm trwa pomimo sporu o Liban. Ormuz stopniowo się otwiera. Ropa stabilizuje się 90–100 USD.</div></div>
-      <div class="sw"><div class="sclabel">☠ PESYMISTYCZNY 35%</div><div class="sct">Rozejm się rozpada. Iran wycofuje się oficjalnie. Ormuz z powrotem zablokowany. Ropa wraca powyżej 110 USD. CPN znów pod presją.</div></div>
-      <div class="sg"><div class="sclabel">✓ OPTYMISTYCZNY 20%</div><div class="sct">USA naciskają Izrael ws. Libanu. Rozejm stabilizuje się. Ormuz w pełni otwarty. Ropa schodzi do 85 USD. Pakiet CPN może być wygaszany.</div></div>
-    </div>
-  </div>
-</div>
-
-<!-- EV2 -->
-<div class="ecard" style="animation-delay:.2s">
-  <div class="ech">
-    <div>
-      <div class="ect">📈 GPW rekord wszech czasów — rynki świętują mimo chaosu</div>
-      <div class="ecm"><span>📍 POLSKA / GLOBALNE</span><span>Wiarygodność: <span style="color:var(--green)">●●●●●</span></span><span style="color:var(--green)">✅ POZYTYWNE</span></div>
-    </div>
-    <span class="badge bo">REKORD</span>
-  </div>
-  <div class="ecb">
-    <p class="ed">8 kwietnia GPW pobiła rekord wszech czasów: WIG osiągnął 129 201 pkt, WIG20 zamknął sesję na 3534 pkt (+3,85%). KGHM lider wzrostów +9,85% (miedź tanieje po rozejmie — kopalnie uchodzą za bezpieczną inwestycję). Banki: mBank +9,4%, Alior +7,3%, Pekao +6,6%. Przegrane: Orlen -2,84%, węgiel (Bogdanka -17%, JSW -10%), turystyka odrabia (Rainbow Tours +8%, Enter Air +11%). Ropa Brent spada z 117 USD do ~94 USD (-13%). Dolar słabnie, złoty się umacnia. 80% Polaków chce utrzymania maks. cen paliw do końca 2026.</p>
-    <div class="ig">
-      <div class="ii"><div class="il">Gospodarka</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:100%;background:var(--green);box-shadow:0 0 8px rgba(0,255,136,.5)"></div></div><div class="is" style="color:var(--green)">5+</div></div></div>
-      <div class="ii"><div class="il">Inwestorzy</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:100%;background:var(--green);box-shadow:0 0 8px rgba(0,255,136,.5)"></div></div><div class="is" style="color:var(--green)">5+</div></div></div>
-      <div class="ii"><div class="il">Energia (krótko)</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:80%;background:var(--green)"></div></div><div class="is" style="color:var(--green)">4+</div></div></div>
-      <div class="ii"><div class="il">Paliwa</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:60%;background:var(--green)"></div></div><div class="is" style="color:var(--green)">3+</div></div></div>
-      <div class="ii"><div class="il">Orlen/PKN</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:60%;background:var(--red)"></div></div><div class="is" style="color:var(--red)">-3</div></div></div>
-      <div class="ii"><div class="il">Górnictwo węgla</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:80%;background:var(--red)"></div></div><div class="is" style="color:var(--red)">-4</div></div></div>
-    </div>
-    <div class="sc2">
-      <div class="sb"><div class="sclabel">⚙ BAZOWY</div><div class="sct">Rozejm trwa mimo Libanu. Ropa stabilna 90–100 USD. Giełda utrzymuje poziomy. Złoty mocny.</div></div>
-      <div class="sw"><div class="sclabel">☠ PESYMISTYCZNY</div><div class="sct">Rozejm się rozpada. Ropa wraca do 110+. Korekta na GPW 5–10%. Złoty traci do dolara.</div></div>
-      <div class="sg"><div class="sclabel">✓ OPTYMISTYCZNY</div><div class="sct">Trwały pokój w ciągu 2 tygodni. Ropa 80 USD. GPW dalej rośnie. Nowe rekordy WIG.</div></div>
-    </div>
-  </div>
-</div>
-
-<!-- EV3 -->
-<div class="ecard" style="animation-delay:.3s">
-  <div class="ech">
-    <div>
-      <div class="ect">🗳️ Węgry — wybory 12 IV za 3 dni | TISZA nadal prowadzi</div>
-      <div class="ecm"><span>📍 WĘGRY / UE</span><span>Wiarygodność: <span style="color:var(--green)">●●●●●</span></span><span style="color:var(--amber)">WYNIK: TISZA 70%</span></div>
-    </div>
-    <span class="badge bh">ZA 3 DNI</span>
-  </div>
-  <div class="ecb">
-    <p class="ed">Wybory parlamentarne na Węgrzech 12 kwietnia 2026. TISZA (Peter Magyar) utrzymuje przewagę: 56–58% vs Fidesz 35–37%. Incydent przy gazociągu Balkan Stream (5 IV) nie zmienił znacząco sondaży — opozycja skutecznie odpierała narrację o „operacji pod fałszywą flagą". Afera szpiegowska: KE żąda wyjaśnień ws. przecieków z Węgier do Rosji. Vance był w Budapeszcie ws. rozejmu iranskiego. Zmiana władzy = koniec blokowania sankcji UE wobec Rosji, wygaszanie TurkStream, wsparcie dla Ukrainy, normalizacja z Brukselą.</p>
-    <div class="ig">
-      <div class="ii"><div class="il">Bezpieczeństwo EU</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:60%;background:#ff8c00"></div></div><div class="is" style="color:#ff8c00">3+</div></div></div>
-      <div class="ii"><div class="il">Geopolityka UE</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:80%;background:var(--amber);box-shadow:0 0 6px rgba(255,184,0,.4)"></div></div><div class="is" style="color:var(--amber)">4</div></div></div>
-      <div class="ii"><div class="il">Energia UE</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:60%;background:#ff8c00"></div></div><div class="is" style="color:#ff8c00">3</div></div></div>
-      <div class="ii"><div class="il">Polska/geopolityka</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:80%;background:var(--green)"></div></div><div class="is" style="color:var(--green)">4+</div></div></div>
-      <div class="ii"><div class="il">Gospodarka PL</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:40%;background:var(--blue)"></div></div><div class="is" style="color:var(--blue)">2</div></div></div>
-      <div class="ii"><div class="il">Farmacja</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:4%;background:var(--dim)"></div></div><div class="is" style="color:var(--dim)">0</div></div></div>
-    </div>
-    <div class="sc2">
-      <div class="sb"><div class="sclabel">⚙ BAZOWY 70%</div><div class="sct">TISZA wygrywa. Nowy rząd WĘ reorientuje politykę: sankcje vs Rosja, wygaszanie TurkStream, normalizacja z UE.</div></div>
-      <div class="sw"><div class="sclabel">☠ PESYMISTYCZNY 30%</div><div class="sct">Fidesz wygrywa dzięki manipulacjom. Orban zostaje. Blokada UE trwa. Afera szpiegowska odwieszona.</div></div>
-      <div class="sg"><div class="sclabel">✓ OPTYMISTYCZNY</div><div class="sct">TISZA wygrywa landslide. Czyste śledztwo ws. Balkan Stream. WĘ przystępują do Europejskiego Filaru Obrony.</div></div>
-    </div>
-  </div>
-</div>
-
-<!-- EV4 -->
-<div class="ecard" style="animation-delay:.4s">
-  <div class="ech">
-    <div>
-      <div class="ect">🛡️ Szczyt Trump–Rutte: „NATO odwróciło się plecami" — rzeczniczka Białego Domu</div>
-      <div class="ecm"><span>📍 USA / NATO</span><span>Wiarygodność: <span style="color:var(--green)">●●●●●</span></span><span style="color:var(--red)">ESKALACJA: 40%</span></div>
-    </div>
-    <span class="badge bc">KRYTYCZNE DLA PL</span>
-  </div>
-  <div class="ecb">
-    <p class="ed">Przed planowanym szczytem Trump–Rutte rzeczniczka Białego Domu Karoline Leavitt stwierdziła, że „NATO odwróciło się od USA plecami." To najostrzejsza oficjalna retoryka wobec Sojuszu. Jednocześnie: Pete Hegseth, sekretarz obrony USA, powiedział że Iran będzie „przestrzegał rozejmu i usiądzie do stołu." Hegseth oznajmił też, że USA „nie wycofują sił z Bliskiego Wschodu" i „dozbroją się." Vance był w Budapeszcie — wątek NATO obecny w kontekście węgierskim. Paradoks: Trump potrzebuje NATO jako platformy żądania budżetów obronnych od Europy, ale jednocześnie deprecjonuje Sojusz jako narzędzie negocjacyjne.</p>
-    <div class="ig">
-      <div class="ii"><div class="il">Bezpieczeństwo PL</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:100%;background:var(--red);box-shadow:0 0 8px rgba(255,45,85,.5)"></div></div><div class="is" style="color:var(--red)">5</div></div></div>
-      <div class="ii"><div class="il">Gospodarka</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:40%;background:var(--blue)"></div></div><div class="is" style="color:var(--blue)">2</div></div></div>
-      <div class="ii"><div class="il">Wydatki obronne</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:80%;background:var(--amber)"></div></div><div class="is" style="color:var(--amber)">4</div></div></div>
-      <div class="ii"><div class="il">Samorządy</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:40%;background:var(--blue)"></div></div><div class="is" style="color:var(--blue)">2</div></div></div>
-      <div class="ii"><div class="il">Farmacja</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:4%;background:var(--dim)"></div></div><div class="is" style="color:var(--dim)">0</div></div></div>
-      <div class="ii"><div class="il">Społeczeństwo</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:100%;background:var(--red);box-shadow:0 0 8px rgba(255,45,85,.5)"></div></div><div class="is" style="color:var(--red)">5</div></div></div>
-    </div>
-    <div class="sc2">
-      <div class="sb"><div class="sclabel">⚙ BAZOWY</div><div class="sct">Rutte negocjuje kompromis. Europa zobowiązuje się do 3,5% PKB na obronę. Trump rezygnuje z retoryki wyjścia z NATO.</div></div>
-      <div class="sw"><div class="sclabel">☠ PESYMISTYCZNY</div><div class="sct">Szczyt fiasko. USA formalizują „rewizję" NATO po Iranie. PL przyspiesza europejski filar bezpieczeństwa bez USA.</div></div>
-      <div class="sg"><div class="sclabel">✓ OPTYMISTYCZNY</div><div class="sct">Trump ogłasza „historyczne porozumienie" z NATO. Polska wzmocniona obietnicami dodatkowych kontyngentów USA.</div></div>
-    </div>
-  </div>
-</div>
-
-<!-- EV5 -->
-<div class="ecard" style="animation-delay:.5s">
-  <div class="ech">
-    <div>
-      <div class="ect">⛽ Polskie paliwa — paradoks CPN: ropa tanieje, ceny detaliczne rosną</div>
-      <div class="ecm"><span>📍 POLSKA</span><span>Wiarygodność: <span style="color:var(--green)">●●●●●</span></span><span style="color:var(--amber)">PARADOKS ALGORYTMU</span></div>
-    </div>
-    <span class="badge bm">WAŻNE</span>
-  </div>
-  <div class="ecb">
-    <p class="ed">9 IV: benzyna 95 maks. 6,27 zł (+0,06 vs tydzień temu), diesel 7,83 zł (-0,04 vs Wielkanoc). Paradoks: ropa Brent spada o 13%, ale ceny detaliczne rosną lub stoją. Dlaczego? Algorytm CPN oparty na cenach hurtowych z poprzedniego dnia — z opóźnieniem. Hurtowy diesel Orlen 9 IV: 8,37 PLN z VAT (spadek z 8,60). Przed wojną benzyna 95 kosztowała 5,67 zł, diesel 5,96 zł — jesteśmy wciąż o ok. 15–30% wyżej. Minister Motyka: „w ciągu kilku dni ceny mogą spaść o kilkanaście groszy." 80% Polaków chce maks. cen do końca 2026. Decyzja o CPN po 15 IV (akcyza) — do dziś nie podjęta.</p>
-    <div class="ig">
-      <div class="ii"><div class="il">Ceny paliw (krótko)</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:60%;background:var(--green)"></div></div><div class="is" style="color:var(--green)">3+</div></div></div>
-      <div class="ii"><div class="il">Budżet PL</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:80%;background:var(--amber)"></div></div><div class="is" style="color:var(--amber)">4</div></div></div>
-      <div class="ii"><div class="il">Samorządy</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:60%;background:var(--green)"></div></div><div class="is" style="color:var(--green)">3+</div></div></div>
-      <div class="ii"><div class="il">Sektor transportu</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:60%;background:var(--green)"></div></div><div class="is" style="color:var(--green)">3+</div></div></div>
-      <div class="ii"><div class="il">Inflacja (trend)</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:60%;background:var(--green)"></div></div><div class="is" style="color:var(--green)">3+</div></div></div>
-      <div class="ii"><div class="il">Górnictwo węgla</div><div class="ibw"><div class="ibb"><div class="ibf" style="width:80%;background:var(--red)"></div></div><div class="is" style="color:var(--red)">-4</div></div></div>
-    </div>
-    <div class="sc2">
-      <div class="sb"><div class="sclabel">⚙ BAZOWY</div><div class="sct">Ropa 90–95 USD. Ceny detaliczne zaczynają spadać w ciągu 5–7 dni. Diesel wraca do 7,50 zł. CPN przedłużony po 15 IV.</div></div>
-      <div class="sw"><div class="sclabel">☠ PESYMISTYCZNY</div><div class="sct">Rozejm się rozpada. Ropa wraca do 110 USD. CPN znów pod presją. Diesel może osiągnąć 8 zł nawet z regulacjami.</div></div>
-      <div class="sg"><div class="sclabel">✓ OPTYMISTYCZNY</div><div class="sct">Trwały pokój w 2 tyg. Ropa 80 USD. Ceny paliw mogą wrócić do poziomów sprzed 28 II (benzyna 95 ok. 5,70 zł).</div></div>
-    </div>
-  </div>
-</div>
-```
-
-  </div>
-</div>
-
-<!-- ===== TAB RYNKI ===== -->
-
-<div id="tab-en" class="tab-content">
-  <div class="stitle">RYNKI I ENERGIA — 9 KWIETNIA 2026</div>
-
-  <!-- GPW TICKER -->
-
-  <div class="stitle">GPW — SESJA 8 KWIETNIA 2026 (DZIEŃ ROZEJMU)</div>
-  <div class="ticker">
-    <div class="tick"><div class="tick-name">WIG20</div><div class="tick-val up">+3,85%</div><div style="font-size:10px;color:var(--t2)">3534 pkt | REKORD</div></div>
-    <div class="tick"><div class="tick-name">WIG SZEROKI</div><div class="tick-val up">+2,89%</div><div style="font-size:10px;color:var(--t2)">129 201 pkt | REKORD</div></div>
-    <div class="tick"><div class="tick-name">KGHM</div><div class="tick-val up">+9,85%</div><div style="font-size:10px;color:var(--t2)">lider WIG20</div></div>
-    <div class="tick"><div class="tick-name">mBANK</div><div class="tick-val up">+9,4%</div><div style="font-size:10px;color:var(--t2)">banki ↑↑</div></div>
-    <div class="tick"><div class="tick-name">ORLEN</div><div class="tick-val down">-2,84%</div><div style="font-size:10px;color:var(--t2)">ropa tanieje</div></div>
-    <div class="tick"><div class="tick-name">BOGDANKA</div><div class="tick-val down">-17%</div><div style="font-size:10px;color:var(--t2)">węgiel traci</div></div>
-  </div>
-
-  <!-- FUEL -->
-
-  <div class="stitle">CENY PALIW POLSKA — 9 KWIETNIA 2026</div>
-  <div class="fp">
-    <div class="fc">
-      <div class="fl">Benzyna 95 (maks. CPN)</div>
-      <div class="fv">6,27</div>
-      <div class="fu">PLN/l | ↑0,06 vs tydzień temu</div>
-      <div class="fs warn">⚠ ROŚNIE MIMO TAŃSZEJ ROPY</div>
-    </div>
-    <div class="fc">
-      <div class="fl">Diesel ON (maks. CPN)</div>
-      <div class="fv g">7,83</div>
-      <div class="fu">PLN/l | ↓0,04 vs Wielkanoc</div>
-      <div class="fs ok">↓ MAŁY SPADEK</div>
-    </div>
-    <div class="fc">
-      <div class="fl">Diesel hurtowo Orlen</div>
-      <div class="fv">8,37</div>
-      <div class="fu">PLN/l z VAT | ↓ z 8,60</div>
-      <div class="fs warn">⚠ OPÓŹNIENIE ALGORYTMU</div>
-    </div>
-    <div class="fc">
-      <div class="fl">Ropa Brent</div>
-      <div class="fv g">~97</div>
-      <div class="fu">USD/bbl | ↓ z 117 USD (-17%)</div>
-      <div class="fs ok">✅ ROZEJM OBNIŻYŁ ROPĘ</div>
-    </div>
-    <div class="fc">
-      <div class="fl">Benzyna PRZED wojną</div>
-      <div class="fv r">5,67</div>
-      <div class="fu">PLN/l (stan z 28.02.2026)</div>
-      <div class="fs bad">🔴 WCIĄŻ +10% WYŻEJ</div>
-    </div>
-  </div>
-
-  <div class="alert amber" style="margin-bottom:22px">
-    <div style="font-size:22px">📊</div>
-    <div>
-      <strong>PARADOKS CPN: ROPA -13%, CENY PALIW ROSNĄ</strong>
-      <p>Algorytm CPN oparty na cenach hurtowych z POPRZEDNIEGO dnia roboczego — z opóźnieniem. Hurtowy diesel spada (8,60 → 8,37 PLN/l), ale detaliczny algorytm dolicza jeszcze VAT 8%, akcyzę i marżę. Efekt: ceny detaliczne zacznie poczują spadek ropy dopiero za 5–7 dni roboczych. Minister Motyka zapowiada „kilkanaście groszy w dół w ciągu kilku dni."</p>
-    </div>
-  </div>
-
-  <div class="egrid" style="grid-template-columns:repeat(auto-fill,minmax(340px,1fr))">
-    <div class="ecard">
-      <div class="ech"><div class="ect">🌊 Ormuz — aktualny status (9 IV)</div></div>
-      <div class="ecb">
-        <div class="rit" style="display:flex;gap:8px;margin-bottom:8px;font-size:12px;color:var(--t2)"><span style="color:var(--red);flex-shrink:0;font-size:10px;margin-top:2px;font-family:'Share Tech Mono',monospace">▶</span>Status: <strong style="color:var(--red)">PONOWNIE ZABLOKOWANA</strong> (Iran odpowiedź na Liban)</div>
-        <div class="rit" style="display:flex;gap:8px;margin-bottom:8px;font-size:12px;color:var(--t2)"><span style="color:var(--amber)">▶</span>~200 tankowców z 130 mln baryłek ropy wciąż w Zatoce Perskiej</div>
-        <div class="rit" style="display:flex;gap:8px;margin-bottom:8px;font-size:12px;color:var(--t2)"><span style="color:var(--amber)">▶</span>Saudyjski rurociąg East-West zaatakowany irańskim dronem (8 IV)</div>
-        <div class="rit" style="display:flex;gap:8px;margin-bottom:8px;font-size:12px;color:var(--t2)"><span style="color:var(--cyan)">▶</span>Fizyczne przywrócenie przepływu — nawet po pełnym rozejmie potrwa dni/tygodnie</div>
-        <div class="rit" style="display:flex;gap:8px;margin-bottom:8px;font-size:12px;color:var(--green)"><span style="color:var(--green)">▶</span>Polska: Orlen dywersyfikuje dostawy — brak zależności od Ormuzu</div>
-      </div>
-    </div>
-    <div class="ecard">
-      <div class="ech"><div class="ect">📉 Dlaczego ropa spadła mimo blokady Ormuzu?</div></div>
-      <div class="ecb">
-        <div class="rit" style="display:flex;gap:8px;margin-bottom:8px;font-size:12px;color:var(--t2)"><span style="color:var(--cyan)">▶</span>Rynki wyceniają <em>prawdopodobieństwo</em> odblokowania, nie aktualny stan</div>
-        <div class="rit" style="display:flex;gap:8px;margin-bottom:8px;font-size:12px;color:var(--t2)"><span style="color:var(--cyan)">▶</span>Euforia dyplomatyczna: rozejm USA–Iran = sygnał że Ormuz zostanie otwarty</div>
-        <div class="rit" style="display:flex;gap:8px;margin-bottom:8px;font-size:12px;color:var(--amber)"><span style="color:var(--amber)">▶</span>RYZYKO: jeśli rozejm się rozpadnie, ropa może GWAŁTOWNIE wrócić do 110–115 USD</div>
-        <div class="rit" style="display:flex;gap:8px;margin-bottom:8px;font-size:12px;color:var(--t2)"><span style="color:var(--cyan)">▶</span>ING Bank: ropa ok. 95 USD przy założeniu utrzymania rozejmu w perspektywie tygodnia</div>
-        <div class="rit" style="display:flex;gap:8px;margin-bottom:8px;font-size:12px;color:var(--t2)"><span style="color:var(--cyan)">▶</span>Prognozy roczne Brent: 96 USD/bbl (e-petrol.pl, 9 IV)</div>
-      </div>
-    </div>
-    <div class="ecard">
-      <div class="ech"><div class="ect">💰 Co to oznacza dla cen paliw w PL?</div></div>
-      <div class="ecb">
-        <div class="rit" style="display:flex;gap:8px;margin-bottom:8px;font-size:12px;color:var(--green)"><span style="color:var(--green)">▶</span>Scenariusz optymistyczny (rozejm trwa): diesel może spaść do 7,40–7,50 zł w ciągu 10 dni</div>
-        <div class="rit" style="display:flex;gap:8px;margin-bottom:8px;font-size:12px;color:var(--green)"><span style="color:var(--green)">▶</span>Benzyna 95 może spaść do ok. 6,00–6,10 zł w ciągu 10 dni</div>
-        <div class="rit" style="display:flex;gap:8px;margin-bottom:8px;font-size:12px;color:var(--amber)"><span style="color:var(--amber)">▶</span>Scenariusz pesymistyczny (rozejm się rozpada): diesel wraca do 8 zł, benzyna do 6,60 zł</div>
-        <div class="rit" style="display:flex;gap:8px;margin-bottom:8px;font-size:12px;color:var(--t2)"><span style="color:var(--cyan)">▶</span>Przed wojną (28.02): benzyna 95 = 5,67 zł, diesel = 5,96 zł — do tych poziomów daleko</div>
-        <div class="rit" style="display:flex;gap:8px;margin-bottom:8px;font-size:12px;color:var(--red)"><span style="color:var(--red)">▶</span>Wciąż nie podjęto decyzji o CPN po 15 IV — ryzyko paniki rynkowej w razie opóźnienia</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ===== TAB SYGNAŁY ===== -->
-
-<div id="tab-wa" class="tab-content">
-  <div class="stitle">WCZESNE SYGNAŁY OSTRZEGAWCZE — 9–12 KWIETNIA</div>
-  <div class="wgrid">
-    <div class="wg">
-      <div class="wgt">🕊️ IRAN / ROZEJM — KRYTYCZNE</div>
-      <div class="wi"><span class="wd dr"></span><strong>10 IV</strong> — negocjacje USA–Iran w Islamabadzie; Vance prowadzi delegację. Czy się odbędą mimo blokady Ormuzu?</div>
-      <div class="wi"><span class="wd dr"></span>Komunikaty irańskie ws. wycofania się z rozejmu — monitoruj Fars News, Tasnim i IRNA</div>
-      <div class="wi"><span class="wd dr"></span>Aktywność IRGC przy Cieśninie Ormuz — tankowce blokowane czy przepuszczane?</div>
-      <div class="wi"><span class="wd da"></span>Odpowiedź USA na atak Izraela w Libanie — czy Trump naciśnie Netanjahu?</div>
-      <div class="wi"><span class="wd da"></span>Saudyjski rurociąg East-West — ocena szkód po ataku irańskiego drona (8 IV)</div>
-    </div>
-    <div class="wg">
-      <div class="wgt">🗳️ WĘGRY — 12 KWIETNIA</div>
-      <div class="wi"><span class="wd dr"></span>Wyniki wyborów 12 IV — exit poll od 19:00 CET. TISZA vs Fidesz; frekwencja kluczowa</div>
-      <div class="wi"><span class="wd da"></span>Ewentualne próby manipulacji wyborczych po incydencie Balkan Stream</div>
-      <div class="wi"><span class="wd da"></span>Afera szpiegowska: KE żąda wyjaśnień ws. przecieków z Węgier do Rosji</div>
-      <div class="wi"><span class="wd dc"></span>Rekordowa frekwencja za granicą wśród Węgrów (sygnał anty-Fidesz)</div>
-    </div>
-    <div class="wg">
-      <div class="wgt">🛡️ NATO / BEZPIECZEŃSTWO PL</div>
-      <div class="wi"><span class="wd dr"></span>Szczyt Trump–Rutte — wynik kluczowy dla Art. 5 i polskiej strategii bezpieczeństwa</div>
-      <div class="wi"><span class="wd da"></span>Aktywność wojsk białoruskich przy granicy z Polską — traktat z KRLD w tle</div>
-      <div class="wi"><span class="wd da"></span>Aktywność rosyjskiej „szarej floty" na Bałtyku — AIS anomalie</div>
-      <div class="wi"><span class="wd dc"></span>Polska suwerenność rakietowa — postępy programu ogłoszone w tym tygodniu</div>
-    </div>
-    <div class="wg">
-      <div class="wgt">💱 RYNKI I WALUTY</div>
-      <div class="wi"><span class="wd dr"></span>Ropa Brent — każda wiadomość z Ormuzu może wywołać 5–10 USD ruch</div>
-      <div class="wi"><span class="wd da"></span>EUR/PLN — złoty umocnił się (dolar słabszy). Poziom 4,28–4,32 = strefa obserwacji</div>
-      <div class="wi"><span class="wd da"></span>Kontrakty TTF gaz — reagują błyskawicznie na Ormuz; w dniu rozejmu -20%</div>
-      <div class="wi"><span class="wd dc"></span>GPW — po rekordzie możliwa korekta jeśli rozejm się rozpadnie; monitoruj Orlen i KGHM</div>
-      <div class="wi"><span class="wd dc"></span>Decyzja RPP ws. stóp — czy rozejm wpłynie na nastawienie wobec inflacji?</div>
-    </div>
-    <div class="wg">
-      <div class="wgt">⛽ PALIWA I CPN</div>
-      <div class="wi"><span class="wd dr"></span>Decyzja rządu ws. CPN po 15 IV (akcyza) — musi zapaść przed 12 IV by nie wywołać niepokoju</div>
-      <div class="wi"><span class="wd da"></span>Algorytm CPN — za ok. 5–7 dni roboczych ceny detaliczne zaczną odzwierciedlać tańszą ropę</div>
-      <div class="wi"><span class="wd da"></span>Turystyka paliwowa z Niemiec/Czech — minister rozważa limity dla obcokrajowców</div>
-      <div class="wi"><span class="wd dc"></span>80% Polaków za utrzymaniem maks. cen do końca 2026 (sondaż SE/Pollster)</div>
-    </div>
-    <div class="wg">
-      <div class="wgt">💊 FARMACJA I ŁAŃCUCHY DOSTAW</div>
-      <div class="wi"><span class="wd da"></span>Jeśli Ormuz się otwiera: siarka i API zaczną znów płynąć — potrzeba 2–4 tygodni na normalizację</div>
-      <div class="wi"><span class="wd da"></span>Cła USA na leki patentowe — sierpień/październik 2026; kontrakty podpisywać teraz</div>
-      <div class="wi"><span class="wd dc"></span>Nowe zasady wydawania leków w aptekach — obowiązują od 7 IV 2026</div>
-      <div class="wi"><span class="wd dc"></span>GIF: monitoring dostępności API po 40 dniach blokady Ormuzu</div>
-    </div>
-  </div>
-</div>
-
-<!-- ===== TAB REKOMENDACJE ===== -->
-
-<div id="tab-re" class="tab-content">
-  <div class="stitle">REKOMENDACJE DLA POLSKI — 9 KWIETNIA 2026</div>
-  <div class="rgrid">
-    <div class="rc">
-      <div class="rh"><span class="ri">🏛️</span><div class="rt">RZĄD — PILNE</div></div>
-      <div class="rb">
-        <div class="rit"><span class="ra">▶</span><strong style="color:var(--red)">DO 12 IV:</strong> ogłosić przedłużenie pakietu CPN (akcyza po 15 IV) — brak decyzji wywoła niepokój rynkowy i spekulację medialną</div>
-        <div class="rit"><span class="ra">▶</span>MSZ: aktywne wsparcie dla delegacji USA w Islamabadzie (10 IV) — Polska jako kraj frontowy NATO ma interes w trwałym rozejmie</div>
-        <div class="rit"><span class="ra">▶</span>Przed szczytem Trump–Rutte: własny komunikat ws. polskich gwarancji Art. 5 — nie czekaj na wynik szczytu</div>
-        <div class="rit"><span class="ra">▶</span>Monitorować Węgry 12 IV — w razie wygranej TISZA szybko nawiązać kontakt dyplomatyczny z nowym rządem</div>
-        <div class="rit"><span class="ra">▶</span>Farmacja: ogłosić negocjacje z UE ws. zwolnień dla leków generycznych z ceł USA (termin: sierpień)</div>
-      </div>
-    </div>
-    <div class="rc">
-      <div class="rh"><span class="ri">🏙️</span><div class="rt">SAMORZĄDY</div></div>
-      <div class="rb">
-        <div class="rit"><span class="ra">▶</span>Przetargi transportowe: wstrzymać do 15 IV — ceny diesla mogą spaść o 0,15–0,30 zł/l w ciągu 10 dni</div>
-        <div class="rit"><span class="ra">▶</span>Budżety JST: aktualizować prognozy — ropa poniżej 100 USD to 10–15% niższe koszty energii</div>
-        <div class="rit"><span class="ra">▶</span>SPZOZ-y: sprawdzić nowe zasady wydawania leków (od 7 IV) i zapasy kluczowych substancji</div>
-        <div class="rit"><span class="ra">▶</span>Obrona cywilna: utrzymać gotowość mimo rozejmu — Ormuz wciąż niestabilny</div>
-      </div>
-    </div>
-    <div class="rc">
-      <div class="rh"><span class="ri">💼</span><div class="rt">BIZNES</div></div>
-      <div class="rb">
-        <div class="rit"><span class="ra">▶</span>Transport: POCZEKAJ z hedgowaniem — ceny diesla w ciągu 10 dni mogą spaść do 7,40–7,50 zł; renegocjuj kontrakty po spadku</div>
-        <div class="rit"><span class="ra">▶</span>GPW inwestorzy: KGHM może kontynuować wzrosty; Orlen pod presją tańszej ropy; górnictwo węgla — sprzedaj</div>
-        <div class="rit"><span class="ra">▶</span>Eksporterzy: dolar słabszy = złoty mocniejszy; sprawdź ekspozycję walutową</div>
-        <div class="rit"><span class="ra">▶</span>Farmaceutyki: TERAZ zawierać kontrakty na leki innowacyjne — cła USA za 4 miesiące</div>
-        <div class="rit"><span class="ra">▶</span>Nawozy: jeśli Ormuz otworzy się trwale — ceny mocznika/amoniaku zaczną spadać; poczekaj 2 tygodnie</div>
-      </div>
-    </div>
-    <div class="rc">
-      <div class="rh"><span class="ri">🏥</span><div class="rt">ZDROWIE / NFZ</div></div>
-      <div class="rb">
-        <div class="rit"><span class="ra">▶</span>Nowe zasady wydawania leków od 7 IV — wdrożyć procedury w aptekach szpitalnych i publicznych</div>
-        <div class="rit"><span class="ra">▶</span>Przetargi na leki innowacyjne: zawierać kontrakty PRZED sierpniem 2026 (cła USA)</div>
-        <div class="rit"><span class="ra">▶</span>Monitor API: jeśli Ormuz otworzy się stabilnie — zaopatrzenie w surowce farmaceutyczne wróci do normy w 3–6 tyg.</div>
-      </div>
-    </div>
-    <div class="rc">
-      <div class="rh"><span class="ri">💊</span><div class="rt">APTEKI</div></div>
-      <div class="rb">
-        <div class="rit"><span class="ra">▶</span>Wdrożyć nowe zasady wydawania leków (od 7 IV 2026) — sprawdź szczegóły na GIF.gov.pl</div>
-        <div class="rit"><span class="ra">▶</span>Inwentaryzacja leków patentowych — cła USA za 4 miesiące; zamów większe zapasy teraz</div>
-        <div class="rit"><span class="ra">▶</span>Informować pacjentów o substytutach generycznych (bez ceł USA)</div>
-      </div>
-    </div>
-    <div class="rc">
-      <div class="rh"><span class="ri">👥</span><div class="rt">OBYWATELE</div></div>
-      <div class="rb">
-        <div class="rit"><span class="ra" style="color:var(--green)">▶</span>PALIWO: dobra wiadomość — ceny powinny spaść o kilkanaście groszy w ciągu tygodnia. Nie tankuj na zapas</div>
-        <div class="rit"><span class="ra" style="color:var(--green)">▶</span>GPW: rekordy — jeśli inwestujesz, dobra wiadomość. Ale kruchy rozejm = ryzyko korekty</div>
-        <div class="rit"><span class="ra" style="color:var(--amber)">▶</span>IRAN: rozejm zagrożony przez Izrael/Liban. Śledź wiadomości przed negocjacjami 10 IV</div>
-        <div class="rit"><span class="ra" style="color:var(--amber)">▶</span>NATO: szczyt Trump–Rutte — ważny dla bezpieczeństwa Polski. Wynik poznamy wkrótce</div>
-        <div class="rit"><span class="ra" style="color:var(--green)">▶</span>LEKI: nowe zasady wydawania recept od 7 IV — zapytaj farmaceutę jeśli masz wątpliwości</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ===== TAB PODSUMOWANIE ===== -->
-
-<div id="tab-su" class="tab-content">
-  <div class="stitle">EXECUTIVE SUMMARY — 9 KWIETNIA 2026</div>
-  <div class="exec">
-    <div class="ei">
-      <div class="el">CO SIĘ WYDARZYŁO</div>
-      <div class="et">Dramatyczna noc z 7 na 8 IV: USA i Iran zawarły 14-dniowe zawieszenie broni 90 minut przed upływem ultimatum. Warunek: otwarcie Ormuzu. Rynki zareagowały euforią — ropa -13%, GPW rekord. Ale: <strong>Izrael zaatakował Liban 100 celami Hezbollahu</strong>. Iran uznał to za naruszenie i PONOWNIE zablokował Ormuz. Hezbollah wznowił rakietowanie Izraela. Rozejm trwa formalnie, ale wisi na włosku. Negocjacje w Islamabadzie planowane na 10 IV.</div>
-    </div>
-    <div class="ei">
-      <div class="el">PARADOKS DNIA</div>
-      <div class="et">Ropa tanieje, ale ceny paliw w Polsce ROSNĄ — dlatego że algorytm CPN działa z 1-dniowym opóźnieniem opartym na cenach hurtowych. <strong>W ciągu 5–7 dni roboczych ceny powinny zacząć realnie spadać</strong> (o kilkanaście groszy). Minister energii to potwierdza. Na GPW: KGHM +9,85%, mBank +9,4%, ale Orlen -2,84% (tańsza ropa = mniejszy zysk rafinacyjny). WIG i WIG20 biją rekordy wszech czasów.</div>
-    </div>
-    <div class="ei">
-      <div class="el">NAJWIĘKSZE RYZYKO</div>
-      <div class="et">Rozpad rozejmu. Jeśli negocjacje w Islamabadzie 10 IV się nie odbędą lub zakończą fiaskiem — <span class="rd">ropa może wrócić do 110–115 USD w ciągu godzin</span>. GPW straci 5–10%. Diesel wróci do 7,87 zł lub wyżej. Iran ma Izrael jako kartę do wymuszenia ustępstw od USA. Trump z kolei ma 4 LIPCA jako deadline do ogłoszenia „wielkiego zwycięstwa."</div>
-    </div>
-    <div class="ei">
-      <div class="el">POLSKA — OCENA</div>
-      <div class="et"><span class="gr">Pozytywne:</span> GPW rekord, złoty mocniejszy, ceny paliw zaczną spadać, zapasy ropy zabezpieczone, farmacja — jeśli Ormuz otworzy się trwale, API wróci w 3–6 tygodni. <strong>Wymagające uwagi:</strong> decyzja o CPN po 15 IV musi zapaść przed 12 IV — każde opóźnienie to ryzyko. Szczyt Rutte–Trump to egzystencjalny moment dla polskich gwarancji bezpieczeństwa. Wybory węgierskie 12 IV — potencjalnie pozytywny sygnał geopolityczny.</div>
-    </div>
-    <div class="ei">
-      <div class="el">MONITORUJ JUTRO</div>
-      <div class="et"><strong>10 IV:</strong> czy negocjacje w Islamabadzie ruszają? Komunikat Vance'a lub Araghcziego. Status Ormuzu rano. Reakcja Izraela na irański ultimatum ws. Libanu. Ceny ropy na otwarciu europejskich rynków. Komunikat rządu PL ws. CPN po 15 IV. <strong>12 IV:</strong> exit poll wyborów węgierskich od 19:00 CET.</div>
-    </div>
-    <div class="ei">
-      <div class="el">KONKLUZJA</div>
-      <div class="et">Polska jest dziś w <span class="gr">lepszej pozycji niż tydzień temu</span> — ropa tanieje, rynki euforyczne, Ormuz może być stopniowo otwierany. Ale <span class="rd">kruchość rozejmu jest realnym ryzykiem</span>: Izrael nie zatrzymał się w Libanie, Iran nie otworzył Ormuzu mimo rozejmu, Hezbollah znowu strzela. <strong>Okno optymizmu jest otwarte, ale wąskie. Następne 48 godzin zdecyduje czy rozejm trwa czy się rozpadnie.</strong></div>
-    </div>
-  </div>
-
-  <div class="stitle">ŹRÓDŁA — 9 KWIETNIA 2026</div>
-  <div class="ecard">
-    <div class="ecb">
-      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:8px">
-        <div class="wi"><span class="wd dg"></span>Reuters / AP / AFP — wiarygodność ●●●●●</div>
-        <div class="wi"><span class="wd dg"></span>PAP / RP.pl / Bankier.pl — wiarygodność ●●●●●</div>
-        <div class="wi"><span class="wd dg"></span>Euronews / Axios — wiarygodność ●●●●●</div>
-        <div class="wi"><span class="wd dg"></span>WNP.pl / Biznes Interia — wiarygodność ●●●●●</div>
-        <div class="wi"><span class="wd dc"></span>Forsal.pl / 300Gospodarka — wiarygodność ●●●●○</div>
-        <div class="wi"><span class="wd dc"></span>cenypaliw.fyi / e-petrol.pl — wiarygodność ●●●●○</div>
-        <div class="wi"><span class="wd da"></span>Goniec.pl / SE.pl — wiarygodność ●●●○○</div>
-        <div class="wi"><span class="wd da"></span>IRNA / Fars / Tasnim (Iran state) — wiarygodność ●●○○○ ⚠</div>
-      </div>
-      <div style="margin-top:12px;font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--dim);letter-spacing:1px;">
-        ⚠ METODOLOGIA: OSINT | OPEN SOURCE | 3 WYSZUKIWANIA WEB | Data: 9.04.2026 | Następny raport: 10.04.2026 (wyniki negocjacji Islamabad)
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="footer">
-  <span>OSINT-PL v4.0 | 9 KWIECIEŃ 2026 | RAPORT DZIENNY</span>
-  <span>OPEN SOURCE | WIELOŹRÓDŁOWY | ANALITYCZNY</span>
-  <span>NAST. AKTUALIZACJA: 10.04.2026</span>
-</div>
-
-</main>
 
 <script>
-function showTab(n){
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
-  const b=[...document.querySelectorAll('.tab')].find(t=>t.getAttribute('onclick')?.includes(`'${n}'`));
-  if(b)b.classList.add('active');
-  const c=document.getElementById(`tab-${n}`);
-  if(c)c.classList.add('active');
+function showTab(id) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('on'));
+  document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('on'));
+  event.currentTarget.classList.add('on');
+  document.getElementById('pane-' + id).classList.add('on');
 }
-function updateClock(){
-  const n=new Date();
-  document.getElementById('clock').textContent=n.toLocaleTimeString('pl-PL',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+function tick() {
+  const t = new Date();
+  document.getElementById('clock').textContent =
+    t.toLocaleTimeString('pl-PL', {hour:'2-digit', minute:'2-digit', second:'2-digit'});
 }
-setInterval(updateClock,1000);
-updateClock();
+setInterval(tick, 1000); tick();
 </script>
-
 </body>
 </html>
